@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="icon" href="sn.png" />
+    <title>AutoMart App</title>
+	<link rel="stylesheet" href="main.css"/>
+	<link rel="stylesheet" href="pageRegulator.css"/>
+	 <script> 
+ 		function toggleag(){
+           var ele3 = document.getElementById("login");
+
+           if (ele3.style.display == "none") {
+              ele3.style.display = "block";
+			  
+           }
+           else
+           {
+             ele3.style.display = "none";
+			 
+           }
+		   
+		   
+         }
+		 
+		
+function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+
+
+
+function opennav() {
+
+  document.getElementById("mynavbar").style.width = "100%";
+  document.getElementById("myrightnav").style.width = "100%";
+  
+}
+
+function closenav() {
+  document.getElementById("mynavbar").style.width = "0";
+  document.getElementById("myrightnav").style.width = "0";
+  document.getElementById("myrightnav").style = "@media (min-width: 992px){.rightNav{width:100%;}}";
+  document.getElementById("mynavbar").style = "@media (min-width: 992px){.navbar-nav{width:100%;}}";
+}
+function closelog(){
+document.getElementById("login").style.display = "none";
+}
+ </script>
+  </head>
+  <body>
+  
+  <nav id='navContainer'>
+  <img src="sn.png" class="logo" style="float:left;"/>
+  <button class="openbtn" onclick="opennav()">&#9776;</button> 
+  <ul class="navbar-nav" id="mynavbar">
+  <li><a href="javascript:void(0)" class="closebtn" onclick="closenav()">&times;</a></li>
+            <li class="active" tabindex="-1"><a href="index.html">Home</a></li>
+            <li tabindex="-1"><a href="">About</a></li>
+            <li tabindex="-1"><a href="ad.html">Adverts</a></li>
+			<li tabindex="-1"><a href="admin.html">Admin</a></li>
+            </ul>
+   <ul class="rightNav" id="myrightnav">
+   <li><a href="javascript:;" onclick="toggleag();">Sign In</a></li>
+</ul>   
+  </nav>
+  
+  <div id="login">
+  <form role="form" method="post" action="" enctype="multipart/form-data">
+  <a href="javascript:void(0)" class="closebtn" style="color:black; font-weight:bold;" onclick="closelog()">&times;</a>
+              <div > <h2>Sign In</h2> </div>
+                
+                <input type="text" required class="control" name="logEmail" placeholder="Enter Email Address">
+          
+              <br/>
+			  <br/>
+
+                <input type="text" required class="control" name="password" placeholder="Provided Your Password">
+           
+              <br/>
+             <br/>
+            
+               
+			  <input type="submit" class="btn" name="login" value="Sign In"/>
+
+        </form>
+  </div>
+
+  <div id="firstContainer" class = "fade">
+  <div class="topHeadDiv">
+    <h2 id="topHead">Auto Mart</h2>
+	<center style="color:white; font-style:italic; padding:1% 5% 5% 5%; font-size:1.2em;"> Auto Mart is an online marketplace for automobiles of diverse makes, model or body type. With
+Auto Mart, users can sell their cars or buy from trusted dealerships or private sellers.
+<div class="signUp">
+   <a href="javascript:;" onclick="on()">Get Started</a>
+</div> 
+</center>
+    </div>
+
+ </div>  
+<div id="overlay" class="fade">
+<center>
+<div id="centerForm">
+<a href="javascript:;" onclick="off()" style="text-align:right; float:right; background-color:rgba(250,0,30,0.8); border-radius:50%; padding:1% 2% 1% 2%; color:white; text-decoration:none;">X</a>
+  
+
+<h3 id="secondHead">Sign Up For Free!</h3>
+<div id="response"></div>
+<form role="form" method="post" action="" enctype="multipart/form-data">
+              
+                
+                <input type="text" required class="control" id="firstName" placeholder="First Name">
+          <div id="fnameResponse"></div>
+              <br/>
+			  <input type="text" required class="control" id="lastName" placeholder="Last Name">
+           
+            <div id="lnameResponse"></div>
+             <br/>
+
+                <input type="text" required class="control" id="email" placeholder="Email Address">
+           
+             <div id="emailResponse"></div>
+             <br/>
+                
+                <input type="text" required class="control" id="phone" onkeyup="signupcheck();" placeholder="Mobile Phone Number">
+            
+              <div id="phoneResponse"></div>
+			 <br/>
+			 
+			 <input type="text" required class="control" id="address" placeholder="Address">
+            
+             <div id="addressResponse"></div>
+			 <br/>
+                
+                <input type="password" required class="control" id="password" placeholder="Your Password">
+           
+             <div id="passResponse"></div>
+              <br/>
+			  <input type="password" required class="control" id="conf_password" placeholder="Confirm Your Password">
+           
+              <div id="confPassResponse"></div>
+              <br/>
+               
+			  <input type="button" class="btn" id="signUp" onclick="signupcheck()" value="Sign Up"/>
+
+        </form>
+		</div>
+<script>
+ function signupcheck(){
+ document.getElementById("fnameResponse").innerHTML = "";
+ document.getElementById("lnameResponse").innerHTML = "";
+  document.getElementById("emailResponse").innerHTML = "";
+   document.getElementById("phoneResponse").innerHTML = "";
+    document.getElementById("addressResponse").innerHTML = "";
+
+var firstname = document.getElementById("firstName").value;
+var lastname = 	document.getElementById("lastName").value;
+var emailAddress = document.getElementById("email").value;
+var phone = document.getElementById("phone").value;
+var address = document.getElementById("address").value;
+var password = document.getElementById("password").value;
+var firstResponse = document.getElementById("fnameResponse");
+var lastResponse = document.getElementById("lnameResponse");
+var emailresponse = document.getElementById("emailResponse");
+var phoneResponse = document.getElementById("phoneResponse");
+var addressResponse = document.getElementById("addressResponse");
+var passResponse = document.getElementById("passwordResponse");
+	
+ if(firstname == ""){
+ firstResponse.innerHTML = "*Provide Your Firstname*";
+ firstResponse.style.color = "red";
+ }else if(lastname == ""){
+ lastResponse.innerHTML = "*Provide Your Lastname*";
+ lastResponse.style.color = "red";
+ }else if(emailAddress == ""){
+ emailresponse.innerHTML = "*Provide Your Email Address*";
+ emailresponse.style.color = "red";
+ }else if(phone == ""){
+ phoneResponse.innerHTML = "*Provide Your Phone Number*";
+ phoneResponse.style.color = "red";
+ }else if(isNaN(parseInt(phone)) == true){
+ phoneResponse.innerHTML = "*Phone Number Can Only Be In Digits!*";
+ phoneResponse.style.color = "red";
+ }else if(address == ""){
+ addressResponse.innerHTML = "*Provide Your Address*";
+ addressResponse.style.color = "red";
+ }else if( password == ""){
+ passResponse.innerHTML = "*Provide Your Password*";
+ passResponse.style.color = "red";
+ }
+ 
+
+ }
+ </script>
+</center>
+</div> 
+<footer style="background-color:black; height:50px; color:grey; text-align:center; padding-top:20px;">
+Copyright: &copy; Auto Mart <? echo date("Y"); ?>
+</footer>
+  </body>
+</html>
