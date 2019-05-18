@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="icon" href="sn.png" />
+    <title>AutoMart App</title>
+	<link rel="stylesheet" href="main.css"/>
+	<link rel="stylesheet" href="pageRegulator.css"/>
+	 <script> 
+ 		function toggleag() {
+           var ele3 = document.getElementById("login");
+
+           if (ele3.style.display == "none") {
+              ele3.style.display = "block";
+			  
+           }
+           else
+           {
+             ele3.style.display = "none";
+			 
+           }
+		   
+		   
+         }
+		 
+
+function closelog(){
+document.getElementById("login").style.display = "none";
+}		 
+
+ </script>
+  </head>
+  <body>
+  
+  <nav id='navContainer'>
+  <img src="sn.png" class="logo" style="float:left;">
+  <button class="openbtn" onclick="opennav()">&#9776;</button> 
+  <ul class="navbar-nav" id="mynavbar">
+  <li><a href="javascript:void(0)" class="closebtn" onclick="closenav()">&times;</a></li>
+            <li class="active" tabindex="-1"><a href="index.html">Home |</a></li>
+            <li tabindex="-1"><a href="">About |</a></li>
+            <li tabindex="-1"><a href="admin.html">Admin</a></li>
+            </ul>
+   <div class="rightNav"id="myrightnav">
+   <a href="javascript:;" onclick="toggleag();">Sign In</a>
+</div>   
+  </nav>
+  
+  <div id="login">
+  <form role="form" method="post" action="" enctype="multipart/form-data">
+              <div > <h2>Sign In</h2> </div>
+                
+                <input type="text" required class="control" name="logEmail" placeholder="Enter Email Address">
+          
+              <br/>
+			  <br/>
+
+                <input type="text" required class="control" name="password" placeholder="Provided Your Password">
+           
+              <br/>
+             <br/>
+            
+               
+			  <input type="submit" class="btn" name="login" value="Sign In"/>
+
+        </form>
+  </div>
+
+  <div id="secondContainer">
+  <div class="slide-content slide-section" >
+ <p class="  textSlide slide-animate-top" style="position:absolute; background-color:rgba(250,0,30,0.6); z-index:10; padding:4% 4% 4% 4%;">Ferrari<br/><span id="price1">Price:N17.5m</span><br/>
+ <input type="button" value="Order Now" id="order1"  onclick="orderFunc1()" style="padding:5% 5% 5% 5%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; color:(0,0,0,0.2); background-color:gold; font-size:16px; font-weight: bold ;" />
+ <br/><b><a href="javascript:;" onclick="updatePrice()" style="color:white; text-decoration:none; font-size:12px;">Update</a> | <a href="javascript:;" onclick="flagAd()" style="color:white; text-decoration:none; font-size:12px;">Flag</a> | <a href="javascript:;" onclick="viewAd()" style="color:white; text-decoration:none; font-size:12px;">View details</a></b>
+ <br/><br/> <a href="javascript:;" onclick="soldAd()" style="color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:5% 8% 5% 8%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;">Sold</a>
+ </p>
+ <p class=" textSlide slide-animate-top" style="position:absolute; background-color:rgba(250,0,30,0.8); z-index:10; padding:4% 4% 4% 4%;">Porche<br/><span id="price2">Price:N20.5m</span><br/>
+ <input type="button" value="Order Now" id="order2" onclick="orderFunc2()" style="padding:5% 5% 5% 5%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; color:(0,0,0,0.2); background-color:gold; font-size:16px; font-weight: bold ;" />
+ <br/><b><a href="javascript:;" onclick="updatePrice()" style="color:white; text-decoration:none; font-size:12px;">Update</a> | <a href="javascript:;" onclick="flagAd()" style="color:white; text-decoration:none; font-size:12px;">Flag</a> | <a href="javascript:;" onclick="viewAd()" style="color:white; text-decoration:none; font-size:12px;">View details</a></b>
+<br/><br/> <a href="javascript:;" onclick="soldAd()" style="color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:5% 8% 5% 8%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;">Sold</a>
+ </p>
+ <p class=" textSlide slide-animate-top" style="position:absolute; background-color:rgba(250,0,30,0.8); z-index:10; padding:4% 4% 4% 4%;">Lambogini<br/><span id="price3">Price:N16.5m</span><br/>
+ <input type="button" value="Order Now" id="order3" onclick="orderFunc3()" style="padding:5% 5% 5% 5%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; color:(0,0,0,0.2); background-color:gold; font-size:16px; font-weight: bold ;" />
+ <br/><b><a href="javascript:;" onclick="updatePrice()" style="color:white; text-decoration:none; font-size:12px;">Update</a> | <a href="javascript:;" onclick="flagAd()" style="color:white; text-decoration:none; font-size:12px;">Flag</a> | <a href="javascript:;" onclick="viewAd()" style="color:white; text-decoration:none; font-size:12px;">View details</a></b>
+ <br/><br/> <a href="javascript:;" onclick="soldAd()" style="color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:5% 8% 5% 8%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;">Sold</a>
+ 
+ </p>
+  <p class=" textSlide slide-animate-top" style="position:absolute; background-color:rgba(250,0,30,0.8); z-index:10; padding:4% 4% 4% 4%;">Buggati<br/><span id="price4">Price:N14m</span><br/>
+ <input type="button" value="Order Now" id="order4" onclick="orderFunc4()" style="padding:5% 5% 5% 5%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; color:(0,0,0,0.2); background-color:gold; font-size:16px; font-weight: bold ;" />
+ <br/><b><a href="javascript:;" onclick="updatePrice()" style="color:white; text-decoration:none; font-size:12px;">Update</a> | <a href="javascript:;" onclick="flagAd()" style="color:white; text-decoration:none; font-size:12px;">Flag</a> | <a href="javascript:;" onclick="viewAd()" style="color:white; text-decoration:none; font-size:12px;">View details</a></b>
+ 
+ <br/><br/> <a href="javascript:;" onclick="soldAd()" style="color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:5% 8% 5% 8%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;">Sold</a>
+ </p>
+  <img class="mySlides  slide-animate-right" src="car1.jpg" />
+  <img class="mySlides slide-animate-fading" src="car2.jpg"/>
+  <img class="mySlides slide-animate-fading" src="car3.jpg"/>
+  <img class="mySlides slide-animate-fading" src="car4.jpg"/>
+  
+</div>
+  <div class="SecondtopHeadDiv" style="padding:2% 2% 2% 2%; margin-bottom:4%; ">
+<center >
+    <a href="javascript:;" onclick="on()" style="background-color:rgba(250,0,30,0.8); border-radius:7px; font-weight:bold;  box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; width:20%; padding:1% 2% 1% 2%; text-decoration:none; color:white;">Post Advert</a>
+</center>
+    </div>
+
+ </div>  
+ <center style="color:white; font-style:italic; padding:1% 1% 5% 1%; margin-left:10%; font-size:1.2em; margin-bottom:30%;"> 
+<div class=" slide-animate-left"  style="background-image:url(car1.jpg);" id="addedDisplay"></div>
+ <div class=" slide-animate-left"  style="background-image:url(car2.jpg);" id="addedDisplay"></div>
+ <div class=" slide-animate-right"  style=" background-image:url(car3.jpg);" id="addedDisplay"></div>
+ <div class=" slide-animate-right"  style="background-image:url(car4.jpg);" id="addedDisplay"></div>
+  
+  <div class=" slide-animate-left"  style="background-image:url(car5.jpg);" id="addedDisplay"></div>
+ <div class=" slide-animate-left"  style="background-image:url(car6.jpg);" id="addedDisplay"></div>
+ <div class=" slide-animate-right"  style="background-image:url(car7.png);" id="addedDisplay"></div>
+ <div class=" slide-animate-right"  style=" background-image:url(car4.jpg);" id="addedDisplay"></div>
+</center>
+<br/>
+<br/>
+ <script>
+
+var myIndex = 0;
+var myIndex2 = 0;
+var Intervals;
+var Interval;
+var myIndexIndex = 0;
+var mySelectedIndex = 0;
+
+function carousel() {
+
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+	
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  myIndexIndex = myIndex-1;
+  Interval = setTimeout(carousel, 9000);    
+}
+carousel();
+
+function carousel2() {
+  var i;
+  var y = document.getElementsByClassName("textSlide");
+  for (i = 0; i < y.length; i++) {
+    y[i].style.display = "none";  
+  }
+  myIndex2++;
+  if (myIndex2 > y.length) {myIndex2 = 1}    
+  y[myIndex2-1].style.display = "block";  
+  Intervals = setTimeout(carousel2, 9000);    
+}
+carousel2();
+
+		
+function on() {
+var b = document.getElementsByClassName("textSlide");
+  document.getElementById("overlay").style.display = "block";
+  document.getElementById("login").style = "z-index:0;";
+  b[myIndexIndex].style = "z-index:0;";
+  b[myIndexIndex].style.display = "none";
+   clearTimeout(Intervals);
+  clearTimeout(Interval);
+  mySelectedIndex = myIndexIndex;
+ 
+}
+
+function off() {
+ var b2 = document.getElementsByClassName("textSlide");
+  document.getElementById("overlay").style.display = "none";
+  document.getElementById("login").style = "z-index:10;";
+ b2[mySelectedIndex].style = "position:absolute; background-color:rgba(250,0,30,0.6); z-index:10; padding:4% 4% 4% 4%;";
+ carousel();
+  carousel2(); 
+}
+
+function opennav() {
+var b = document.getElementsByClassName("textSlide");
+var t = document.getElementsByClassName("mySlides");
+  document.getElementById("mynavbar").style.width = "100%";
+  document.getElementById("myrightnav").style.width = "100%";
+
+  
+}
+
+function closenav() {
+  document.getElementById("mynavbar").style.width = "0";
+  document.getElementById("myrightnav").style.width = "0";
+  document.getElementById("myrightnav").style = "@media (min-width: 992px){.rightNav{width:100%;}}";
+  document.getElementById("mynavbar").style = "@media (min-width: 992px){.navbar-nav{width:100%;}}";
+}
+
+function loadnewads(){
+ // Listen for new update from the server
+ //updating data in each of mySlides,textSlide and addedDisplay with result of the processed information using status,price,manufacturer,model,body_type from server
+ }
+</script>
+<div id="overlay">
+<center>
+<div id="centerForm" class="addForm">
+<a href="javascript:;" onclick="off()" style="text-align:right; float:right; background-color:rgba(250,0,30,0.8); border-radius:50%; padding:1% 2% 1% 2%; color:white; text-decoration:none; z-index;">X</a>
+  
+
+<h3 id="secondHead">Add a Car Advert</h3>
+<form role="form" method="post" action="" enctype="multipart/form-data" >
+              
+                
+               
+                <input type="text" required class="control" id="date_added" placeholder="Date Added(Format: DD-MM-YYYY)">
+				<br/>
+			  <br/>
+           <select name="state" required="" class="control" id="state">	
+				<option value="">Select State </option>
+
+    <option value="2019">Abia</option>
+   <option value="2019">Adamawa</option>
+    <option value="2019">Akwa Ibom</option>
+    <option value="2019">Anambra</option>
+    <option value="2019">Bauchi</option>
+    <option value="2019">Bayelsa</option>
+    <option value="2019">Benue</option>
+    <option value="2019">Borno</option>
+    <option value="2019">Cross River</option>
+    <option value="2019">Delta</option>
+    <option value="2019">Ebonyi</option>
+    <option value="2019">Enugu</option>
+    <option value="2019">Edo</option>
+    <option value="2019">Ekiti</option>
+    <option value="2019">Gombe</option>
+    <option value="2019">Imo</option>
+    <option value="2019">Jigawa</option>
+    <option value="2019">Kaduna</option>
+    <option value="2019">Kano</option>
+    <option value="2019">Katsina</option>
+    <option value="2019">Kebbi</option>
+    <option value="2019">Kogi</option>
+    <option value="2019">Kwara</option>
+    <option value="2019">Lagos</option>
+    <option value="2019">Nasarawa</option>
+    <option value="2019">Niger</option>
+    <option value="2019">Ogun</option>
+    <option value="2019">Ondo</option>
+    <option value="2019">Osun</option>
+    <option value="2019">Oyo</option>
+    <option value="2019">Plateau</option>
+    <option value="2019">Rivers</option>
+    <option value="2019">Sokoto</option>
+    <option value="2019">Taraba</option>
+    <option value="2019">Yobe</option>
+    <option value="2019">Zamfara</option>
+		</select>
+              <br/>
+             <br/>
+                
+                <input type="text" required class="control" name="price" placeholder="Car price">
+            
+              <br/>
+			 <br/>
+                
+                <input type="password" required class="control" name="manufacturer" placeholder="Car Manufacturer">
+           
+              <br/>
+              <br/>
+			  <input type="password" required class="control" name="model" placeholder="Car Model">
+           
+              <br/>
+              <br/>
+			   <input type="text" required class="control" id="body_type" placeholder="Car's Body type">
+          
+              <br/>
+			  <br/>
+			  <b style="color:rgba(255,255,255,0.99);">Upload Car's Photo:</b>
+              <input type="file" required class="control" id="car_pic" placeholder="Picture Of The Car">
+          
+              <br/>
+			  <br/>
+               
+			  <input type="submit" class="btn" name="signUp" style="background-color:rgba(250,0,30,0.8);" value="Add Advert"/>
+
+        </form>
+		</div>
+</center>
+</div> 
+<script>
+function adregisterprocessor(){
+ // Listen for form submit to collect data to sent to server in json
+ }
+</script>
+<footer style="background-color:black; height:50px; color:grey; text-align:center; padding-top:20px;">
+Copyright: &copy; Auto Mart <? echo date("Y"); ?>
+</footer>
+<script>
+document.getElementById("mynavbar").style = "z-index:1;";
+</script>
+  </body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="icon" href="sn.png" />
+    <title>AutoMart App</title>
+	<link rel="stylesheet" href="main.css"/>
+	<link rel="stylesheet" href="pageRegulator.css"/>
+	 <script> 
+ 		function toggleag() {
+           var ele3 = document.getElementById("login");
+
+           if (ele3.style.display == "none") {
+              ele3.style.display = "block";
+			  
+           }
+           else
+           {
+             ele3.style.display = "none";
+			 
+           }
+		   
+		   
+         }
+		 
+		
+function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+
+function opennav() {
+
+  document.getElementById("mynavbar").style.width = "100%";
+  document.getElementById("myrightnav").style.width = "100%";
+
+  
+}
+
+function closenav() {
+  document.getElementById("mynavbar").style.width = "0";
+  document.getElementById("myrightnav").style.width = "0";
+  document.getElementById("myrightnav").style = "@media (min-width: 992px){.rightNav{width:100%;}}";
+  document.getElementById("mynavbar").style = "@media (min-width: 992px){.navbar-nav{width:100%;}}";
+}
+
+function loadnewads(){
+ // Listen for new update from the server
+ //updating data in each of adminImg,whoPost and littleTextSlide with result of the processed information using status,price,manufacturer,model,body_type,owner and state from server
+ }
+ function unsold(){
+ // Loads only unsold cars from the server
+ //create more adminImg,whoPost and littleTextSlide dynamically if there is need
+ }
+ function sold(){
+ // Loads only sold cars from the server
+ //create more adminImg,whoPost and littleTextSlide dynamically if there is need
+ }
+ function viewall(){
+ // Loads all cars from the server
+ //create more adminImg,whoPost and littleTextSlide dynamically if there is need
+ }
+ </script>
+  </head>
+  <body>
+  
+  <nav id='navContainer'>
+  <img src="sn.png" class="logo" style="float:left;">
+  <button class="openbtn" onclick="opennav()">&#9776;</button> 
+  <ul class="navbar-nav" id="mynavbar">
+  <li><a href="javascript:void(0)" class="closebtn" onclick="closenav()">&times;</a></li>
+  <li class="active" tabindex="-1"><a href="index.html">Home</a></li>
+            <li tabindex="-1"><a href="">About</a></li>
+            <li tabindex="-1"><a href="ad.html">Adverts</a></li>
+			<li tabindex="-1"><a href="admin.html">Admin</a></li>
+            </ul>
+  <div class="rightNav"id="myrightnav">
+   <a href="javascript:;" onclick="toggleag();">Sign In</a>
+</div>   
+  </nav>
+  
+  <div id="login">
+  <form role="form" method="post" action="" enctype="multipart/form-data">
+              <div > <h2>Sign In</h2> </div>
+                
+                <input type="text" required class="control" name="logEmail" placeholder="Enter Email Address">
+          
+              <br/>
+			  <br/>
+
+                <input type="text" required class="control" name="password" placeholder="Provided Your Password">
+           
+              <br/>
+             <br/>
+            
+               
+			  <input type="submit" class="btn" name="login" value="Sign In"/>
+
+        </form>
+  </div>
+
+  <section style="width:100%; margin-top:4%;">
+  <div class="myProfile">
+ <div class="slide-content slide-section subProfile ">
+ <p class=" textSlide slide-animate-top2 profileInfor">
+ <b style="color:rgba(255,255,255,0.8); text-align:center; font-weight:bold; font-size:1.7em;"> Administrator </b>
+ <img class="profileImg" src="default_pic.jpg" />
+ <b id="profileName"> Okafor Joel </b>
+ </p>
+
+   
+</div>
+
+  <div class="SecondtopHeadDiv adminControl">
+
+    <a href="javascript:;" onclick="unsold()" class="adContrl" style="background-color: rgba(0,50,255,0.3);">Unsold Cars</a>
+<a href="javascript:;" onclick="sold()" class="adContrl" style="background-color:rgba(250,0,30,0.8);">Sold Cars</a>
+    <a href="javascript:;" onclick="viewall()" class="adContrl" style="background-color:gold;">View All</a>
+
+	</div>
+	</div>
+<div class="adminDisplay"> 
+<div class=" slide-animate-right adminImg"  style=" background-image:url(car1.jpg);">
+  
+  <p class="littleTextSlide slide-animate-top" style="position:absolute; z-index:10; padding:10% 4% 4% 4%;">
+  <span id="whoPost">Advert by: Akomolafe Segun</span>
+ <input type="button" value="Delete Advert" id="item1"  onclick="deleteFunc()" style="padding:4% 4% 4% 4%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(0,0,0,0.5) inset; color:white; background-color:gold; font-size:12px; font-weight: bold ;" />
+ <br/><span id="flag">Flagged</span>
+ </p>
+  
+  </div>
+ <div class=" slide-animate-right adminImg"  style=" background-image:url(car2.jpg);">
+   <p class="littleTextSlide slide-animate-top" style="position:absolute; z-index:10; padding:10% 4% 4% 4%;">
+  <span id="whoPost">Advert by: Akomolafe Segun</span>
+ <input type="button" value="Delete Advert" id="item2"  onclick="deleteFunc()" style="padding:4% 4% 4% 4%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(0,0,0,0.5) inset; color:white; background-color:gold; font-size:12px; font-weight: bold ;" />
+ <br/><span id="flag">Flagged</span>
+ </p>
+  </div>
+ <div class=" slide-animate-right adminImg"  style="background-image:url(car3.jpg);">
+   <p class="littleTextSlide slide-animate-top" style="position:absolute; z-index:10; padding:10% 4% 4% 4%;">
+  <span id="whoPost">Advert by: Akomolafe Segun</span>
+ <input type="button" value="Delete Advert" id="item3"  onclick="deleteFunc()" style="padding:4% 4% 4% 4%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(0,0,0,0.5) inset; color:white; background-color:gold; font-size:12px; font-weight: bold ;" />
+ <br/><span id="flag">Flagged</span>
+ </p>
+  </div>
+ <div class=" slide-animate-right adminImg"  style="background-image:url(car4.jpg);">
+   <p class="littleTextSlide slide-animate-top" style="position:absolute; z-index:10; padding:10% 4% 4% 4%;">
+  <span id="whoPost">Advert by: Akomolafe Segun</span>
+ <input type="button" value="Delete Advert" id="item4"  onclick="deleteFunc()" style="padding:4% 4% 4% 4%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(0,0,0,0.5) inset; color:white; background-color:gold; font-size:12px; font-weight: bold ;" />
+ <br/><span id="flag">Flagged</span>
+ </p>
+  </div>
+  
+  <div class=" slide-animate-left adminImg"  style=" background-image:url(car5.jpg); ">
+   <p class="littleTextSlide slide-animate-top" style="position:absolute; z-index:10; padding:10% 4% 4% 4%;">
+  <span id="whoPost">Advert by: Akomolafe Segun</span>
+ <input type="button" value="Delete Advert" id="item5"  onclick="deleteFunc()" style="padding:4% 4% 4% 4%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(0,0,0,0.5) inset; color:white; background-color:gold; font-size:12px; font-weight: bold ;" />
+ <br/><span id="flag">Flagged</span>
+ </p>
+ </div>
+ <div class=" slide-animate-left adminImg"  style=" background-image:url(car6.jpg); ">
+<p class="littleTextSlide slide-animate-top" style="position:absolute; z-index:10; padding:10% 4% 4% 4%;">
+  <span id="whoPost">Advert by: Akomolafe Segun</span>
+ <input type="button" value="Delete Advert" id="item6"  onclick="deleteFunc()" style="padding:4% 4% 4% 4%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(0,0,0,0.5) inset; color:white; background-color:gold; font-size:12px; font-weight: bold ;" />
+ <br/><span id="flag">Flagged</span>
+ </p>
+  </div>
+ <div class=" slide-animate-right adminImg"  style=" background-image:url(car7.png); ">
+   <p class="littleTextSlide slide-animate-top" style="position:absolute; z-index:10; padding:10% 4% 4% 4%;">
+  <span id="whoPost">Advert by: Akomolafe Segun</span>
+ <input type="button" value="Delete Advert" id="item7"  onclick="deleteFunc()" style="padding:4% 4% 4% 4%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(0,0,0,0.5) inset; color:white; background-color:gold; font-size:12px; font-weight: bold ;" />
+ <br/><span id="flag">Flagged</span>
+ </p>
+  </div>
+ <div class=" slide-animate-right adminImg"  style="background-image:url(car4.jpg); ">
+   <p class="littleTextSlide slide-animate-top" style="position:absolute; z-index:10; padding:10% 4% 4% 4%;">
+  <span id="whoPost">Advert by: Akomolafe Segun</span>
+ <input type="button" value="Delete Advert" id="item8"  onclick="deleteFunc()" style="padding:4% 4% 4% 4%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(0,0,0,0.5) inset; color:white; background-color:gold; font-size:12px; font-weight: bold ;" />
+ <br/><span id="flag">Flagged</span>
+ </p>
+  </div>
+</div>
+ </section>  
+ 
+ <script>
+
+
+</script>
+<div id="overlay">
+<center>
+<div id="centerForm" class="addForm">
+<a href="javascript:;" onclick="off()" style="text-align:right; float:right; background-color:rgba(250,0,30,0.8); border-radius:50%; padding:1% 2% 1% 2%; color:white; text-decoration:none;">X</a>
+  
+
+<h3 id="secondHead">Add a Car Advert</h3>
+<form role="form" method="post" action="" enctype="multipart/form-data" >
+              
+                
+               
+                <input type="text" required class="control" id="date_added" placeholder="Date Added(Format: DD-MM-YYYY)">
+				<br/>
+			  <br/>
+           <select name="state" required="" class="control" id="state">	
+				<option value="">Select State </option>
+
+    <option value="2019">Abia</option>
+   <option value="2019">Adamawa</option>
+    <option value="2019">Akwa Ibom</option>
+    <option value="2019">Anambra</option>
+    <option value="2019">Bauchi</option>
+    <option value="2019">Bayelsa</option>
+    <option value="2019">Benue</option>
+    <option value="2019">Borno</option>
+    <option value="2019">Cross River</option>
+    <option value="2019">Delta</option>
+    <option value="2019">Ebonyi</option>
+    <option value="2019">Enugu</option>
+    <option value="2019">Edo</option>
+    <option value="2019">Ekiti</option>
+    <option value="2019">Gombe</option>
+    <option value="2019">Imo</option>
+    <option value="2019">Jigawa</option>
+    <option value="2019">Kaduna</option>
+    <option value="2019">Kano</option>
+    <option value="2019">Katsina</option>
+    <option value="2019">Kebbi</option>
+    <option value="2019">Kogi</option>
+    <option value="2019">Kwara</option>
+    <option value="2019">Lagos</option>
+    <option value="2019">Nasarawa</option>
+    <option value="2019">Niger</option>
+    <option value="2019">Ogun</option>
+    <option value="2019">Ondo</option>
+    <option value="2019">Osun</option>
+    <option value="2019">Oyo</option>
+    <option value="2019">Plateau</option>
+    <option value="2019">Rivers</option>
+    <option value="2019">Sokoto</option>
+    <option value="2019">Taraba</option>
+    <option value="2019">Yobe</option>
+    <option value="2019">Zamfara</option>
+		</select>
+              <br/>
+             <br/>
+                
+                <input type="text" required class="control" name="price" placeholder="Car price">
+            
+              <br/>
+			 <br/>
+                
+                <input type="password" required class="control" name="manufacturer" placeholder="Car Manufacturer">
+           
+              <br/>
+              <br/>
+			  <input type="password" required class="control" name="model" placeholder="Car Model">
+           
+              <br/>
+              <br/>
+			   <input type="text" required class="control" id="body_type" placeholder="Car's Body type">
+          
+              <br/>
+			  <br/>
+			  <b style="color:rgba(255,255,255,0.99);">Upload Car's Photo:</b>
+              <input type="file" required class="control" id="car_pic" placeholder="Picture Of The Car">
+          
+              <br/>
+			  <br/>
+               
+			  <input type="submit" class="btn" name="signUp" style="background-color:rgba(250,0,30,0.8);" value="Add Advert"/>
+
+        </form>
+		</div>
+</center>
+</div> 
+<footer style="background-color:black; height:50px; color:grey; text-align:center; padding-top:20px;">
+Copyright: &copy; Auto Mart <? echo date("Y"); ?>
+</footer>
+<script>
+document.getElementById("mynavbar").style = "z-index:1;";
+</script>
+  </body>
+  </body>
+</html>
