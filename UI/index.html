@@ -115,15 +115,15 @@ Auto Mart, users can sell their cars or buy from trusted dealerships or private 
 <form role="form" method="post" action="" enctype="multipart/form-data">
               
                 
-                <input type="text" required class="control" id="firstName" placeholder="First Name">
+                <input type="text" required class="control" id="firstName" onkeyup="signupcheck();" placeholder="First Name">
           <div id="fnameResponse"></div>
               <br/>
-			  <input type="text" required class="control" id="lastName" placeholder="Last Name">
+			  <input type="text" required class="control" id="lastName" onkeyup="signupcheck();" placeholder="Last Name">
            
             <div id="lnameResponse"></div>
              <br/>
 
-                <input type="text" required class="control" id="email" placeholder="Email Address">
+                <input type="text" required class="control" id="email" onkeyup="signupcheck();" placeholder="Email Address">
            
              <div id="emailResponse"></div>
              <br/>
@@ -133,21 +133,21 @@ Auto Mart, users can sell their cars or buy from trusted dealerships or private 
               <div id="phoneResponse"></div>
 			 <br/>
 			 
-			 <input type="text" required class="control" id="address" placeholder="Address">
+			 <input type="text" required class="control" id="address" onkeyup="signupcheck();" placeholder="Address">
             
              <div id="addressResponse"></div>
 			 <br/>
                 
-                <input type="password" required class="control" id="password" placeholder="Your Password">
+                <input type="password" required class="control" id="password" onkeyup="signupcheck();" placeholder="Your Password">
            
              <div id="passResponse"></div>
               <br/>
-			  <input type="password" required class="control" id="conf_password" placeholder="Confirm Your Password">
+			  <input type="password" required class="control" id="confpassword" onkeyup="signupcheck();" placeholder="Confirm Your Password">
            
               <div id="confPassResponse"></div>
               <br/>
                
-			  <input type="button" class="btn" id="signUp" onclick="signupcheck()" value="Sign Up"/>
+			  <input type="button" class="btn" id="signUp" onclick="signup()" value="Sign Up"/>
 
         </form>
 		</div>
@@ -165,12 +165,14 @@ var emailAddress = document.getElementById("email").value;
 var phone = document.getElementById("phone").value;
 var address = document.getElementById("address").value;
 var password = document.getElementById("password").value;
+var confpassword = document.getElementById("confpassword").value;
 var firstResponse = document.getElementById("fnameResponse");
 var lastResponse = document.getElementById("lnameResponse");
 var emailresponse = document.getElementById("emailResponse");
 var phoneResponse = document.getElementById("phoneResponse");
 var addressResponse = document.getElementById("addressResponse");
 var passResponse = document.getElementById("passwordResponse");
+var confPassResponse = document.getElementById("confPassResponse");
 	
  if(firstname == ""){
  firstResponse.innerHTML = "*Provide Your Firstname*";
@@ -193,9 +195,16 @@ var passResponse = document.getElementById("passwordResponse");
  }else if( password == ""){
  passResponse.innerHTML = "*Provide Your Password*";
  passResponse.style.color = "red";
+ }else if(confpassword != password){
+ confPassResponse.innerHTML = "*Confirm Password is not the same as Password*";
+ confPassResponse.style.color = "red";
  }
  
 
+ }
+ 
+ function signup(){
+ // send data to server
  }
  </script>
 </center>
