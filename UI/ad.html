@@ -39,7 +39,7 @@ document.getElementById("login").style.display = "none";
   <button class="openbtn" onclick="opennav()">&#9776;</button> 
   <ul class="navbar-nav" id="mynavbar">
   <li><a href="javascript:void(0)" class="closebtn" onclick="closenav()">&times;</a></li>
-            <li class="active" tabindex="-1"><a href="index.php">Home |</a></li>
+            <li class="active" tabindex="-1"><a href="index.html">Home |</a></li>
             <li tabindex="-1"><a href="">About |</a></li>
             <li tabindex="-1"><a href="admin.html">Admin</a></li>
             </ul>
@@ -193,6 +193,11 @@ function closenav() {
   document.getElementById("myrightnav").style = "@media (min-width: 992px){.rightNav{width:100%;}}";
   document.getElementById("mynavbar").style = "@media (min-width: 992px){.navbar-nav{width:100%;}}";
 }
+
+function loadnewads(){
+ // Listen for new update from the server
+ //updating data in each of mySlides,textSlide and addedDisplay with result of the processed information using status,price,manufacturer,model,body_type from server
+ }
 </script>
 <div id="overlay">
 <center>
@@ -280,6 +285,11 @@ function closenav() {
 		</div>
 </center>
 </div> 
+<script>
+function adregisterprocessor(){
+ // Listen for form submit to collect data to sent to server in json
+ }
+</script>
 <footer style="background-color:black; height:50px; color:grey; text-align:center; padding-top:20px;">
 Copyright: &copy; Auto Mart <? echo date("Y"); ?>
 </footer>
