@@ -1,0 +1,461 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# Automart 
+
+Auto Mart is an online marketplace for automobiles of diverse makes, model or body type. With
+Auto Mart, users can sell their cars or buy from trusted dealerships or private sellers.
+.
+## HTTP Status [/http]
+
+### The Status Codes [GET]
+
++ Response 200 (application/json)
+
+        [
+        {
+         "status" : 200,
+         "data" : [
+            {
+             "id" : Integer,
+             "email" : String,
+             "first_name" : String,
+             "last_name" : String,
+             "password" : String,
+             "address" : String,
+             "is_admin" : True,
+             }
+           ]
+
+        }
+        ]
+        
++ Response 404 (application/json)
+
+        [
+        {
+         "status" : 404,
+         "error" : “relevant-error-message”
+        }
+        ]
+        
+
+
+## Users Login [/auth/signin]
+
+### User Login Request [POST]
+
+You login by sending a login request using the user login credentials which are the user email address and password.
+
++ Request (application/json)
+
+        {
+            "email" : String,
+            "password" : String
+            
+        }
+        
+
++ Response 200 (application/json)
+
+        [
+            {
+                "status" : Integer,
+                "data" : {
+                "token" : "45erkjherht45495783",
+                "id": Integer,
+                "first_name": String,
+                "last_name": String,
+                "address" : String,
+                "is_admin" : Boolean,
+                "phone_number" : String
+                 
+            }
+        ]
+
+## User Sign Up [/auth/signup]        
+
+### Create New User [POST]
+
+You create a new user by sending a signup request using the users credentials which are provided from the signup form.
+
++ Request (application/json)
+
+        {
+            "firstname" : String,
+            "lastname" : String,
+            "email" : String,
+            "phoneNumber" : String,
+            "address" : String,
+            "password" : String
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /users
+
+    + Body
+
+            {
+                "status" : Integer,
+                "data" : {
+                "token" : "45erkjherht45495783",
+                "id" : Integer,
+                "first_name" : String,
+                "last_name" : String,
+                "is_admin" : Boolean
+                }
+            }
+
+## Car Sales Advert [/car/]        
+
+### Create New Car Advert [POST]
+
+You can create a new car advert by sending new advert creation request.
+
++ Request (application/json)
+
+        {
+            "user_id" : Integer,
+            "state" : String,
+            "car_price" : String,
+            "car_manufacturer" : String,
+            "car_model" : String,
+            "body_type" : String,
+            "date_added" : DateTime
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /car/2
+
+    + Body
+
+            {
+                "status" : Integer,
+                "data" : {
+                "token" : "45erkjherht45495783",
+                "email" : String,
+                "created_on" : DateTime,
+                "manufacturer" : String,
+                "model" : String,
+                "body_type" : String,
+                "price" : Float,
+                "state" : String,
+                "status" : String
+                }
+            }
+
+### View All Cars. [GET]
+
+Response allows you to View all posted ads whether sold or available
+
++ Response 200 (application/json)
+
+            {
+                "status" : Integer,
+                "data" :[ {
+                "id" : Integer,
+                "owner" : String,
+                "created_on" : DateTime,
+                "state" : String,
+                "status" : String,
+                "price" : Float,
+                "manufacturer" : String,
+                "model" : String,
+                "body_type" : True
+                },
+                {
+                "id" : Integer,
+                "owner" : String,
+                "created_on" : DateTime,
+                "state" : String,
+                "status" : String,
+                "price" : Float,
+                "manufacturer" : String,
+                "model" : String,
+                "body_type" : True
+                }
+                ]
+            } 
+              
+
+## Purchase order [/order/]        
+
+### Create A Purchase order [POST]
+
+Create a new purchase order by sending new puchase request to the API URL.
+
++ Request (application/json)
+
+        {
+            "user_id" : Integer,
+            "car_id" : Integer,
+            "price" : Float,
+            "price_offered" : Float
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /order/2
+
+    + Body
+
+            {
+                "status" : Integer,
+                "data" : {
+                "id" : Integer,
+                "car_id" : Integer,
+                "created_on" : DateTime,
+                "status" : String,
+                "price" : Float,
+                "price_offered" : Float,
+                "state" : String
+                }
+            }
+
+    
+
+### Updating Purchase order [PATCH]
+
+Update purchase order by sending new update request to the API URL. Note: A user can only update the price of his/her
+purchase order while the order’s status still reads pending.
+
++ Request (application/json)
+
+        {
+            "user_id" : Integer,
+            "car_id" : Integer,
+            "price" : Float,
+            "new_price_offered" : Float
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /order/<:order-id>/price
+
+    + Body
+
+            {
+                "status" : Integer,
+                "data" : {
+                "id" : Integer,
+                "car_id" : Integer,
+                "created_on" : DateTime,
+                "status" : String,
+                "old_price_offered" : Float,
+                "new_price_offered" : Float
+                }
+            }
+
+## Manage Adverts [/car/<:car-id>/status]        
+
+### Mark a posted car Ad as sold [PATCH]
+
+Mark a posted car Ad as sold..
+
++ Request (application/json)
+
+        {
+            "user_id" : Integer,
+            "car_id" : Integer
+        }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /car/<:car-id>/status
+
+    + Body
+
+            {
+                "status" : Integer,
+                "data" : {
+                "id" : Integer,
+                "email" : Integer,
+                "created_on" : DateTime,
+                "manufacturer" : String,
+                "model" : String,
+                "price" : Float,
+                "state" : String,
+                "status" : String
+                }
+            }
+
+## Update Adverts Price [/car/<:car-id>/price]  
+
+### Update The Price Of A Car. [PATCH]
+
+Update the price of a car.
+
++ Request (application/json)
+
+        {
+            "user_id" : Integer,
+            "car_id" : Integer
+        }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /car/<:car-id>/price
+
+    + Body
+
+            {
+                "status" : Integer,
+                "data" : {
+                "id" : Integer,
+                "email" : String,
+                "created_on" : DateTime,
+                "manufacturer" : String,
+                "model" : String,
+                "price" : Float,
+                "state" : String,
+                "status" : String
+                }
+            } 
+            
+## View Car [/car/<:car-id>/]
+
+### View Specific Car Information. [GET]
+
++ Response 200 (application/json)
+
+        [
+        {
+         
+             "id" : Integer,
+             "owner" : String,
+             "created_on" : DateTime,
+             "state" : String,
+             "status" : String,
+             "price" : Float,
+             "manufacturer" : String,
+             "model" : String,
+             "body_type" : True
+
+        }
+        ]
+
+## Unsold Cars [/car?status=available]  
+
+### View all unsold cars. [GET]
+
+Response allows you to View all unsold cars.
+
++ Response 200 (application/json)
+
+            {
+                "status" : Integer,
+                "data" :[ {
+                "id" : Integer,
+                "owner" : String,
+                "created_on" : DateTime,
+                "state" : String,
+                "status" : String,
+                "price" : Float,
+                "manufacturer" : String,
+                "model" : String,
+                "body_type" : True
+                },
+                {
+                "id" : Integer,
+                "owner" : String,
+                "created_on" : DateTime,
+                "state" : String,
+                "status" : String,
+                "price" : Float,
+                "manufacturer" : String,
+                "model" : String,
+                "body_type" : True
+                }
+                ]
+            } 
+   
+## Unsold Cars Within Price Range [/car?status=available&min_price=XXXValue&max_price=XXXValue]  
+
+### View all unsold cars within a price range. [GET]
+
++ Response 200 (application/json)
+
+           {
+                "status" : Integer,
+                "data" :[ {
+                "id" : Integer,
+                "owner" : String,
+                "created_on" : DateTime,
+                "state" : String,
+                "status" : String,
+                "price" : Float,
+                "manufacturer" : String,
+                "model" : String,
+                "body_type" : True
+                },
+                {
+                "id" : Integer,
+                "owner" : String,
+                "created_on" : DateTime,
+                "state" : String,
+                "status" : String,
+                "price" : Float,
+                "manufacturer" : String,
+                "model" : String,
+                "body_type" : True
+                }
+                ]
+            }        
+            
+## Flag/Report Adverts [/flag/]  
+
+### Update The Price Of A Car. [POST]
+
+Update the price of a car.
+
++ Request (application/json)
+
+        {
+            "user_id" : Integer,
+            "car_id" : Integer
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /<:car-id>/
+
+    + Body
+
+            {
+                "status" : Integer,
+                "data" : {
+                "id" : Integer,
+                "car_id" : Integer,
+                "fagged_on" : DateTime,
+                "reason" : String,
+                "description" : String
+                
+                }
+            } 
+            
+## Delete Car [/car/<:car_id>/]  
+
+### Delete a specific car Ad [DELETE]
+
++ Response 200 (application/json)
+
+            {
+                "status" : Integer,
+                "data" : "Car Ad successfully deleted"
+            }
