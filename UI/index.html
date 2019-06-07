@@ -8,6 +8,9 @@
     <title>AutoMart App</title>
 	<link rel="stylesheet" href="main.css"/>
 	<link rel="stylesheet" href="pageRegulator.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="server.js" type="text/javascript"></script>
+
 	 <script> 
  		function toggleag(){
            var ele3 = document.getElementById("login");
@@ -72,24 +75,23 @@ document.getElementById("login").style.display = "none";
   </nav>
   
   <div id="login">
-  <form role="form" method="post" action="" enctype="multipart/form-data">
-  <a href="javascript:void(0)" class="closebtn" style="color:black; font-weight:bold;" onclick="closelog()">&times;</a>
+  
+    <a href="javascript:void(0)" class="closebtn" style="color:black; font-weight:bold;" onclick="closelog()">&times;</a>
               <div > <h2>Sign In</h2> </div>
                 
-                <input type="text" required class="control" name="logEmail" placeholder="Enter Email Address">
+                <input type="text" required class="control" id="logEmail" placeholder="Enter Email Address">
           
               <br/>
 			  <br/>
 
-                <input type="text" required class="control" name="password" placeholder="Provided Your Password">
+                <input type="text" required class="control" id="password" placeholder="Provided Your Password">
            
               <br/>
              <br/>
             
                
-			  <input type="submit" class="btn" name="login" value="Sign In"/>
+			  <input type="button" class="btn" id="login" value="Sign In"/>
 
-        </form>
   </div>
 
   <div id="firstContainer" class = "fade">
@@ -112,10 +114,10 @@ Auto Mart, users can sell their cars or buy from trusted dealerships or private 
 
 <h3 id="secondHead">Sign Up For Free!</h3>
 <div id="response"></div>
-<form role="form" method="post" action="" enctype="multipart/form-data">
+<div id="message"></div>
               
                 
-                <input type="text" required class="control" id="firstName" onkeyup="signupcheck();" placeholder="First Name">
+                <input type="text" required id="firstName" onkeyup="signupcheck();" placeholder="First Name" class="control">
           <div id="fnameResponse"></div>
               <br/>
 			  <input type="text" required class="control" id="lastName" onkeyup="signupcheck();" placeholder="Last Name">
@@ -149,7 +151,7 @@ Auto Mart, users can sell their cars or buy from trusted dealerships or private 
                
 			  <input type="button" class="btn" id="signUp" onclick="signup()" value="Sign Up"/>
 
-        </form>
+       
 		</div>
 <script>
  function signupcheck(){
@@ -203,9 +205,85 @@ var confPassResponse = document.getElementById("confPassResponse");
 
  }
  
- function signup(){
- // send data to server
+ function randomString() {
+var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+var string_length = 8;
+	var randomstring = '';
+	for (var i=0; i<string_length; i++) {
+		var rnum = Math.floor(Math.random() * chars.length);
+		randomstring += chars.substring(rnum,rnum+1);
+	}
+	return randomstring;
+}
+ 
+ var loginfo = {};
+ 
+ function login(){
+ 
+ var email = document.getElementById("logEmail").value;
+ var password = document.getElementById("password").value;
+ 
+loginfo['email'] = first_name;
+loginfo['password'] = last_name;
+
  }
+ 
+$(document).on('click','#login',function(){
+login();
+		$.ajax({
+        	url: "/auth/signin",   	
+			type: "POST",      				
+			data:  loginfo, 		
+			contentType: false,       		
+    	    cache: false,					
+			processData:false,  			
+			success: function(data)  		
+		    {
+			
+			$("#message").html(data);
+            		
+		    }	        
+	   });
+	});
+
+ 
+ // send data to server 
+ var userinfo = {};
+ function signup(){
+ 
+ var first_name = document.getElementById("firstName").value;
+ var last_name = document.getElementById("lastName").value;
+ var email = document.getElementById("email").value;
+ var phone = document.getElementById("phone").value;
+ var address = document.getElementById("address").value;
+ var password = document.getElementById("password").value;
+ 
+userinfo['first_name'] = first_name;
+userinfo['last_name'] = last_name;
+userinfo['password'] = password;
+userinfo['address'] = address;
+userinfo['email'] = email;
+userinfo['phone'] = phone;
+userinfo['token'] = randomString();
+}
+ $(document).on('click','#signUp',function(){
+signup();
+		$.ajax({
+        	url: "/auth/signup",   	
+			type: "POST",      				
+			data:  userinfo, 		
+			contentType: false,       		
+    	    cache: false,					
+			processData:false,  			
+			success: function(data)  		
+		    {
+			
+			$("#message").html(data);
+            		
+		    }	        
+	   });
+	});
+
  </script>
 </center>
 </div> 
