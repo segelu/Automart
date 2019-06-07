@@ -8,6 +8,8 @@
     <title>AutoMart App</title>
 	<link rel="stylesheet" href="main.css"/>
 	<link rel="stylesheet" href="pageRegulator.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="server.js" type="text/javascript"></script>
 	 <script> 
  		function toggleag() {
            var ele3 = document.getElementById("login");
@@ -30,10 +32,82 @@ function closelog(){
 document.getElementById("login").style.display = "none";
 }		 
 
+function imagin(){
+var i = 5;
+var carprice = "N5m";
+var carName = "Audi Premerier";
+var inputtextslid = document.createElement("p");
+inputtextslid.className="textSlide slide-animate-top";
+inputtextslid.id="txtSlid";
+inputtextslid.style.display = "none";  
+
+var textspan = document.createElement("span");
+textspan.className="price"; 
+textspan.innerHTML = "Price: " + carprice;
+inputtextslid.innerHTML += carName + "<br/>";
+inputtextslid.appendChild(textspan);
+
+var textbutton = document.createElement("INPUT");
+textbutton.setAttribute("type","button");
+textbutton.id="orderButton"; 
+textbutton.className = "order";
+textbutton.value = "Order Now";
+inputtextslid.innerHTML += "<br/>";
+
+inputtextslid.appendChild(textbutton);
+inputtextslid.innerHTML += "<br/>";
+
+var textbold = document.createElement("b");
+var texta = document.createElement("a");
+texta.href = "javascript:;";
+texta.className="upflaview"; 
+texta.id="update"; 
+texta.innerHTML = "Update";
+textbold.appendChild(texta);
+textbold.innerHTML += " | ";
+
+var texta2 = document.createElement("a");
+texta2.href = "javascript:;";
+texta2.className="upflaview"; 
+texta2.innerHTML = "Flag";
+textbold.appendChild(texta2);
+textbold.innerHTML += " | ";
+
+var texta3 = document.createElement("a");
+texta3.href = "javascript:;";
+texta3.className="upflaview"; 
+texta3.innerHTML = "View";
+textbold.appendChild(texta3);
+
+inputtextslid.appendChild(textbold);
+
+inputtextslid.innerHTML += "<br/><br/>";
+
+var textsold = document.createElement("a");
+textsold.href = "javascript:;";
+textsold.className="soldad"; 
+textsold.innerHTML = "Sold";
+inputtextslid.appendChild(textsold);
+
+document.getElementById("disp").appendChild(inputtextslid);
+
+var inputimage = document.createElement("IMG");
+inputimage.src = "car6.jpg";
+inputimage.className="mySlides slide-animate-fading";
+inputimage.style.display = "none";  
+document.getElementById("disp").appendChild(inputimage);
+}
  </script>
+ 
+ <script src="jquery/dist/jquery.js" type="text/javascript"></script>
+
+<script src="blueimp-file-upload/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
+<script src="blueimp-file-upload/js/jquery.iframe-transport.js" type="text/javascript"></script>
+<script src="blueimp-file-upload/js/jquery.fileupload.js" type="text/javascript"></script>
+<script src="cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js" type="text/javascript"></script>
   </head>
   <body>
-  
+ 
   <nav id='navContainer'>
   <img src="sn.png" class="logo" style="float:left;">
   <button class="openbtn" onclick="opennav()">&#9776;</button> 
@@ -69,28 +143,28 @@ document.getElementById("login").style.display = "none";
   </div>
 
   <div id="secondContainer">
-  <div class="slide-content slide-section" >
- <p class="  textSlide slide-animate-top" style="position:absolute; background-color:rgba(250,0,30,0.6); z-index:10; padding:4% 4% 4% 4%;">Ferrari<br/><span id="price1">Price:N17.5m</span><br/>
- <input type="button" value="Order Now" id="order1"  onclick="orderFunc1()" style="padding:5% 5% 5% 5%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; color:(0,0,0,0.2); background-color:gold; font-size:16px; font-weight: bold ;" />
- <br/><b><a href="javascript:;" onclick="updatePrice()" style="color:white; text-decoration:none; font-size:12px;">Update</a> | <a href="javascript:;" onclick="flagAd()" style="color:white; text-decoration:none; font-size:12px;">Flag</a> | <a href="javascript:;" onclick="viewAd()" style="color:white; text-decoration:none; font-size:12px;">View details</a></b>
- <br/><br/> <a href="javascript:;" onclick="soldAd()" style="color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:5% 8% 5% 8%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;">Sold</a>
+  <div class="slide-content slide-section" id="disp">
+ <p class="textSlide slide-animate-top" id="txtSlid">Ferrari<br/><span class="price">Price:N17.5m</span><br/>
+ <input type="button" value="Order Now" class="order" id="orderButton" />
+ <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" onclick="viewAd()" class="upflaview" id="view">View details</a></b>
+ <br/><br/> <a href="javascript:;" class="soldad">Sold</a>
  </p>
- <p class=" textSlide slide-animate-top" style="position:absolute; background-color:rgba(250,0,30,0.8); z-index:10; padding:4% 4% 4% 4%;">Porche<br/><span id="price2">Price:N20.5m</span><br/>
- <input type="button" value="Order Now" id="order2" onclick="orderFunc2()" style="padding:5% 5% 5% 5%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; color:(0,0,0,0.2); background-color:gold; font-size:16px; font-weight: bold ;" />
- <br/><b><a href="javascript:;" onclick="updatePrice()" style="color:white; text-decoration:none; font-size:12px;">Update</a> | <a href="javascript:;" onclick="flagAd()" style="color:white; text-decoration:none; font-size:12px;">Flag</a> | <a href="javascript:;" onclick="viewAd()" style="color:white; text-decoration:none; font-size:12px;">View details</a></b>
-<br/><br/> <a href="javascript:;" onclick="soldAd()" style="color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:5% 8% 5% 8%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;">Sold</a>
+ <p class=" textSlide slide-animate-top" id="txtSlid">Porche<br/><span class="price">Price:N20.5m</span><br/>
+ <input type="button" value="Order Now" class="order" id="orderButton" />
+ <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" onclick="viewAd()" class="upflaview" id="view">View details</a></b>
+<br/><br/> <a href="javascript:;" class="soldad">Sold</a>
  </p>
- <p class=" textSlide slide-animate-top" style="position:absolute; background-color:rgba(250,0,30,0.8); z-index:10; padding:4% 4% 4% 4%;">Lambogini<br/><span id="price3">Price:N16.5m</span><br/>
- <input type="button" value="Order Now" id="order3" onclick="orderFunc3()" style="padding:5% 5% 5% 5%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; color:(0,0,0,0.2); background-color:gold; font-size:16px; font-weight: bold ;" />
- <br/><b><a href="javascript:;" onclick="updatePrice()" style="color:white; text-decoration:none; font-size:12px;">Update</a> | <a href="javascript:;" onclick="flagAd()" style="color:white; text-decoration:none; font-size:12px;">Flag</a> | <a href="javascript:;" onclick="viewAd()" style="color:white; text-decoration:none; font-size:12px;">View details</a></b>
- <br/><br/> <a href="javascript:;" onclick="soldAd()" style="color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:5% 8% 5% 8%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;">Sold</a>
+ <p class=" textSlide slide-animate-top" id="txtSlid">Lambogini<br/><span class="price">Price:N16.5m</span><br/>
+ <input type="button" value="Order Now" class="order" id="orderButton" />
+ <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" onclick="viewAd()" class="upflaview" id="view">View details</a></b>
+ <br/><br/> <a href="javascript:;" class="soldad">Sold</a>
  
  </p>
-  <p class=" textSlide slide-animate-top" style="position:absolute; background-color:rgba(250,0,30,0.8); z-index:10; padding:4% 4% 4% 4%;">Buggati<br/><span id="price4">Price:N14m</span><br/>
- <input type="button" value="Order Now" id="order4" onclick="orderFunc4()" style="padding:5% 5% 5% 5%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; color:(0,0,0,0.2); background-color:gold; font-size:16px; font-weight: bold ;" />
- <br/><b><a href="javascript:;" onclick="updatePrice()" style="color:white; text-decoration:none; font-size:12px;">Update</a> | <a href="javascript:;" onclick="flagAd()" style="color:white; text-decoration:none; font-size:12px;">Flag</a> | <a href="javascript:;" onclick="viewAd()" style="color:white; text-decoration:none; font-size:12px;">View details</a></b>
+  <p class=" textSlide slide-animate-top" id="txtSlid">Buggati<br/><span class="price">Price:N14m</span><br/>
+ <input type="button" value="Order Now" class="order" id="orderButton" />
+ <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" onclick="viewAd()" class="upflaview" id="view">View details</a></b>
  
- <br/><br/> <a href="javascript:;" onclick="soldAd()" style="color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:5% 8% 5% 8%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;">Sold</a>
+ <br/><br/> <a href="javascript:;" class="soldad">Sold</a>
  </p>
   <img class="mySlides  slide-animate-right" src="car1.jpg" />
   <img class="mySlides slide-animate-fading" src="car2.jpg"/>
@@ -106,15 +180,15 @@ document.getElementById("login").style.display = "none";
 
  </div>  
  <center style="color:white; font-style:italic; padding:1% 1% 5% 1%; margin-left:10%; font-size:1.2em; margin-bottom:30%;"> 
-<div class=" slide-animate-left"  style="background-image:url(car1.jpg);" id="addedDisplay"></div>
- <div class=" slide-animate-left"  style="background-image:url(car2.jpg);" id="addedDisplay"></div>
- <div class=" slide-animate-right"  style=" background-image:url(car3.jpg);" id="addedDisplay"></div>
- <div class=" slide-animate-right"  style="background-image:url(car4.jpg);" id="addedDisplay"></div>
+<div class=" slide-animate-left lower"  style="background-image:url(car1.jpg);" id="addedDisplay"></div>
+ <div class=" slide-animate-left lower"  style="background-image:url(car2.jpg);" id="addedDisplay"></div>
+ <div class=" slide-animate-right lower"  style=" background-image:url(car3.jpg);" id="addedDisplay"></div>
+ <div class=" slide-animate-right lower"  style="background-image:url(car4.jpg);" id="addedDisplay"></div>
   
-  <div class=" slide-animate-left"  style="background-image:url(car5.jpg);" id="addedDisplay"></div>
- <div class=" slide-animate-left"  style="background-image:url(car6.jpg);" id="addedDisplay"></div>
- <div class=" slide-animate-right"  style="background-image:url(car7.png);" id="addedDisplay"></div>
- <div class=" slide-animate-right"  style=" background-image:url(car4.jpg);" id="addedDisplay"></div>
+  <div class=" slide-animate-left lower"  style="background-image:url(car5.jpg);" id="addedDisplay"></div>
+ <div class=" slide-animate-left lower"  style="background-image:url(car6.jpg);" id="addedDisplay"></div>
+ <div class=" slide-animate-right lower"  style="background-image:url(car7.png);" id="addedDisplay"></div>
+ <div class=" slide-animate-right lower"  style=" background-image:url(car4.jpg);" id="addedDisplay"></div>
 </center>
 <br/>
 <br/>
@@ -194,10 +268,116 @@ function closenav() {
   document.getElementById("mynavbar").style = "@media (min-width: 992px){.navbar-nav{width:100%;}}";
 }
 
-function loadnewads(){
- // Listen for new update from the server
- //updating data in each of mySlides,textSlide and addedDisplay with result of the processed information using status,price,manufacturer,model,body_type from server
+function loadlower(){
+var images = ["car1.jpg","car2.jpg","car3.jpg","car4.jpg","car5.jpg","car6.jpg","car7.png","car1.jpg"];
+var p = document.getElementsByClassName(" lower");
+  for (i = 0; i < p.length; i++) {
+    p[i].style = "background-image:url(" + images[i] + ");";  
+	
+  }
+
+}
+loadlower();
+
+function ordering(carinfo){
+var clickorder = document.getElementsByClassName("price");
+alert(clickorder[carinfo].innerHTML);
+
+}
+ function ordeributton(){
+  ordering(myIndexIndex);
  }
+ 
+ function updateprice(prices){
+ var pricechange = document.getElementsByClassName("price");
+alert(pricechange[prices].innerHTML);
+ }
+
+ function flag(id){
+ var idflagged = document.getElementsByClassName("price");
+alert(idflagged[id].innerHTML);
+ }
+ 
+ function viewing(id){
+ var idviewing = document.getElementsByClassName("mySlides");
+ var viewjson = {};
+ viewjson["url"] = idviewing[id].src;
+window.location.href = "view.html?a=" + viewjson.url;
+ }
+ 
+ function sold(id){
+ var idsold = document.getElementsByClassName("price");
+alert(idsold[id].innerHTML);
+ }
+ 
+ $(document).on('click','.order',function(){
+
+  ordeributton();
+
+});
+
+$(document).on('click','#update',function(){
+
+  updateprice(myIndexIndex);
+
+});
+
+$(document).on('click','#flag',function(){
+
+  flag(myIndexIndex);
+
+});
+
+$(document).on('click','#view',function(){
+
+  viewing(myIndexIndex);
+
+});
+
+$(document).on('click','.soldad',function(){
+
+  sold(myIndexIndex);
+
+});
+ 
+ 
+function loadnewads(){
+const api = 'https://randomuser.me/api/';
+       // make API call here
+     var xmlhttp = new XMLHttpRequest();
+     xmlhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+    var myObj = JSON.parse(this.responseText);
+     
+    }
+    };
+    xmlhttp.open("GET", api, true);
+    xmlhttp.send();
+ 
+ }
+ 
+ 
+ function analyse(){
+ var da_selected = [];
+var no_items = da_selected.length;
+var i = 0;
+while(i < no_items){
+da_selected[i]['owner'] = weight;
+da_selected[i]['created_on'] = item_name;
+da_selected[i]['state'] = total_item_weight;
+da_selected[i]['price'] = total_item_value;
+da_selected[i]['manufacturer'] = weight;
+da_selected[i]['model'] = item_name;
+da_selected[i]['body_type'] = total_item_weight;
+da_selected[i]['id'] = total_item_value;
+da_selected[i]['status'] = total_item_value;
+i++;
+}
+
+console.log(da_selected);
+} 
+
+ //
 </script>
 <div id="overlay">
 <center>
@@ -206,10 +386,8 @@ function loadnewads(){
   
 
 <h3 id="secondHead">Add a Car Advert</h3>
-<form role="form" method="post" action="" enctype="multipart/form-data" >
-              
-                
-               
+            <div id="message"></div>
+   
                 <input type="text" required class="control" id="date_added" placeholder="Date Added(Format: DD-MM-YYYY)">
 				<br/>
 			  <br/>
@@ -256,16 +434,16 @@ function loadnewads(){
               <br/>
              <br/>
                 
-                <input type="text" required class="control" name="price" placeholder="Car price">
+                <input type="text" required class="control" name="price" id="price" placeholder="Car price">
             
               <br/>
 			 <br/>
                 
-                <input type="password" required class="control" name="manufacturer" placeholder="Car Manufacturer">
+                <input type="password" required class="control" name="manufacturer" id="manufacturer" placeholder="Car Manufacturer">
            
               <br/>
               <br/>
-			  <input type="password" required class="control" name="model" placeholder="Car Model">
+			  <input type="password" required class="control" name="model" id="model" placeholder="Car Model">
            
               <br/>
               <br/>
@@ -274,21 +452,58 @@ function loadnewads(){
               <br/>
 			  <br/>
 			  <b style="color:rgba(255,255,255,0.99);">Upload Car's Photo:</b>
-              <input type="file" required class="control" id="car_pic" placeholder="Picture Of The Car">
-          
+              
+
+         <input name="file" type="file" id="carpic" class="control cloudinary-fileupload" data-cloudinary-field="image_id" 
+          data-form-data="[upload-preset-and-other-upload-options-as-html-escaped-JSON-data]"></input>
+
+
               <br/>
 			  <br/>
                
-			  <input type="submit" class="btn" name="signUp" style="background-color:rgba(250,0,30,0.8);" value="Add Advert"/>
+			  <input type="submit" class="btn" id="signAds" style="background-color:rgba(250,0,30,0.8);" value="Add Advert"/>
 
-        </form>
+        
 		</div>
 </center>
 </div> 
 <script>
+imagin();
+$.cloudinary.config({ cloud_name: 'akomolafe-segun', secure: true});
+$(document).ready(function() {
+    $("input.cloudinary-fileupload[type=file]").cloudinary_fileupload();
+})
+var adsinfo = {};
 function adregisterprocessor(){
  // Listen for form submit to collect data to sent to server in json
- }
+ 
+ var curFiles = document.getElementById("carpic").files;
+  adsinfo['image_name'] = curFiles[0].name;
+  adsinfo['date_added'] = document.getElementById('date_added').value;
+  adsinfo['state'] = document.getElementById('state').value;
+  adsinfo['price'] = document.getElementById('price').value;
+ adsinfo['manufacturer'] = document.getElementById('manufacturer').value;
+  adsinfo['model'] = document.getElementById('model').value;
+  adsinfo['body_type'] = document.getElementById('body_type').value;
+  }
+  $(document).on('click','#signAds',function(){
+adregisterprocessor();
+		$.ajax({
+        	url: "/car/",   	
+			type: "POST",      				
+			data:  adsinfo, 		
+			contentType: false,       		
+    	    cache: false,					
+			processData:false,  			
+			success: function(data)  		
+		    {
+			
+			$("#message").html(data);
+            		
+		    }	        
+	   });
+	});
+
 </script>
 <footer style="background-color:black; height:50px; color:grey; text-align:center; padding-top:20px;">
 Copyright: &copy; Auto Mart <? echo date("Y"); ?>
