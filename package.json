@@ -1,0 +1,31 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "Automart",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/segelu/Automart.git"
+  },
+  "keywords": [
+    "Automart"
+  ],
+  "author": "AKOMOLAFE SEGUN",
+  "license": "UNLICENCED",
+  "bugs": {
+    "url": "https://github.com/segelu/Automart/issues"
+  },
+  "homepage": "https://github.com/segelu/Automart#readme",
+  "dependencies": {
+    "blueimp-file-upload": "^9.31.0",
+    "cloudinary": "^1.14.0",
+    "cloudinary-jquery-file-upload": "^2.6.3",
+    "express": "^4.16.4",
+    "jquery": "^3.4.1",
+    "pg": "^7.11.0"
+  }
+}
