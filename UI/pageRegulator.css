@@ -194,6 +194,11 @@ border-radius:8px;
  color:white;
  
 }
+#navContainer{
+opacity: 0.7;
+
+z-index:10;
+}
 #login{
 width:93%;
 margin-left:0%;
@@ -271,6 +276,16 @@ margin-left:0%; padding-top:2%; border-radius:5px; height:300px; width:100%;
 .profileInfor{
 position:absolute; background-color: rgba(10,150,255,0.9); z-index:10; padding:2% 4% 0% 4%;
 
+}
+.slide-section2{width:700px;
+float:center; margin-left:2%; padding-top:4%; border-radius:5px;
+z-index:1;}
+.viewSlide{
+	box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5);
+  border:2px solid rgba(0,50,255,0.3);
+ width:100%;
+ height:700px;
+  
 }
 }
 
@@ -433,4 +448,34 @@ margin-left:0%; padding-top:2%; border-radius:5px; height:300px; width:100%;
 position:absolute; background-color: rgba(10,150,255,0.9); z-index:10; padding:2% 4% 0% 4%;
 
 }
+
+#viewtxtSlid{
+position:relative; background-color:rgba(250,0,30,0.8); z-index:10; padding:1% 1% 1% 1%;
+width:96%;
+font-size:13px;
+}
+.myDisplays{
+ box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5);
+  border:2px solid rgba(0,50,255,0.3);
+  width:100%; height:300px;
+  
+}
+.viewsoldad{
+color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:2% 5% 2% 5%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;
+
+}
+
+#vieworderButton{
+padding:1% 1% 1% 1%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; color:(0,0,0,0.2); background-color:gold; font-size:16px; font-weight: bold ;
+}
+.slide-section2{width:700px;
+float:center; margin-left:2%; padding-top:4%; border-radius:5px;
+z-index:1;}
+.viewSlide{
+	box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5);
+  border:2px solid rgba(0,50,255,0.3);
+  width:100%; height:400px;
+  
+}
+.slide-animate-right2{position:relative;animation:animateright 2s}@keyframes animateright{from{right:-200px;opacity:0} to{right:0;opacity:1}}
 }
