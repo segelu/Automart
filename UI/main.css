@@ -124,7 +124,7 @@ color:white;
 font-size:1.8em;
 font-style:italic;
 }
-form .control{
+.control{
 width:80%;
 height:30px;
 }
@@ -210,12 +210,13 @@ background-color:rgba(20,125,205,0.9);
 
 .slide-animate-fading{animation:fading 10s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
 .slide-animate-right{position:relative;animation:animateright 2s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+.slide-animate-right2{position:relative;animation:animateright 2s}@keyframes animateright{from{right:-200px;opacity:0} to{right:0;opacity:1}}
 
 .slide-section{margin-top:50px!important;margin-bottom:1x!important; max-width:700px; float:center; margin-left:23%; padding-top:4%; border-radius:5px;}
 .slide-animate-top2{position:relative;animation:animatetop 1.6s}@keyframes animatetop{from{top:0px;opacity:0} to{top:8%;opacity:1}}
 .slide-animate-top{position:relative;animation:animatetop 1.6s}@keyframes animatetop{from{top:0px;opacity:0} to{top:16%;opacity:1}}
 .slide-animate-left{position:relative;animation:animateleft 2.0s}@keyframes animateleft{from{left:-300px;opacity:0} to{left:0;opacity:1}}
-
+.slide-animate-top3{position:relative;animation:animatetop 1.6s}@keyframes animatetop{from{top:0px;opacity:0} to{top:13%;opacity:1}}
 
 #SecondtopHeadDiv{
 margin-top:0.2%;
@@ -233,9 +234,10 @@ padding:0% 2% 2% 2%; margin-left:10%; margin-bottom:4%; margin-top:10%; width:97
 color:white; float:left; font-style:italic; padding:1% 1% 5% 1%; margin-left:2%; background-color:rgba(20,125,205,0.9); font-size:1.2em;  width:65%;
 }
 .adminImg{
-width:20%; margin-right:2%; height:100px;
+width:21%; margin-right:2%; height:150px; margin-top:1%;
  background-size:100% 100%; float:left; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5);
   border:2px solid rgba(0,50,255,0.3);
+  display:none;
 }
 #SecondtopHead{
 text-align:center;
@@ -254,11 +256,13 @@ font-weight:bold;
 font-size:20px;
 margin-left:3%;
 color:white;
+
 }
 .mySlides{
  box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5);
   border:2px solid rgba(0,50,255,0.3);
   width:700px; height:500px;
+  
 }
 .upDatePrice{
 width:10%;
@@ -324,3 +328,50 @@ margin-left:1%; padding-top:2%; border-radius:5px; height:300px; width:98%;
 position:absolute; background-color: rgba(10,150,255,0.9); z-index:10; padding:2% 4% 0% 4%;
 
 }
+#txtSlid{
+position:absolute; background-color:rgba(250,0,30,0.8); z-index:10; padding:4% 4% 4% 4%;
+}
+#orderButton{
+padding:5% 5% 5% 5%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; color:(0,0,0,0.2); background-color:gold; font-size:16px; font-weight: bold ;
+}
+.upflaview{
+color:white; text-decoration:none; font-size:12px;
+}
+.soldad{
+color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:5% 8% 5% 8%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;
+}
+
+#viewtxtSlid{
+position:relative; background-color:rgba(250,0,30,0.8); z-index:10; padding:4% 4% 4% 4%;
+}
+.myDisplays{
+ box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5);
+  border:2px solid rgba(0,50,255,0.3);
+  width:700px; height:500px;
+  
+}
+.viewsoldad{
+color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:2% 3% 2% 3%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;
+
+}
+
+#vieworderButton{
+padding:1% 1% 1% 1%;margin-top:5%; border-radius:7px; border-color:gold; box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; color:(0,0,0,0.2); background-color:gold; font-size:16px; font-weight: bold ;
+}
+.viewSlide{
+	box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5);
+  border:2px solid rgba(0,50,255,0.3);
+  width:800px; height:800px;
+  
+}
+
+.vtextSlide{
+background-color:rgba(0,0,0,0.7);
+box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5);
+font-style:italic;
+font-weight:bold;
+font-size:20px;
+margin-left:5%;
+color:white;
+}
+.slide-section2{margin-top:50px!important;margin-bottom:1x!important; max-width:700px; float:center; margin-left:2%; padding-top:0%; border-radius:5px;}
