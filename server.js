@@ -8,14 +8,14 @@ const client = new Client({
 
 client.connect();
 
-var app = express();
+var myapp = express();
 
-app.get('/', function (req, res) {
+myapp.get('/', function (req, res) {
 
   res.send('hello world');
 });
 
-app.post('/auth/signup', function (req, res) {
+myapp.post('/auth/signup', function (req, res) {
 var datae = {};
 client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,token) VALUES(' + req.first_name + ', ' + req.last_name + ', ' + req.password + ', ' + req.address + ', ' + req.email + ', ' + req.phone + ', ' + req.token + ') RETURNING id;', (err, resp) => {
 if (err){
@@ -37,7 +37,7 @@ datae['data'] = arr;
 res.send( datae);
 });
 
-app.post('/auth/signin', function (req, res) {
+myapp.post('/auth/signin', function (req, res) {
 var datae = {};
 client.query('SELECT firstname,lastname FROM users WHERE email = ' + req.email + ' AND password = ' + req.password + ';', (err, resp) => {
 if (err){
@@ -52,7 +52,7 @@ datae['data'] = resp.rows;
 res.send( datae); 
 });
 
-app.post('/car/', function (req, res) {
+myapp.post('/car/', function (req, res) {
 var datae = {};
 client.query('INSERT INTO cars(email,created_on,manufacturer,model,price,state,status,body_type) VALUES(' + req.email + ', ' + Date.now() + ', ' + req.manufacturer + ', ' + req.model + ', ' + req.price + ', ' + req.state + ', ' + req.status + ', ' + req.body_type + ') RETURNING id;', (err, resp) => {
 if (err){
@@ -78,7 +78,7 @@ datae['data'] = arr;
 res.send( datae);
 });
 
-app.post('/order/', function (req, res) {
+myapp.post('/order/', function (req, res) {
 var datae = {};
 client.query('SELECT * FROM cars WHERE email = ' + req.email + ' AND id = ' + req.car_id + ';', (err, resp) => {
 if (err){
@@ -105,10 +105,11 @@ datae['data'] = arr;
 
 });
 }
+});
 res.send( datae);
 });
 
-app.patch('/order/:order-id/price', function (req, res) {
+myapp.patch('/order/:order-id/price', function (req, res) {
 var orderid = req.params.order-id;
 var datae = {};
 client.query('SELECT * FROM orders WHERE id = ' + orderid + ';', (err, resp) => {
@@ -143,7 +144,7 @@ datae['data'] = arr;
 res.send(datae);
 });
 
-app.patch('/car/:car-id/status', function (req, res) {
+myapp.patch('/car/:car-id/status', function (req, res) {
 var carid = req.params.car-id;
 var newstatus = "sold";
 var datae = {};
@@ -182,7 +183,7 @@ datae['data'] = arr;
 res.send(datae);
 });
 
-app.patch('/car/:car-id/price', function (req, res) {
+myapp.patch('/car/:car-id/price', function (req, res) {
 var carid = req.params.car-id;
 
 var datae = {};
@@ -221,7 +222,7 @@ datae['data'] = arr;
 res.send(datae);
 });
 
-app.get('/car/:car-id/', function (req, res) {
+myapp.get('/car/:car-id/', function (req, res) {
 var carid = req.params.car-id;
 
 var datae = {};
@@ -252,7 +253,7 @@ datae['data'] = arr;
 res.send(datae);
 });
 
-app.get('/car/:car-id/', function (req, res) {
+myapp.get('/car/:car-id/', function (req, res) {
 var carid = req.params.car-id;
 
 var datae = {};
@@ -283,7 +284,7 @@ datae['data'] = arr;
 res.send(datae);
 });
 
-app.get('/car?status=available', function (req, res) {
+myapp.get('/car?status=available', function (req, res) {
 var carStatus = "available";
 
 var datae = {};
@@ -315,6 +316,6 @@ datae['data'] = arr2;
 res.send(datae);
 });
 
-
+const portr = process.env.PORT || 3000;
 client.end();
-app.listen(320);
+myapp.listen(portr);
