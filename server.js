@@ -10,9 +10,8 @@ client.connect();
 
 var myapp = express();
 
-myapp.get('/', function (req, res) {
-
-  res.send('hello world');
+myapp.get('/UI/index.html', function(req, res) {
+    res.sendFile(path.join(__dirname + '/'));
 });
 
 myapp.post('/auth/signup', function (req, res) {
