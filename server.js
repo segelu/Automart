@@ -9,10 +9,15 @@ const client = new Client({
 client.connect();
 
 var myapp = express();
+const path = require('path');
+const router = express.Router();
 
 myapp.get('/', function(req, res) {
-   res.sendFile(path.join(__dirname + 'UI/index.html'));
+   res.sendFile( __dirname);
+   res.sendFile(path.join(__dirname + '/UI/index.html'));
 });
+
+app.use(express.static(__dirname + '/UI'));
 
 myapp.post('/auth/signup', function (req, res) {
 var datae = {};
