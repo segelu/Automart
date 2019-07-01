@@ -11,7 +11,7 @@ client.connect();
 var myapp = express();
 
 myapp.get('/UI/index.html', function(req, res) {
-    res.sendFile(path.join(__dirname + '/'));
+    res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 myapp.post('/auth/signup', function (req, res) {
