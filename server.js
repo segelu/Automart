@@ -17,7 +17,7 @@ myapp.get('/', function (req, res) {
   res.send('hello world');
 });
 
-app.use(express.static(__dirname + '/UI'));
+myapp.use(express.static(__dirname + '/UI'));
 
 myapp.post('/auth/signup', function (req, res) {
 var datae = {};
