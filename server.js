@@ -256,42 +256,14 @@ datae['data'] = arr;
 res.send(datae);
 });
 
-myapp.get('/car/:car-id/', function (req, res) {
-var carid = req.params.car-id;
+
+myapp.get('/car', function (req, res) {
+var carStatus = req.query.status;
+var min_price = req.query.min_price;
+var max_price = req.query.max_price;
 
 var datae = {};
-
-client.query('SELECT * FROM cars WHERE id = ' + carid + ';', (err2, resp2) => {
-if (err2){
-datae['status'] = 404;
-datae['error'] = "Error: Try again, server unable to respond...";
-}else{
-
-datae['status'] = 200;
-var arr = [];
-arr['id'] = carid;
-arr['owner'] = resp2.rows.email;
-arr['created_on'] = resp2.rows.created_on;
-arr['status'] = resp2.rows.status;
-arr['manufacturer'] = resp2.rows.manufacturer;
-arr['model'] = resp2.rows.model;
-arr['price'] = resp2.rows.price;
-arr['state'] = resp2.rows.state;
-arr['body_type'] = resp2.rows.body_type;
-
-datae['data'] = arr;
-
-}	
-});	
-	
-res.send(datae);
-});
-
-myapp.get('/car?status=available', function (req, res) {
-var carStatus = "available";
-
-var datae = {};
-
+if(min_price == "" && max_price == ""){
 client.query('SELECT * FROM cars WHERE status = ' + carStatus + ';', (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
@@ -315,9 +287,88 @@ arr2.push(arr);
 datae['data'] = arr2;
 }	
 });	
+}else{
+
+client.query('SELECT * FROM cars WHERE status = ' + carStatus + ' AND price > ' + min_price + ' OR status = ' + carStatus + ' AND price = ' + min_price +  ' OR status = ' + carStatus + ' AND price < ' + max_price + ' OR status = ' + carStatus + ' AND price = ' + max_price + ';', (err2, resp2) => {
+if (err2){
+datae['status'] = 404;
+datae['error'] = "Error: Try again, server unable to respond...";
+}else{
+var arr2 = [];
+datae['status'] = 200;
+for (var i=0; i < resp2.rows.length; i++){
+var arr = [];
+arr['id'] = carid;
+arr['owner'] = resp2.rows[i].email;
+arr['created_on'] = resp2.rows[i].created_on;
+arr['status'] = resp2.rows[i].status;
+arr['manufacturer'] = resp2[i].rows.manufacturer;
+arr['model'] = resp2.rows[i].model;
+arr['price'] = resp2.rows[i].price;
+arr['state'] = resp2.rows[i].state;
+arr['body_type'] = resp2.rows[i].body_type;
+arr2.push(arr);
+}
+datae['data'] = arr2;
+}	
+});	
+
+}	
+res.send(datae);
+});
+
+myapp.delete('/car/:car-id/', function (req, res) {
+var carid = req.params.car-id;
+
+var datae = {};
+
+client.query('DELETE FROM cars WHERE id = ' + carid + ';', (err2, resp2) => {
+if (err2){
+datae['status'] = 404;
+datae['error'] = "Error: Try again, server unable to respond...";
+}else{
+datae['status'] = 200;
+datae['data'] =  " Successfully Deleted";
+
+}	
+});	
 	
 res.send(datae);
 });
+
+myapp.get('/car/', function (req, res) {
+var carid = req.params.car-id;
+
+var datae = {};
+
+client.query('SELECT * FROM cars ;', (err2, resp2) => {
+if (err2){
+datae['status'] = 404;
+datae['error'] = "Error: Try again, server unable to respond...";
+}else{
+var arr2 = [];
+datae['status'] = 200;
+for (var i=0; i < resp2.rows.length; i++){
+var arr = [];
+arr['id'] = carid;
+arr['owner'] = resp2.rows[i].email;
+arr['created_on'] = resp2.rows[i].created_on;
+arr['status'] = resp2.rows[i].status;
+arr['manufacturer'] = resp2[i].rows.manufacturer;
+arr['model'] = resp2.rows[i].model;
+arr['price'] = resp2.rows[i].price;
+arr['state'] = resp2.rows[i].state;
+arr['body_type'] = resp2.rows[i].body_type;
+arr2.push(arr);
+}
+datae['data'] = arr;
+
+}	
+});	
+	
+res.send(datae);
+});
+
 
 const portr = process.env.PORT || 3000;
 client.end();
