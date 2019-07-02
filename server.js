@@ -12,9 +12,9 @@ var myapp = express();
 const path = require('path');
 const router = express.Router();
 
-myapp.get('/', function(req, res) {
-   res.sendFile( __dirname);
-   res.sendFile(path.join(__dirname + '/UI/index.html'));
+myapp.get('/', function (req, res) {
+
+  res.send('hello world');
 });
 
 app.use(express.static(__dirname + '/UI'));
