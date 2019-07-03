@@ -261,9 +261,12 @@ myapp.get('/car', function (req, res) {
 var carStatus = req.query.status;
 var min_price = req.query.min_price;
 var max_price = req.query.max_price;
+var state = req.query.state;
+var manufacturer = req.query.manufacturer;
+var bodytype = req.query.body_type;
 
 var datae = {};
-if(min_price == "" && max_price == ""){
+if(min_price == "" && max_price == "" && state == "" && carStatus !=""){
 client.query('SELECT * FROM cars WHERE status = ' + carStatus + ';', (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
@@ -273,7 +276,7 @@ var arr2 = [];
 datae['status'] = 200;
 for (var i=0; i < resp2.rows.length; i++){
 var arr = [];
-arr['id'] = carid;
+arr['id'] = resp2.rows[i].id;
 arr['owner'] = resp2.rows[i].email;
 arr['created_on'] = resp2.rows[i].created_on;
 arr['status'] = resp2.rows[i].status;
@@ -287,7 +290,7 @@ arr2.push(arr);
 datae['data'] = arr2;
 }	
 });	
-}else{
+}else if(min_price != "" && max_price != ""){
 
 client.query('SELECT * FROM cars WHERE status = ' + carStatus + ' AND price > ' + min_price + ' OR status = ' + carStatus + ' AND price = ' + min_price +  ' OR status = ' + carStatus + ' AND price < ' + max_price + ' OR status = ' + carStatus + ' AND price = ' + max_price + ';', (err2, resp2) => {
 if (err2){
@@ -298,7 +301,85 @@ var arr2 = [];
 datae['status'] = 200;
 for (var i=0; i < resp2.rows.length; i++){
 var arr = [];
-arr['id'] = carid;
+arr['id'] = resp2.rows[i].id;
+arr['owner'] = resp2.rows[i].email;
+arr['created_on'] = resp2.rows[i].created_on;
+arr['status'] = resp2.rows[i].status;
+arr['manufacturer'] = resp2[i].rows.manufacturer;
+arr['model'] = resp2.rows[i].model;
+arr['price'] = resp2.rows[i].price;
+arr['state'] = resp2.rows[i].state;
+arr['body_type'] = resp2.rows[i].body_type;
+arr2.push(arr);
+}
+datae['data'] = arr2;
+}	
+});	
+
+}else if(state != "" && carStatus !=""){
+
+client.query('SELECT * FROM cars WHERE status = ' + carStatus + ' AND state = ' + state + ';', (err2, resp2) => {
+if (err2){
+datae['status'] = 404;
+datae['error'] = "Error: Try again, server unable to respond...";
+}else{
+var arr2 = [];
+datae['status'] = 200;
+for (var i=0; i < resp2.rows.length; i++){
+var arr = [];
+arr['id'] = resp2.rows[i].id;
+arr['owner'] = resp2.rows[i].email;
+arr['created_on'] = resp2.rows[i].created_on;
+arr['status'] = resp2.rows[i].status;
+arr['manufacturer'] = resp2[i].rows.manufacturer;
+arr['model'] = resp2.rows[i].model;
+arr['price'] = resp2.rows[i].price;
+arr['state'] = resp2.rows[i].state;
+arr['body_type'] = resp2.rows[i].body_type;
+arr2.push(arr);
+}
+datae['data'] = arr2;
+}	
+});	
+
+}else if( manufacturer != "" && carStatus !=""){
+
+client.query('SELECT * FROM cars WHERE status = ' + carStatus + ' AND manufacturer = ' + manufacturer + ';', (err2, resp2) => {
+if (err2){
+datae['status'] = 404;
+datae['error'] = "Error: Try again, server unable to respond...";
+}else{
+var arr2 = [];
+datae['status'] = 200;
+for (var i=0; i < resp2.rows.length; i++){
+var arr = [];
+arr['id'] = resp2.rows[i].id;
+arr['owner'] = resp2.rows[i].email;
+arr['created_on'] = resp2.rows[i].created_on;
+arr['status'] = resp2.rows[i].status;
+arr['manufacturer'] = resp2[i].rows.manufacturer;
+arr['model'] = resp2.rows[i].model;
+arr['price'] = resp2.rows[i].price;
+arr['state'] = resp2.rows[i].state;
+arr['body_type'] = resp2.rows[i].body_type;
+arr2.push(arr);
+}
+datae['data'] = arr2;
+}	
+});	
+
+}else if( bodytype != "" ){
+
+client.query('SELECT * FROM cars WHERE body_type = ' + bodytype + ';', (err2, resp2) => {
+if (err2){
+datae['status'] = 404;
+datae['error'] = "Error: Try again, server unable to respond...";
+}else{
+var arr2 = [];
+datae['status'] = 200;
+for (var i=0; i < resp2.rows.length; i++){
+var arr = [];
+arr['id'] = resp2.rows[i].id;
 arr['owner'] = resp2.rows[i].email;
 arr['created_on'] = resp2.rows[i].created_on;
 arr['status'] = resp2.rows[i].status;
@@ -367,6 +448,34 @@ datae['data'] = arr;
 });	
 	
 res.send(datae);
+});
+
+myapp.post('/flag/', function (req, res) {
+var datae = {};
+client.query('SELECT * FROM cars WHERE email = ' + req.email + ' AND id = ' + req.car_id + ';', (err, resp) => {
+if (err){
+datae['status'] = 404;
+datae['error'] = "Error: Car does Not exist...";
+}else{
+
+client.query('INSERT INTO flags(car_id,created_on,reason,description) VALUES(' + req.car_id + ', ' + Date.now() + ', ' + req.reason + ', ' + req.description + ') RETURNING id;', (err2, resp2) => {
+if (err2){
+datae['status'] = 404;
+datae['error'] = "Error: Can Not Flag Advert...";
+}else{
+datae['status'] = 200;
+var arr = [];
+arr['id'] = resp2.rows.id;
+arr['car_id'] = req.car_id;
+arr['reason'] = req.reason;
+arr['description'] = req.description;
+datae['data'] = arr;
+} 
+
+});
+}
+});
+res.send( datae);
 });
 
 
