@@ -51,7 +51,8 @@ arr['id'] = resp.rows.id;
 arr['first_name'] = req.first_name;
 arr['last_name'] = req.last_name;
 arr['email'] = req.email;
-arr['token'] = token;  
+arr['token'] = token; 
+arr['secretKey'] = randomstring; 
 
 datae['data'] = arr;
 }
@@ -68,7 +69,7 @@ myapp.post('/auth/signin', function (req, res) {
 var datae = {};
 var user = {};
 
-client.query('SELECT firstname,lastname FROM users WHERE email = ' + req.email + ' AND password = ' + req.password + ';', (err, resp) => {
+client.query('SELECT id,first_name,last_name FROM users WHERE email = ' + req.email + ' AND password = ' + req.password + ';', (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Incorrect Login Credentials...";
@@ -83,6 +84,7 @@ datae['error'] = "Error: Connection Not Secure...";
 }else{ 	
 var arr = [];
 arr = resp.rows;
+arr['email'] = req.email;
 arr['token'] = token;
 arr['secretKey'] = resp.rows.token;
 datae['status'] = 200;
