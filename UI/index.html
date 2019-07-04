@@ -76,9 +76,9 @@ document.getElementById("login").style.display = "none";
   
   <div id="login">
   
-    <a href="javascript:void(0)" class="closebtn" style="color:black; font-weight:bold;" onclick="closelog()">&times;</a>
+    <a href="javascript:void(0)" class="closebtnn" onclick="closelog()">&times;</a>
               <div > <h2>Sign In</h2> </div>
-                
+                <div id="logMessage"></div>
                 <input type="text" required class="control" id="logEmail" placeholder="Enter Email Address">
           
               <br/>
@@ -90,7 +90,7 @@ document.getElementById("login").style.display = "none";
              <br/>
             
                
-			  <input type="button" class="btn" id="login" value="Sign In"/>
+			  <input type="button" class="btn" id="loginn" value="Sign In"/>
 
   </div>
 
@@ -228,7 +228,7 @@ loginfo['password'] = last_name;
 
  }
  
-$(document).on('click','#login',function(){
+$(document).on('click','#loginn',function(){
 login();
 		$.ajax({
         	url: "/auth/signin",   	
@@ -239,9 +239,14 @@ login();
 			processData:false,  			
 			success: function(data)  		
 		    {
-			
-			$("#message").html(data);
-            		
+			const {data: {id, first_name, last_name, email, token, secretKey}} = data;
+
+			$("#logMessage").html(last_name + " " + first_name + " Successfully Logged In!");
+			sessionStorage.setItem("secretKey", secretKey);	
+			sessionStorage.setItem("token", token);	
+            sessionStorage.setItem("email", email);	
+            sessionStorage.setItem("id", id);	
+				
 		    }	        
 	   });
 	});
@@ -264,7 +269,7 @@ userinfo['password'] = password;
 userinfo['address'] = address;
 userinfo['email'] = email;
 userinfo['phone'] = phone;
-userinfo['token'] = randomString();
+
 }
  $(document).on('click','#signUp',function(){
 signup();
@@ -277,12 +282,17 @@ signup();
 			processData:false,  			
 			success: function(data)  		
 		    {
-			
-			$("#message").html(data);
-            		
+			const {data: {id, first_name, last_name, email, token, secretKey}} = data;
+
+			$("#message").html(last_name + " " + first_name + "'s Account Successfully Created");
+			sessionStorage.setItem("secretKey", secretKey);	
+			sessionStorage.setItem("token", token);	
+            sessionStorage.setItem("email", email);	
+            sessionStorage.setItem("id", id);				
 		    }	        
 	   });
 	});
+
 
  </script>
 </center>
