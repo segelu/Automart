@@ -1,6 +1,6 @@
 const { Client } = require('pg');
 var express = require('express');
-
+const jwt = require('jsonwebtoken');
 const client = new Client({
   connectionString: "postgres://jptbyfzymxpjdi:0f9fe89fddc8e4e6a2d2a7914c3b403478dc86d24c82c16599dff13f87d979c9@ec2-54-197-234-117.compute-1.amazonaws.com:5432/da5836to2svumd",
   ssl: true,
@@ -19,44 +19,92 @@ myapp.get('/', function(req, res) {
 myapp.use(express.static(__dirname + '/UI'));
 
 myapp.post('/auth/signup', function (req, res) {
+	
+var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+var string_length = 8;
+var randomstring = '';
+for (var i=0; i<string_length; i++) {
+var rnum = Math.floor(Math.random() * chars.length);
+randomstring += chars.substring(rnum,rnum+1);
+}
+
 var datae = {};
-client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,token) VALUES(' + req.first_name + ', ' + req.last_name + ', ' + req.password + ', ' + req.address + ', ' + req.email + ', ' + req.phone + ', ' + req.token + ') RETURNING id;', (err, resp) => {
+var user = {};
+user['email'] = req.email;
+user['secretKey'] = randomstring;
+jwt.sign(user, randomstring, { expiresIn: '1h' },(errt, token) => {
+
+if(errt){ 
+datae['status'] = 404;
+datae['error'] = "Error: Connection Not Secure...";
+}else{ 
+
+client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,token) VALUES(' + req.first_name + ', ' + req.last_name + ', ' + req.password + ', ' + req.address + ', ' + req.email + ', ' + req.phone + ', ' + randomstring + ') RETURNING id;', (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Problem occur when signing up...";
 }else{
+	
 datae['status'] = 200;
 var arr = [];
-arr['token'] = req.token;
 arr['id'] = resp.rows.id;
 arr['first_name'] = req.first_name;
-arr['last_name'] = req.first_name;
+arr['last_name'] = req.last_name;
 arr['email'] = req.email;
+arr['token'] = token;  
+
 datae['data'] = arr;
 }
-
 });
 
-res.send( datae);
+}
+});
+
+res.send(datae);
+
 });
 
 myapp.post('/auth/signin', function (req, res) {
 var datae = {};
+var user = {};
+
 client.query('SELECT firstname,lastname FROM users WHERE email = ' + req.email + ' AND password = ' + req.password + ';', (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Incorrect Login Credentials...";
 }else{
+	
+user['email'] = req.email;
+user['secretKey'] = resp.rows.token;
+jwt.sign(user, resp.rows.token, { expiresIn: '1h' },(errt, token) => {
+if(errt){ 
+datae['status'] = 404;
+datae['error'] = "Error: Connection Not Secure...";
+}else{ 	
+var arr = [];
+arr = resp.rows;
+arr['token'] = token;
+arr['secretKey'] = resp.rows.token;
 datae['status'] = 200;
-datae['data'] = resp.rows;
+datae['data'] = arr;
+
+}
+});
+
 } 
 
 });
-res.send( datae); 
+res.send(datae);
+
 });
 
 myapp.post('/car/', function (req, res) {
 var datae = {};
+jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+if(errt){ 
+datae['status'] = 404;
+datae['error'] = "Error: Connection Not Secure...";			
+}else{
 client.query('INSERT INTO cars(email,created_on,manufacturer,model,price,state,status,body_type) VALUES(' + req.email + ', ' + Date.now() + ', ' + req.manufacturer + ', ' + req.model + ', ' + req.price + ', ' + req.state + ', ' + req.status + ', ' + req.body_type + ') RETURNING id;', (err, resp) => {
 if (err){
 datae['status'] = 404;
@@ -78,11 +126,18 @@ datae['data'] = arr;
 
 });
 
-res.send( datae);
+}
+res.send(datae);
+});
 });
 
 myapp.post('/order/', function (req, res) {
 var datae = {};
+jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+if(errt){ 
+datae['status'] = 404;
+datae['error'] = "Error: Connection Not Secure...";			
+}else{
 client.query('SELECT * FROM cars WHERE email = ' + req.email + ' AND id = ' + req.car_id + ';', (err, resp) => {
 if (err){
 datae['status'] = 404;
@@ -109,12 +164,19 @@ datae['data'] = arr;
 });
 }
 });
+}
+});
 res.send( datae);
 });
 
 myapp.patch('/order/:order-id/price', function (req, res) {
 var orderid = req.params.order-id;
 var datae = {};
+jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+if(errt){ 
+datae['status'] = 404;
+datae['error'] = "Error: Connection Not Secure...";			
+}else{
 client.query('SELECT * FROM orders WHERE id = ' + orderid + ';', (err, resp) => {
 if (err){
 datae['status'] = 404;
@@ -143,7 +205,8 @@ datae['data'] = arr;
 } 
 
 });	
-	
+}
+});	
 res.send(datae);
 });
 
@@ -151,7 +214,11 @@ myapp.patch('/car/:car-id/status', function (req, res) {
 var carid = req.params.car-id;
 var newstatus = "sold";
 var datae = {};
-
+jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+if(errt){ 
+datae['status'] = 404;
+datae['error'] = "Error: Connection Not Secure...";			
+}else{
 client.query('UPDATE cars SET status = ' + newstatus + ' WHERE id = ' + carid + ';', (err, resp) => {
 if(err){
 datae['status'] = 404;
@@ -182,7 +249,8 @@ datae['data'] = arr;
 	
 }
 });	
-	
+}
+});		
 res.send(datae);
 });
 
@@ -190,7 +258,11 @@ myapp.patch('/car/:car-id/price', function (req, res) {
 var carid = req.params.car-id;
 
 var datae = {};
-
+jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+if(errt){ 
+datae['status'] = 404;
+datae['error'] = "Error: Connection Not Secure...";			
+}else{
 client.query('UPDATE cars SET price = ' + req.price + ' WHERE id = ' + carid + ';', (err, resp) => {
 if(err){
 datae['status'] = 404;
@@ -221,7 +293,8 @@ datae['data'] = arr;
 	
 }
 });	
-	
+}
+});		
 res.send(datae);
 });
 
@@ -229,7 +302,11 @@ myapp.get('/car/:car-id/', function (req, res) {
 var carid = req.params.car-id;
 
 var datae = {};
-
+jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+if(errt){ 
+datae['status'] = 404;
+datae['error'] = "Error: Connection Not Secure...";			
+}else{
 client.query('SELECT * FROM cars WHERE id = ' + carid + ';', (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
@@ -252,7 +329,8 @@ datae['data'] = arr;
 
 }	
 });	
-	
+}
+});		
 res.send(datae);
 });
 
@@ -266,6 +344,11 @@ var manufacturer = req.query.manufacturer;
 var bodytype = req.query.body_type;
 
 var datae = {};
+jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+if(errt){ 
+datae['status'] = 404;
+datae['error'] = "Error: Connection Not Secure...";			
+}else{
 if(min_price == "" && max_price == "" && state == "" && carStatus !=""){
 client.query('SELECT * FROM cars WHERE status = ' + carStatus + ';', (err2, resp2) => {
 if (err2){
@@ -394,7 +477,9 @@ datae['data'] = arr2;
 }	
 });	
 
-}	
+}
+}
+});		
 res.send(datae);
 });
 
@@ -402,7 +487,11 @@ myapp.delete('/car/:car-id/', function (req, res) {
 var carid = req.params.car-id;
 
 var datae = {};
-
+jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+if(errt){ 
+datae['status'] = 404;
+datae['error'] = "Error: Connection Not Secure...";			
+}else{
 client.query('DELETE FROM cars WHERE id = ' + carid + ';', (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
@@ -413,7 +502,8 @@ datae['data'] =  " Successfully Deleted";
 
 }	
 });	
-	
+}
+});		
 res.send(datae);
 });
 
@@ -421,7 +511,11 @@ myapp.get('/car/', function (req, res) {
 var carid = req.params.car-id;
 
 var datae = {};
-
+jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+if(errt){ 
+datae['status'] = 404;
+datae['error'] = "Error: Connection Not Secure...";			
+}else{
 client.query('SELECT * FROM cars ;', (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
@@ -446,12 +540,18 @@ datae['data'] = arr;
 
 }	
 });	
-	
+}
+});		
 res.send(datae);
 });
 
 myapp.post('/flag/', function (req, res) {
 var datae = {};
+jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+if(errt){ 
+datae['status'] = 404;
+datae['error'] = "Error: Connection Not Secure...";			
+}else{
 client.query('SELECT * FROM cars WHERE email = ' + req.email + ' AND id = ' + req.car_id + ';', (err, resp) => {
 if (err){
 datae['status'] = 404;
@@ -475,6 +575,8 @@ datae['data'] = arr;
 });
 }
 });
+}
+});	
 res.send( datae);
 });
 
