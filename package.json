@@ -25,6 +25,7 @@
     "cloudinary": "^1.14.0",
     "cloudinary-jquery-file-upload": "^2.6.3",
     "express": "^4.16.4",
+    "jsonwebtoken": "^7.3.0",
     "jquery": "^3.4.1",
     "pg": "^7.11.0"
   }
