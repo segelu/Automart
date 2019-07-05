@@ -306,6 +306,7 @@ signup();
 			processData:false,  			
 			success: function(data)  		
 		    {
+			console.log(data);
 			const {data: {id, first_name, last_name, email, token, secretKey}} = data;
 
 			$("#message").html(last_name + " " + first_name + "'s Account Successfully Created");
