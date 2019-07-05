@@ -148,6 +148,14 @@ Auto Mart, users can sell their cars or buy from trusted dealerships or private 
            
               <div id="confPassResponse"></div>
               <br/>
+			  
+			  <select class="control" id="admin" onkeyup="signupcheck();">
+			  <option value="">Select As Admin</option>
+			  <option value="non_admin">Non Admin</option>
+			  <option value="admin">Admin</option>
+              </select>
+              <div id="confAdminResponse"></div>
+              <br/>
                
 			  <input type="button" class="btn" id="signUp" onclick="signup()" value="Sign Up"/>
 
@@ -160,7 +168,9 @@ Auto Mart, users can sell their cars or buy from trusted dealerships or private 
   document.getElementById("emailResponse").innerHTML = "";
    document.getElementById("phoneResponse").innerHTML = "";
     document.getElementById("addressResponse").innerHTML = "";
+	document.getElementById("admin").innerHTML = "";
 
+var admin = document.getElementById("admin").value;
 var firstname = document.getElementById("firstName").value;
 var lastname = 	document.getElementById("lastName").value;
 var emailAddress = document.getElementById("email").value;
@@ -175,6 +185,9 @@ var phoneResponse = document.getElementById("phoneResponse");
 var addressResponse = document.getElementById("addressResponse");
 var passResponse = document.getElementById("passwordResponse");
 var confPassResponse = document.getElementById("confPassResponse");
+var confAdminResponse = document.getElementById("confAdminResponse");
+
+
 	
  if(firstname == ""){
  firstResponse.innerHTML = "*Provide Your Firstname*";
@@ -200,6 +213,9 @@ var confPassResponse = document.getElementById("confPassResponse");
  }else if(confpassword != password){
  confPassResponse.innerHTML = "*Confirm Password is not the same as Password*";
  confPassResponse.style.color = "red";
+ }else if(admin == ""){
+ confAdminResponse.innerHTML = "*Is This User an Admin Or Not, please select as appropriate*";
+ confAdminResponse.style.color = "red";
  }
  
 
@@ -262,6 +278,14 @@ login();
  var phone = document.getElementById("phone").value;
  var address = document.getElementById("address").value;
  var password = document.getElementById("password").value;
+ var cadmin = document.getElementById("admin").value;
+ 
+ var is_admin = false;
+if(cadmin == "non_admin"){
+is_admin = false;
+}else if(cadmin == "admin"){
+is_admin = true;
+}
  
 userinfo['first_name'] = first_name;
 userinfo['last_name'] = last_name;
@@ -269,6 +293,7 @@ userinfo['password'] = password;
 userinfo['address'] = address;
 userinfo['email'] = email;
 userinfo['phone'] = phone;
+userinfo['is_admin'] = is_admin;
 
 }
  $(document).on('click','#signUp',function(){
