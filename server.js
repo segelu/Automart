@@ -19,27 +19,19 @@ myapp.get('/', function(req, res) {
 myapp.use(express.static(__dirname + '/UI'));
 
 myapp.post('/auth/signup', function (req, res) {
-	
-var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-var string_length = 8;
-var randomstring = '';
-for (var i=0; i<string_length; i++) {
-var rnum = Math.floor(Math.random() * chars.length);
-randomstring += chars.substring(rnum,rnum+1);
-}
 
 var datae = {};
 var user = {};
 user['email'] = req.email;
-user['secretKey'] = randomstring;
-jwt.sign(user, randomstring, { expiresIn: '1h' },(errt, token) => {
+user['secretKey'] = req.password;
+jwt.sign(user, req.password, { expiresIn: '1h' },(errt, token) => {
 
 if(errt){ 
 datae['status'] = 404;
 datae['error'] = "Error: Connection Not Secure...";
 }else{ 
 
-client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,token) VALUES(' + req.first_name + ', ' + req.last_name + ', ' + req.password + ', ' + req.address + ', ' + req.email + ', ' + req.phone + ', ' + randomstring + ') RETURNING id;', (err, resp) => {
+client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES(' + req.first_name + ', ' + req.last_name + ', ' + req.password + ', ' + req.address + ', ' + req.email + ', ' + req.phone + ', ' + req.is_admin + ') RETURNING id;', (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Problem occur when signing up...";
@@ -52,7 +44,7 @@ arr['first_name'] = req.first_name;
 arr['last_name'] = req.last_name;
 arr['email'] = req.email;
 arr['token'] = token; 
-arr['secretKey'] = randomstring; 
+arr['secretKey'] = req.password;
 
 datae['data'] = arr;
 }
@@ -76,8 +68,8 @@ datae['error'] = "Error: Incorrect Login Credentials...";
 }else{
 	
 user['email'] = req.email;
-user['secretKey'] = resp.rows.token;
-jwt.sign(user, resp.rows.token, { expiresIn: '1h' },(errt, token) => {
+user['secretKey'] = req.password;
+jwt.sign(user, req.password, { expiresIn: '1h' },(errt, token) => {
 if(errt){ 
 datae['status'] = 404;
 datae['error'] = "Error: Connection Not Secure...";
@@ -86,7 +78,7 @@ var arr = [];
 arr = resp.rows;
 arr['email'] = req.email;
 arr['token'] = token;
-arr['secretKey'] = resp.rows.token;
+arr['secretKey'] = req.password;
 datae['status'] = 200;
 datae['data'] = arr;
 
