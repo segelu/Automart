@@ -257,6 +257,10 @@ login();
 			processData:false,  			
 			success: function(data)  		
 		    {
+		
+			if(data.status == 404){
+			$("#logMessage").html(data.error);
+			}else{
 			const {data: {id, first_name, last_name, email, token, secretKey}} = data;
 
 			$("#logMessage").html(last_name + " " + first_name + " Successfully Logged In!");
@@ -264,7 +268,8 @@ login();
 			sessionStorage.setItem("token", token);	
             sessionStorage.setItem("email", email);	
             sessionStorage.setItem("id", id);	
-				
+			}
+			
 		    }	        
 	   });
 	});
@@ -309,14 +314,17 @@ signup();
 			processData:false,  			
 			success: function(data)  		
 		    {
-			console.log(data);
+			if(data.status == 404){
+			$("#message").html(data.error);
+			}else{
 			const {data: {id, first_name, last_name, email, token, secretKey}} = data;
 
 			$("#message").html(last_name + " " + first_name + "'s Account Successfully Created");
 			sessionStorage.setItem("secretKey", secretKey);	
 			sessionStorage.setItem("token", token);	
             sessionStorage.setItem("email", email);	
-            sessionStorage.setItem("id", id);				
+            sessionStorage.setItem("id", id);	
+             }			
 		    }	        
 	   });
 	});
