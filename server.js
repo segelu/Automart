@@ -28,7 +28,7 @@ jwt.sign(user, req.password, { expiresIn: '1h' },(errt, token) => {
 
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";
+datae['error'] = errt;
 }else{ 
 
 client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES(' + req.first_name + ', ' + req.last_name + ', ' + req.password + ', ' + req.address + ', ' + req.email + ', ' + req.phone + ', ' + req.is_admin + ') RETURNING id;', (err, resp) => {
