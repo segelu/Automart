@@ -1,5 +1,6 @@
 const { Client } = require('pg');
 var express = require('express');
+var bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const client = new Client({
   connectionString: "postgres://jptbyfzymxpjdi:0f9fe89fddc8e4e6a2d2a7914c3b403478dc86d24c82c16599dff13f87d979c9@ec2-54-197-234-117.compute-1.amazonaws.com:5432/da5836to2svumd",
@@ -12,23 +13,25 @@ var myapp = express();
 const path = require('path');
 const router = express.Router();
 
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 myapp.get('/', function(req, res) {
    res.sendFile( __dirname);
    res.sendFile(path.join(__dirname + '/UI/index.html'));
 });
 myapp.use(express.static(__dirname + '/UI'));
 
-myapp.post('/auth/signup', function (req, res) {
+myapp.post('/auth/signup', urlencodedParser, function (req, res) {
 
 var datae = {};
 var user = {};
-user['email'] = req.email;
-user['secretKey'] = req.password;
-jwt.sign(user, req.password, { expiresIn: '1h' },(errt, token) => {
+user['email'] = req.body.email;
+user['secretKey'] = req.body.password;
+jwt.sign(user, req.body.password, { expiresIn: '1h' },(errt, token) => {
 
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure..." + req.email;
+datae['error'] = "Error: Connection Not Secure..." + req.body.email;
 }else{ 
 
 client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES(' + req.first_name + ', ' + req.last_name + ', ' + req.password + ', ' + req.address + ', ' + req.email + ', ' + req.phone + ', ' + req.is_admin + ') RETURNING id;', (err, resp) => {
