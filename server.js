@@ -24,10 +24,11 @@ var datae = {};
 var user = {};
 user['email'] = req.email;
 user['secretKey'] = req.password;
-jwt.sign(user, req.password, { algorithm: 'RS256' }, function(errt, token) {
+jwt.sign(user, req.password, { expiresIn: '1h' },(errt, token) => {
+
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = req.email;
+datae['error'] = "Error: Connection Not Secure..." + req.email;
 }else{ 
 
 client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES(' + req.first_name + ', ' + req.last_name + ', ' + req.password + ', ' + req.address + ', ' + req.email + ', ' + req.phone + ', ' + req.is_admin + ') RETURNING id;', (err, resp) => {
