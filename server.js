@@ -27,7 +27,7 @@ user['secretKey'] = req.password;
 jwt.sign(user, req.password, { algorithm: 'RS256' }, function(errt, token) {
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = user;
+datae['error'] = req.email;
 }else{ 
 
 client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES(' + req.first_name + ', ' + req.last_name + ', ' + req.password + ', ' + req.address + ', ' + req.email + ', ' + req.phone + ', ' + req.is_admin + ') RETURNING id;', (err, resp) => {
