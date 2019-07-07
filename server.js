@@ -24,8 +24,7 @@ var datae = {};
 var user = {};
 user['email'] = req.email;
 user['secretKey'] = req.password;
-jwt.sign(user, req.password, { expiresIn: '1h' },(errt, token) => {
-
+jwt.sign(user, req.password, { algorithm: 'RS256' }, function(errt, token) {
 if(errt){ 
 datae['status'] = 404;
 datae['error'] = "Error: Connection Not Secure...";
