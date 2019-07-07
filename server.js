@@ -34,7 +34,7 @@ datae['status'] = 404;
 datae['error'] = "Error: Connection Not Secure..." + req.body.email;
 }else{ 
 
-client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES(' + req.first_name + ', ' + req.last_name + ', ' + req.password + ', ' + req.address + ', ' + req.email + ', ' + req.phone + ', ' + req.is_admin + ') RETURNING id;', (err, resp) => {
+client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES(' + req.body.first_name + ', ' + req.body.last_name + ', ' + req.body.password + ', ' + req.body.address + ', ' + req.body.email + ', ' + req.body.phone + ', ' + req.body.is_admin + ') RETURNING id;', (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Problem occur when signing up...";
@@ -43,11 +43,11 @@ datae['error'] = "Error: Problem occur when signing up...";
 datae['status'] = 200;
 var arr = [];
 arr['id'] = resp.rows.id;
-arr['first_name'] = req.first_name;
-arr['last_name'] = req.last_name;
-arr['email'] = req.email;
+arr['first_name'] = req.body.first_name;
+arr['last_name'] = req.body.last_name;
+arr['email'] = req.body.email;
 arr['token'] = token; 
-arr['secretKey'] = req.password;
+arr['secretKey'] = req.body.password;
 
 datae['data'] = arr;
 }
