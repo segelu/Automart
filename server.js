@@ -19,7 +19,7 @@ myapp.get('/', function(req, res) {
    res.sendFile(path.join(__dirname + '/UI/index.html'));
 });
 myapp.use(express.static(__dirname + '/UI'));
-myapp.use(bodyParser.urlencoded({ extended: false }));
+myapp.use(bodyParser.urlencoded({ extended: true }));
 myapp.use(bodyParser.json());
 
 myapp.post('/auth/signup', function (req, res) {
