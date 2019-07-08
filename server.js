@@ -45,12 +45,14 @@ jwt.sign(user, mapassword, { expiresIn: '1h' },(errt, token) => {
 if(errt){ 
 datae['status'] = 404;
 datae['error'] = "Error: Connection Not Secure..." + mamail;
+res.send(datae);
 }else{ 
 
 client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES(' + mafirst_name + ', ' + malast_name + ', ' + mapassword + ', ' + maaddress + ', ' + mamail + ', ' + maphone + ', ' + isadmin + ') RETURNING id;', (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Problem occur when signing up...";
+res.send(datae);
 }else{
 	
 datae['status'] = 200;
@@ -63,13 +65,11 @@ arr['token'] = token;
 arr['secretKey'] = mapassword;
 
 datae['data'] = arr;
+res.send(datae);
 }
 });
-
 }
 });
-
-res.send(req.body);
 
 });
 
