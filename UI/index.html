@@ -317,6 +317,7 @@ signup();
 			if(data.status == 404){
 			$("#message").html(data.error);
 			}else{
+			console.log(data);
 			const {data: {id, first_name, last_name, email, token, secretKey}} = data;
 
 			$("#message").html(last_name + " " + first_name + "'s Account Successfully Created");
