@@ -140,7 +140,7 @@ Auto Mart, users can sell their cars or buy from trusted dealerships or private 
              <div id="addressResponse"></div>
 			 <br/>
                 
-                <input type="password" required class="control" id="password" onkeyup="signupcheck();" placeholder="Your Password">
+                <input type="password" required class="control" id="passWord" onkeyup="signupcheck();" placeholder="Your Password">
            
              <div id="passResponse"></div>
               <br/>
@@ -178,7 +178,7 @@ var lastname = 	document.getElementById("lastName").value;
 var emailAddress = document.getElementById("email").value;
 var phone = document.getElementById("phone").value;
 var address = document.getElementById("address").value;
-var password = document.getElementById("password").value;
+var password = document.getElementById("passWord").value;
 var confpassword = document.getElementById("confpassword").value;
 var firstResponse = document.getElementById("fnameResponse");
 var lastResponse = document.getElementById("lnameResponse");
@@ -284,7 +284,7 @@ login();
  var email = document.getElementById("email").value;
  var phone = document.getElementById("phone").value;
  var address = document.getElementById("address").value;
- var password = document.getElementById("password").value;
+ var password = document.getElementById("passWord").value;
  var cadmin = document.getElementById("admin").value;
  
  var is_admin = false;
@@ -301,7 +301,7 @@ userinfo['address'] = address;
 userinfo['email'] = email;
 userinfo['phone'] = phone;
 userinfo['is_admin'] = is_admin;
-
+console.log(userinfo);
 }
  $(document).on('click','#signUp',function(){
 signup();
