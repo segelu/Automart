@@ -315,6 +315,7 @@ signup();
 			success: function(data)  		
 		    {
 			if(data.status == 404){
+			console.log(data);
 			$("#message").html(data.error);
 			}else{
 			console.log(data);
