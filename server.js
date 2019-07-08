@@ -13,15 +13,16 @@ var myapp = express();
 const path = require('path');
 const router = express.Router();
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 myapp.get('/', function(req, res) {
    res.sendFile( __dirname);
    res.sendFile(path.join(__dirname + '/UI/index.html'));
 });
 myapp.use(express.static(__dirname + '/UI'));
+myapp.use(bodyParser.urlencoded({ extended: false }));
+myapp.use(bodyParser.json());
 
-myapp.post('/auth/signup', urlencodedParser, function (req, res) {
+myapp.post('/auth/signup', function (req, res) {
 
 var datae = {};
 var user = {};
