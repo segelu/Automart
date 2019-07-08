@@ -308,7 +308,7 @@ signup();
 		$.ajax({
         	url: "/auth/signup",   	
 			type: "POST",      				
-			data:  userinfo, 		
+			data:  JSON.stringify(userinfo), 		
 			contentType: false,       		
     	    cache: false,					
 			processData:false,  			
