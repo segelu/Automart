@@ -47,6 +47,8 @@ datae['status'] = 404;
 datae['error'] = "Error: Connection Not Secure..." + mamail;
 }else{ 
 
+console.log(req.body);
+
 client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES(' + mafirst_name + ', ' + malast_name + ', ' + mapassword + ', ' + maaddress + ', ' + mamail + ', ' + maphone + ', ' + isadmin + ') RETURNING id;', (err, resp) => {
 if (err){
 datae['status'] = 404;
