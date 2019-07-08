@@ -13,6 +13,10 @@ var myapp = express();
 const path = require('path');
 const router = express.Router();
 
+myapp.use(function(req, res, next){ 
+req.headers['content-type'] = "application/json"; 
+next();
+});
 
 myapp.get('/', function(req, res) {
    res.sendFile( __dirname);
@@ -21,6 +25,7 @@ myapp.get('/', function(req, res) {
 myapp.use(express.static(__dirname + '/UI'));
 myapp.use(bodyParser.urlencoded({ extended: true }));
 myapp.use(bodyParser.json());
+
 
 myapp.post('/auth/signup', function (req, res) {
 
