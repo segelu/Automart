@@ -25,16 +25,23 @@ myapp.post('/auth/signup', urlencodedParser, function (req, res) {
 
 var datae = {};
 var user = {};
-user['email'] = req.body.email;
-user['secretKey'] = req.body.password;
-jwt.sign(user, req.body.password, { expiresIn: '1h' },(errt, token) => {
+var mamail = req.body.email;
+var mafirst_name = req.body.first_name;
+var malast_name = req.body.last_name;
+var mapassword = req.body.password;
+var maaddress = req.body.address;
+var maphone = req.body.phone;
+var isadmin = req.body.is_admin;
+user['email'] = mamail;
+user['secretKey'] = mapassword;
+jwt.sign(user, mapassword, { expiresIn: '1h' },(errt, token) => {
 
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure..." + req.body.email;
+datae['error'] = "Error: Connection Not Secure..." + mamail;
 }else{ 
 
-client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES(' + req.body.first_name + ', ' + req.body.last_name + ', ' + req.body.password + ', ' + req.body.address + ', ' + req.body.email + ', ' + req.body.phone + ', ' + req.body.is_admin + ') RETURNING id;', (err, resp) => {
+client.query('INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES(' + mafirst_name + ', ' + malast_name + ', ' + mapassword + ', ' + maaddress + ', ' + mamail + ', ' + maphone + ', ' + isadmin + ') RETURNING id;', (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Problem occur when signing up...";
@@ -43,11 +50,11 @@ datae['error'] = "Error: Problem occur when signing up...";
 datae['status'] = 200;
 var arr = [];
 arr['id'] = resp.rows.id;
-arr['first_name'] = req.body.first_name;
-arr['last_name'] = req.body.last_name;
-arr['email'] = req.body.email;
+arr['first_name'] = mafirst_name;
+arr['last_name'] = malast_name;
+arr['email'] = mamail;
 arr['token'] = token; 
-arr['secretKey'] = req.body.password;
+arr['secretKey'] = mapassword;
 
 datae['data'] = arr;
 }
