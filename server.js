@@ -13,7 +13,7 @@ var myapp = express();
 const path = require('path');
 const router = express.Router();
 
-myapp.use(function(req, res){ 
+myapp.use(function(req, res, next){ 
 req.headers['content-type'] = "application/json"; 
 
 });
