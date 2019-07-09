@@ -15,7 +15,7 @@ const router = express.Router();
 
 myapp.use(function(req, res, next){ 
 req.headers['content-type'] = "application/json"; 
-
+next();
 });
 
 myapp.get('/', function(req, res) {
