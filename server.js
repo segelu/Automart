@@ -28,6 +28,7 @@ myapp.use(bodyParser.json());
 
 
 myapp.post('/auth/signup', function (req, res) {
+client.connect();	
 
 var datae = {};
 var user = {};
@@ -44,7 +45,7 @@ jwt.sign(user, mapassword, { expiresIn: '1h' },(errt, token) => {
 
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure..." + mamail;
+datae['error'] = "Error: Connection Not Secure...";
 res.send(datae);
 }else{ 
 
@@ -54,7 +55,7 @@ const values = [mafirst_name, malast_name, mapassword, maaddress, mamail, maphon
 client.query(text, values, (err, resp) => {
 if (err){
 datae['status'] = 404;
-datae['error'] = "Error: " + err.stack;
+datae['error'] = "Error: Problem occur when signing up...";
 res.send(datae);
 }else{
 	
@@ -73,7 +74,7 @@ res.send(datae);
 });
 }
 });
-
+client.end();
 });
 
 myapp.post('/auth/signin', function (req, res) {
