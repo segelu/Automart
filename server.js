@@ -13,9 +13,9 @@ var myapp = express();
 const path = require('path');
 const router = express.Router();
 
-myapp.use(function(req, res, next){ 
+myapp.use(function(req, res){ 
 req.headers['content-type'] = "application/json"; 
-next();
+
 });
 
 myapp.get('/', function(req, res) {
@@ -54,7 +54,7 @@ const values = [mafirst_name, malast_name, mapassword, maaddress, mamail, maphon
 client.query(text, values, (err, resp) => {
 if (err){
 datae['status'] = 404;
-datae['error'] = "Error: " + err.stack;
+datae['error'] = "Error: Problem occur when signing up...";
 res.send(datae);
 }else{
 	
