@@ -55,7 +55,7 @@ const values = [mafirst_name, malast_name, mapassword, maaddress, mamail, maphon
 client.query(text, values, (err, resp) => {
 if (err){
 datae['status'] = 404;
-datae['error'] = "Error: Problem occur when signing up...";
+datae['error'] = "Error: " + err.stack;
 res.send(datae);
 }else{
 	
