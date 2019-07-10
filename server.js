@@ -3,7 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const client = new Client({
-  connectionString: "postgres://jptbyfzymxpjdi:0f9fe89fddc8e4e6a2d2a7914c3b403478dc86d24c82c16599dff13f87d979c9@ec2-54-197-234-117.compute-1.amazonaws.com:5432/da5836to2svumd",
+  connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
 
@@ -49,13 +49,12 @@ datae['error'] = "Error: Connection Not Secure...";
 res.send(datae);
 }else{ 
 
-const text = 'INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
-const values = [mafirst_name, malast_name, mapassword, maaddress, mamail, maphone, isadmin];
+const text = 'INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES('+ mafirst_name +', '+ malast_name +', '+ mapassword +', '+ maaddress +', '+ mamail +', '+ maphone +', '+ isadmin +') RETURNING id;';
 
-client.query(text, values, (err, resp) => {
+client.query(text, (err, resp) => {
 if (err){
 datae['status'] = 404;
-datae['error'] = "Error: " + err.stack;
+datae['error'] = "Error: Problem occur when signing up...";
 res.send(datae);
 }else{
 	
