@@ -54,7 +54,7 @@ const text = 'INSERT INTO users(first_name,last_name,password,address,email,phon
 client.query(text, (err, resp) => {
 if (err){
 datae['status'] = 404;
-datae['error'] = "Error: Problem occur when signing up...";
+datae['error'] = "Error: " + err.stack;
 res.send(datae);
 }else{
 	
