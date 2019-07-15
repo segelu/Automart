@@ -73,7 +73,7 @@ res.send(datae);
 });
 }
 });
-client.release(true);
+
 });
 
 myapp.post('/auth/signin', function (req, res) {
