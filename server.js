@@ -51,7 +51,7 @@ datae['error'] = "Error: Connection Not Secure...";
 res.send(datae);
 }else{ 
 
-const text = "INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES('"+ mafirst_name +"', '"+ malast_name +"', '"+ mapassword +"', '"+ maaddress +"', '"+ mamail +"', '"+ maphone +"', '"+ isadmin +"') RETURNING id;";
+const text = "INSERT INTO users(id,first_name,last_name,password,address,email,phone,is_admin) VALUES('"+ maId +"', '"+ mafirst_name +"', '"+ malast_name +"', '"+ mapassword +"', '"+ maaddress +"', '"+ mamail +"', '"+ maphone +"', '"+ isadmin +"') RETURNING id;";
 
 client.query(text, (err, resp) => {
 if (err){
