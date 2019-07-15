@@ -442,44 +442,11 @@ console.log(da_selected);
 				<br/>
 			  <br/>
            <select name="state" required="" class="control" id="state">	
-				<option value="">Select State </option>
+				<option value="">Select Car's State </option>
 
-    <option value="2019">Abia</option>
-   <option value="2019">Adamawa</option>
-    <option value="2019">Akwa Ibom</option>
-    <option value="2019">Anambra</option>
-    <option value="2019">Bauchi</option>
-    <option value="2019">Bayelsa</option>
-    <option value="2019">Benue</option>
-    <option value="2019">Borno</option>
-    <option value="2019">Cross River</option>
-    <option value="2019">Delta</option>
-    <option value="2019">Ebonyi</option>
-    <option value="2019">Enugu</option>
-    <option value="2019">Edo</option>
-    <option value="2019">Ekiti</option>
-    <option value="2019">Gombe</option>
-    <option value="2019">Imo</option>
-    <option value="2019">Jigawa</option>
-    <option value="2019">Kaduna</option>
-    <option value="2019">Kano</option>
-    <option value="2019">Katsina</option>
-    <option value="2019">Kebbi</option>
-    <option value="2019">Kogi</option>
-    <option value="2019">Kwara</option>
-    <option value="2019">Lagos</option>
-    <option value="2019">Nasarawa</option>
-    <option value="2019">Niger</option>
-    <option value="2019">Ogun</option>
-    <option value="2019">Ondo</option>
-    <option value="2019">Osun</option>
-    <option value="2019">Oyo</option>
-    <option value="2019">Plateau</option>
-    <option value="2019">Rivers</option>
-    <option value="2019">Sokoto</option>
-    <option value="2019">Taraba</option>
-    <option value="2019">Yobe</option>
-    <option value="2019">Zamfara</option>
+    <option value="New">New</option>
+   <option value="Used">Used</option>
+   
 		</select>
               <br/>
              <br/>
@@ -501,10 +468,11 @@ console.log(da_selected);
           
               <br/>
 			  <br/>
-			   <select id="state" required class="control">
-			   <option value="">Select Car's State</option>
-			   <option value="Used">Used</option>
-			   <option value="Unused">Unused</option>
+			   <select id="status" required class="control">
+			   
+			   <option value="Available">Available</option>
+			   <option value="Sold">Sold</option>
+			   <option value="">Select Car's Status</option>
 			   </select>
           
               <br/>
@@ -585,27 +553,36 @@ function adregisterprocessor(){
  
  var curFiles = document.getElementById("carpic").files;
   adsinfo['image_name'] = curFiles[0].name;
-  adsinfo['date_added'] = document.getElementById('date_added').value;
+  adsinfo['email'] = document.getElementById('email').value;
   adsinfo['state'] = document.getElementById('state').value;
   adsinfo['price'] = document.getElementById('price').value;
  adsinfo['manufacturer'] = document.getElementById('manufacturer').value;
   adsinfo['model'] = document.getElementById('model').value;
   adsinfo['body_type'] = document.getElementById('body_type').value;
+  adsinfo['status'] = document.getElementById('status').value;
+  adsinfo['token'] = sessionStorage.getItem("token");
+  adsinfo['secretKey'] = sessionStorage.getItem("secretKey");
   }
   $(document).on('click','#signAds',function(){
 adregisterprocessor();
 		$.ajax({
         	url: "/car/",   	
 			type: "POST",      				
-			data:  adsinfo, 		
+			data:  JSON.stringify(adsinfo), 		
 			contentType: false,       		
     	    cache: false,					
 			processData:false,  			
 			success: function(data)  		
 		    {
-			
-			$("#message").html(data);
-            		
+			if(data.status == 404){
+			console.log(data);
+			$("#message").html(data.error);
+			}else{
+			console.log(data);
+			const {data: {id, created_on, manufacturer, email, model, price, state, status, body_type}} = data;
+
+			$("#message").html("Advert on " + manufacturer + " " + model + " model (" + body_type + ") Was Successfully Created");
+            }
 		    }	        
 	   });
 	});
