@@ -67,7 +67,7 @@ document.getElementById("login").style.display = "none";
             <li class="active" tabindex="-1"><a href="index.html">Home</a></li>
             <li tabindex="-1"><a href="">About</a></li>
             <li tabindex="-1"><a href="ad.html">Adverts</a></li>
-			<li tabindex="-1"><a href="admin.html">Admin</a></li>
+			<li tabindex="-1" id="dAdmin" style="display:none;"><a href="admin.html">Admin</a></li>
             </ul>
    <ul class="rightNav" id="myrightnav">
    <li><a href="javascript:;" onclick="toggleag();">Sign In</a></li>
@@ -78,7 +78,7 @@ document.getElementById("login").style.display = "none";
   
     <a href="javascript:void(0)" class="closebtnn" onclick="closelog()">&times;</a>
               <div > <h2>Sign In</h2> </div>
-                
+               
                 <input type="text" required class="control" id="logEmail" placeholder="Enter Email Address">
           
               <br/>
@@ -264,11 +264,14 @@ login();
 			$("#logMessage").html(data.error);
 			}else{
 			console.log(data);
-			const {data: {id, first_name, last_name, email, token, secretKey}} = data;
+			const {data: {id, first_name, last_name, email, token, secretKey,is_admin}} = data;
 
 			$("#logMessage").html(last_name + " " + first_name + " Successfully Logged In!");
 			$("#myrightnav").css("display", "none");
 			$("#login").css("display", "none");
+			if(is_admin == true){
+			$("#dAdmin").css("display", "block");
+			}
 			sessionStorage.setItem("secretKey", secretKey);	
 			sessionStorage.setItem("token", token);	
             sessionStorage.setItem("email", email);	
