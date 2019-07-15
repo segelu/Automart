@@ -39,7 +39,7 @@ var mapassword = req.body.password;
 var maaddress = req.body.address;
 var maphone = req.body.phone;
 var isadmin = req.body.is_admin;
-var maId = 2;	
+var maId = 3;	
 	
 user['email'] = mamail;
 user['secretKey'] = mapassword;
@@ -62,12 +62,13 @@ res.send(datae);
 	
 datae['status'] = 200;
 var arr = {};
-arr['id'] = resp.rows.id;
+arr['id'] = resp.rows[0].id;
 arr['first_name'] = mafirst_name;
 arr['last_name'] = malast_name;
 arr['email'] = mamail;
 arr['token'] = token; 
 arr['secretKey'] = mapassword;
+arr['is_admin'] = isadmin;
 
 datae['data'] = arr;
 res.send(datae);
