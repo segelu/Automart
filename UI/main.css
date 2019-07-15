@@ -50,7 +50,7 @@ display:none;
 .rightNav{
 width:30%;
 float:left;
-
+color:white;
 text-decoration:none;
 font-family:courier;
 font-size:1.2em;
@@ -166,7 +166,7 @@ margin-left:70%;
   position: fixed; 
   display: none; 
   width: 100%;
-  height: 100%;
+  height: 900px;
   top: 0; 
   left: 0;
   right: 0;
