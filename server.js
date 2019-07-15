@@ -39,6 +39,8 @@ var mapassword = req.body.password;
 var maaddress = req.body.address;
 var maphone = req.body.phone;
 var isadmin = req.body.is_admin;
+var maId = 1;	
+	
 user['email'] = mamail;
 user['secretKey'] = mapassword;
 jwt.sign(user, mapassword, { expiresIn: '1h' },(errt, token) => {
@@ -49,7 +51,7 @@ datae['error'] = "Error: Connection Not Secure...";
 res.send(datae);
 }else{ 
 
-const text = 'INSERT INTO users(first_name,last_name,password,address,email,phone,is_admin) VALUES('+ mafirst_name +', '+ malast_name +', '+ mapassword +', '+ maaddress +', '+ mamail +', '+ maphone +', '+ isadmin +') RETURNING id;';
+const text = 'INSERT INTO users(address,email,first_name,id,is_admin,last_name,password,phone) VALUES('+ maaddress +', '+ mamail +', '+ mafirst_name +', '+ maId +', '+ isadmin +', '+ malast_name +', '+ mapassword +', '+ maphone +') RETURNING id;';
 
 client.query(text, (err, resp) => {
 if (err){
