@@ -88,6 +88,7 @@ client.query("SELECT id,first_name,last_name FROM users WHERE email = '" + req.b
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Incorrect Login Credentials...";
+res.send(datae);
 }else{
 	
 user['email'] = req.body.email;
@@ -96,6 +97,7 @@ jwt.sign(user, req.body.password, { expiresIn: '1h' },(errt, token) => {
 if(errt){ 
 datae['status'] = 404;
 datae['error'] = "Error: Connection Not Secure...";
+res.send(datae);
 }else{ 	
 var arr = {};
 arr = resp.rows;
@@ -104,14 +106,14 @@ arr['token'] = token;
 arr['secretKey'] = req.body.password;
 datae['status'] = 200;
 datae['data'] = arr;
-
+res.send(datae);
 }
 });
 
 } 
 
 });
-res.send(datae);
+
 
 });
 
