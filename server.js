@@ -73,7 +73,7 @@ res.send(datae);
 });
 }
 });
-client.end();
+client.release(true);
 });
 
 myapp.post('/auth/signin', function (req, res) {
@@ -595,5 +595,5 @@ res.send( datae);
 
 
 const portr = process.env.PORT || 3000;
-client.end();
+
 myapp.listen(portr);
