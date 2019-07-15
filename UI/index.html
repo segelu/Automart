@@ -326,9 +326,10 @@ signup();
 			console.log(data);
 			const {data: {id, first_name, last_name, email, token, secretKey}} = data;
 
-			$("#message").html(last_name + " " + first_name + "'s Account Successfully Created");
+			$("#logMessage").html(last_name + " " + first_name + "'s Account Successfully Created");
 			$("#myrightnav").css("display", "none");
 			$("#login").css("display", "none");
+			$("#overlay").css("display", "none");
 			sessionStorage.setItem("secretKey", secretKey);	
 			sessionStorage.setItem("token", token);	
             sessionStorage.setItem("email", email);	
