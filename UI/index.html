@@ -327,12 +327,15 @@ signup();
 			$("#message").html(data.error);
 			}else{
 			console.log(data);
-			const {data: {id, first_name, last_name, email, token, secretKey}} = data;
+			const {data: {id, first_name, last_name, email, token, secretKey, is_admin}} = data;
 
 			$("#logMessage").html(last_name + " " + first_name + "'s Account Successfully Created");
 			$("#myrightnav").css("display", "none");
 			$("#login").css("display", "none");
 			$("#overlay").css("display", "none");
+			if(is_admin == true){
+			$("#dAdmin").css("display", "block");
+			}
 			sessionStorage.setItem("secretKey", secretKey);	
 			sessionStorage.setItem("token", token);	
             sessionStorage.setItem("email", email);	
