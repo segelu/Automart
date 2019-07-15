@@ -100,7 +100,9 @@ datae['error'] = "Error: Connection Not Secure...";
 res.send(datae);
 }else{ 	
 var arr = {};
-arr = resp.rows;
+arr['id'] = resp.rows.id;
+arr['first_name'] = resp.rows.first_name;
+arr['last_name'] = resp.rows.last_name;
 arr['email'] = req.body.email;
 arr['token'] = token;
 arr['secretKey'] = req.body.password;
