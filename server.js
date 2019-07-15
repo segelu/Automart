@@ -7,7 +7,7 @@ const client = new Client({
   ssl: true,
 });
 
-
+client.connect();	
 
 var myapp = express();
 const path = require('path');
