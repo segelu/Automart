@@ -55,6 +55,22 @@ function closenav() {
 function closelog(){
 document.getElementById("login").style.display = "none";
 }
+
+function sessionChecker(){
+if(sessionStorage.getItem("id") != ""){
+var activeUser = sessionStorage.getItem("id");
+document.getElementById("welcomeMessage").innerHTML = "Hi, " + sessionStorage.getItem("currentUser");
+document.getElementById("myrightsignin").style.display = "none";
+document.getElementById("login").style.display = "none";
+document.getElementById("welcomeMessage").style.display = "block";
+document.getElementById("advertise").style.display = "block";
+document.getElementById("getStarted").style.display = "none";
+if(sessionStorage.getItem("admin") == true){
+document.getElementById("dAdmin").style.display = "block";
+}
+}
+}
+sessionChecker();
  </script>
   </head>
   <body>
@@ -67,11 +83,13 @@ document.getElementById("login").style.display = "none";
             <li class="active" tabindex="-1"><a href="index.html">Home</a></li>
             <li tabindex="-1"><a href="">About</a></li>
             <li tabindex="-1"><a href="ad.html">Adverts</a></li>
-	   <li tabindex="-1" id="dAdmin" style="display:none; float:left;"><a href="admin.html">Admin</a></li>
+			<li tabindex="-1" id="dAdmin" style="display:none; float:left;"><a href="admin.html">Admin</a></li>
             </ul>
    <ul class="rightNav" id="myrightnav">
-   <li><a href="javascript:;" onclick="toggleag();">Sign In</a></li>
+   <li><a href="javascript:;" id="myrightsignin" onclick="toggleag();">Sign In</a></li>
+   <b id="welcomeMessage"></b>
 </ul>   
+
   </nav>
   
   <div id="login">
@@ -101,7 +119,7 @@ document.getElementById("login").style.display = "none";
 	<center style="color:white; font-style:italic; padding:1% 5% 5% 5%; font-size:1.2em;"> Auto Mart is an online marketplace for automobiles of diverse makes, model or body type. With
 Auto Mart, users can sell their cars or buy from trusted dealerships or private sellers.
 <div class="signUp">
-  <a href="javascript:;" id="getStarted" onclick="on()">Get Started</a>
+   <a href="javascript:;" id="getStarted" onclick="on()">Get Started</a>
    <a href="ad.html" id="advertise" style="display:none;">Check Existing Adverts</a>
 </div> 
 </center>
@@ -268,17 +286,21 @@ login();
 			const {data: {id, first_name, last_name, email, token, secretKey,is_admin}} = data;
 
 			$("#logMessage").html(last_name + " " + first_name + " Successfully Logged In!");
-			$("#myrightnav").css("display", "none");
+			$("#myrightsignin").css("display", "none");
 			$("#login").css("display", "none");
-			if(is_admin == true){
-			$("#dAdmin").css("display", "block");
+			$("#welcomeMessage").html("Hi, " + last_name + " " + first_name);
+			$("#welcomeMessage").css("display", "block");
 			$("#advertise").css("display", "block");
 			$("#getStarted").css("display", "none");
+			if(is_admin == true){
+			$("#dAdmin").css("display", "block");			
 			}
 			sessionStorage.setItem("secretKey", secretKey);	
 			sessionStorage.setItem("token", token);	
             sessionStorage.setItem("email", email);	
             sessionStorage.setItem("id", id);	
+			sessionStorage.setItem("admin", is_admin);	
+			sessionStorage.setItem("currentUser", last_name + " " + first_name);
 			}
 			
 		    }	        
@@ -333,16 +355,22 @@ signup();
 			const {data: {id, first_name, last_name, email, token, secretKey, is_admin}} = data;
 
 			$("#logMessage").html(last_name + " " + first_name + "'s Account Successfully Created");
-			$("#myrightnav").css("display", "none");
+			$("#myrightsignin").css("display", "none");
 			$("#login").css("display", "none");
 			$("#overlay").css("display", "none");
+			$("#welcomeMessage").html("Hi, " + last_name + " " + first_name);
+			$("#welcomeMessage").css("display", "block");
+			$("#advertise").css("display", "block");
+			$("#getStarted").css("display", "none");
 			if(is_admin == true){
-			$("#dAdmin").css("display", "block");
+			$("#dAdmin").css("display", "block");			
 			}
 			sessionStorage.setItem("secretKey", secretKey);	
 			sessionStorage.setItem("token", token);	
             sessionStorage.setItem("email", email);	
             sessionStorage.setItem("id", id);	
+			sessionStorage.setItem("admin", is_admin);	
+			sessionStorage.setItem("currentUser", last_name + " " + first_name);
              }			
 		    }	        
 	   });
