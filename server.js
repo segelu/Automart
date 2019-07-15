@@ -50,8 +50,12 @@ datae['status'] = 404;
 datae['error'] = "Error: Connection Not Secure...";
 res.send(datae);
 }else{ 
-
-const text = "INSERT INTO users(id,first_name,last_name,password,address,email,phone,is_admin) VALUES('"+ maId +"', '"+ mafirst_name +"', '"+ malast_name +"', '"+ mapassword +"', '"+ maaddress +"', '"+ mamail +"', '"+ maphone +"', '"+ isadmin +"') RETURNING id;";
+client.query("SELECT id FROM users ORDER BY id DESC;", (errf, respf) => {
+if (errf){
+	
+}else{
+var newId = respf.rows[0].id + 1;	
+const text = "INSERT INTO users(id,first_name,last_name,password,address,email,phone,is_admin) VALUES('"+ newId +"', '"+ mafirst_name +"', '"+ malast_name +"', '"+ mapassword +"', '"+ maaddress +"', '"+ mamail +"', '"+ maphone +"', '"+ isadmin +"') RETURNING id;";
 
 client.query(text, (err, resp) => {
 if (err){
@@ -72,6 +76,8 @@ arr['is_admin'] = isadmin;
 
 datae['data'] = arr;
 res.send(datae);
+}
+});
 }
 });
 }
