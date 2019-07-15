@@ -39,7 +39,7 @@ var mapassword = req.body.password;
 var maaddress = req.body.address;
 var maphone = req.body.phone;
 var isadmin = req.body.is_admin;
-var maId = 1;	
+var maId = 2;	
 	
 user['email'] = mamail;
 user['secretKey'] = mapassword;
