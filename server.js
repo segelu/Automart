@@ -84,7 +84,7 @@ client.connect();
 var datae = {};
 var user = {};
 
-client.query("SELECT id,first_name,last_name FROM users WHERE email = '" + req.body.email + "' AND password = '" + req.body.password + "';", (err, resp) => {
+client.query("SELECT id,first_name,last_name,is_admin FROM users WHERE email = '" + req.body.email + "' AND password = '" + req.body.password + "';", (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Incorrect Login Credentials...";
@@ -103,6 +103,7 @@ var arr = {};
 arr['id'] = resp.rows[0].id;
 arr['first_name'] = resp.rows[0].first_name;
 arr['last_name'] = resp.rows[0].last_name;
+arr['is_admin'] = resp.rows[0].is_admin;
 arr['email'] = req.body.email;
 arr['token'] = token;
 arr['secretKey'] = req.body.password;
