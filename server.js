@@ -79,27 +79,29 @@ res.send(datae);
 });
 
 myapp.post('/auth/signin', function (req, res) {
+client.connect();	
+	
 var datae = {};
 var user = {};
 
-client.query('SELECT id,first_name,last_name FROM users WHERE email = ' + req.email + ' AND password = ' + req.password + ';', (err, resp) => {
+client.query("SELECT id,first_name,last_name FROM users WHERE email = '" + req.body.email + "' AND password = '" + req.body.password + "';", (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Incorrect Login Credentials...";
 }else{
 	
-user['email'] = req.email;
-user['secretKey'] = req.password;
-jwt.sign(user, req.password, { expiresIn: '1h' },(errt, token) => {
+user['email'] = req.body.email;
+user['secretKey'] = req.body.password;
+jwt.sign(user, req.body.password, { expiresIn: '1h' },(errt, token) => {
 if(errt){ 
 datae['status'] = 404;
 datae['error'] = "Error: Connection Not Secure...";
 }else{ 	
-var arr = [];
+var arr = {};
 arr = resp.rows;
-arr['email'] = req.email;
+arr['email'] = req.body.email;
 arr['token'] = token;
-arr['secretKey'] = req.password;
+arr['secretKey'] = req.body.password;
 datae['status'] = 200;
 datae['data'] = arr;
 
