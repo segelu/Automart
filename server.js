@@ -128,35 +128,40 @@ res.send(datae);
 });
 
 myapp.post('/car/', function (req, res) {
+client.connect();	
+
 var datae = {};
-jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";			
+datae['error'] = "Error: Connection Not Secure...";	
+res.send(datae);		
 }else{
-client.query('INSERT INTO cars(email,created_on,manufacturer,model,price,state,status,body_type) VALUES(' + req.email + ', ' + Date.now() + ', ' + req.manufacturer + ', ' + req.model + ', ' + req.price + ', ' + req.state + ', ' + req.status + ', ' + req.body_type + ') RETURNING id;', (err, resp) => {
+client.query("INSERT INTO cars(email,created_on,manufacturer,model,price,state,status,body_type) VALUES('" + req.body.email + "', '" + Date.now() + "', '" + req.body.manufacturer + "', '" + req.body.model + "', '" + req.body.price + "', '" + req.body.state + "', '" + req.body.status + "', '" + req.body.body_type + "') RETURNING id;", (err, resp) => {
 if (err){
 datae['status'] = 404;
-datae['error'] = "Error: Problem occur when creating advert...";
+datae['error'] = err.stack;
+res.send(datae);
 }else{
 datae['status'] = 200;
-var arr = [];
-arr['id'] = resp.rows.id;
-arr['email'] = req.email;
+var arr = {};
+arr['id'] = resp.rows[0].id;
+arr['email'] = req.body.email;
 arr['created_on'] = Date.now();
-arr['manufacturer'] = req.manufacturer;
-arr['model'] = req.model;
-arr['price'] = req.price;
-arr['state'] = req.state;
-arr['status'] = req.status;
-arr['body_type'] = req.body_type;
+arr['manufacturer'] = req.body.manufacturer;
+arr['model'] = req.body.model;
+arr['price'] = req.body.price;
+arr['state'] = req.body.state;
+arr['status'] = req.body.status;
+arr['body_type'] = req.body.body_type;
 datae['data'] = arr;
+res.send(datae);
 }
 
 });
 
 }
-res.send(datae);
+
 });
 });
 
