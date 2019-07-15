@@ -251,7 +251,7 @@ login();
 		$.ajax({
         	url: "/auth/signin",   	
 			type: "POST",      				
-			data:  loginfo, 		
+			data:  JSON.stringify(loginfo), 		
 			contentType: false,       		
     	    cache: false,					
 			processData:false,  			
