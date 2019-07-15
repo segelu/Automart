@@ -56,12 +56,12 @@ const text = "INSERT INTO users(id,first_name,last_name,password,address,email,p
 client.query(text, (err, resp) => {
 if (err){
 datae['status'] = 404;
-datae['error'] = "Error: " + err.stack;
+datae['error'] = "Error: Problem occur when signing up...";
 res.send(datae);
 }else{
 	
 datae['status'] = 200;
-var arr = [];
+var arr = {};
 arr['id'] = resp.rows.id;
 arr['first_name'] = mafirst_name;
 arr['last_name'] = malast_name;
