@@ -134,7 +134,7 @@ var datae = {};
 jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";	
+datae['error'] = "Error: Your Connection Token As Expired...";	
 res.send(datae);		
 }else{
 client.query("INSERT INTO cars(email,created_on,manufacturer,model,price,state,status,body_type) VALUES('" + req.body.email + "', '" + Date.now() + "', '" + req.body.manufacturer + "', '" + req.body.model + "', '" + req.body.price + "', '" + req.body.state + "', '" + req.body.status + "', '" + req.body.body_type + "') RETURNING id;", (err, resp) => {
@@ -170,7 +170,7 @@ var datae = {};
 jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";			
+datae['error'] = "Error: Your Connection Token As Expired...";			
 }else{
 client.query('SELECT * FROM cars WHERE email = ' + req.email + ' AND id = ' + req.car_id + ';', (err, resp) => {
 if (err){
@@ -209,7 +209,7 @@ var datae = {};
 jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";			
+datae['error'] = "Error: Your Connection Token As Expired...";			
 }else{
 client.query('SELECT * FROM orders WHERE id = ' + orderid + ';', (err, resp) => {
 if (err){
@@ -251,7 +251,7 @@ var datae = {};
 jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";			
+datae['error'] = "Error: Your Connection Token As Expired...";			
 }else{
 client.query('UPDATE cars SET status = ' + newstatus + ' WHERE id = ' + carid + ';', (err, resp) => {
 if(err){
