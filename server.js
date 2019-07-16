@@ -137,7 +137,14 @@ datae['status'] = 404;
 datae['error'] = "Error: Your Connection Token As Expired...";	
 res.send(datae);		
 }else{
-client.query("INSERT INTO cars(email,created_on,manufacturer,model,price,state,status,body_type) VALUES('" + req.body.email + "', '" + Date.now() + "', '" + req.body.manufacturer + "', '" + req.body.model + "', '" + req.body.price + "', '" + req.body.state + "', '" + req.body.status + "', '" + req.body.body_type + "') RETURNING id;", (err, resp) => {
+
+client.query("SELECT id FROM cars ORDER BY id DESC;", (errf, respf) => {
+if (errf){
+	
+}else{
+var newId = respf.rows[0].id + 1;		
+
+client.query("INSERT INTO cars(id,owner,created_on,manufacturer,model,price,state,status,body_type) VALUES('"+ newId +"', '" + req.body.email + "', '" + Date.now() + "', '" + req.body.manufacturer + "', '" + req.body.model + "', '" + req.body.price + "', '" + req.body.state + "', '" + req.body.status + "', '" + req.body.body_type + "') RETURNING id;", (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = err.stack;
@@ -163,8 +170,10 @@ res.send(datae);
 }
 
 });
+}
 });
 
+});
 myapp.post('/order/', function (req, res) {
 var datae = {};
 jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
