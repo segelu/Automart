@@ -547,8 +547,8 @@ var adsinfo = {};
 function adregisterprocessor(){
  // Listen for form submit to collect data to sent to server in json
  
- var curFiles = document.getElementById("carpic").files;
-  adsinfo['image_name'] = curFiles[0].name;
+ var curFiles = document.getElementById("carpic").files;  
+  adsinfo['image_name'] = curFiles[0].replace(/^.*[\\\/]/, '');
   adsinfo['email'] = document.getElementById('email').value;
   adsinfo['state'] = document.getElementById('state').value;
   adsinfo['price'] = document.getElementById('price').value;
