@@ -566,7 +566,7 @@ function adregisterprocessor(){
  var curFiles = document.getElementById("carpic").files;
 
   
-  adsinfo['email'] = document.getElementById('email').value;
+  adsinfo['email'] = sessionStorage.getItem("email");
   adsinfo['state'] = document.getElementById('state').value;
   adsinfo['price'] = document.getElementById('price').value;
  adsinfo['manufacturer'] = document.getElementById('manufacturer').value;
