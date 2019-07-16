@@ -142,10 +142,11 @@ client.query("SELECT id FROM cars ORDER BY id DESC;", (errf, respf) => {
 if (errf){
 	
 }else{
-	
-var newId = 1;	
-	
-client.query("INSERT INTO cars(id,owner,created_on,manufacturer,model,price,state,status,body_type) VALUES('"+ newId +"', '" + req.body.email + "', '" + Date.now() + "', '" + req.body.manufacturer + "', '" + req.body.model + "', '" + req.body.price + "', '" + req.body.state + "', '" + req.body.status + "', '" + req.body.body_type + "') RETURNING id;", (err, resp) => {
+
+var newId = 1;		
+var timeStamp = Math.floor(Date.now() / 1000);
+
+client.query("INSERT INTO cars(id,owner,created_on,manufacturer,model,price,state,status,body_type) VALUES('"+ newId +"', '" + req.body.email + "', '" + timeStamp + "', '" + req.body.manufacturer + "', '" + req.body.model + "', '" + req.body.price + "', '" + req.body.state + "', '" + req.body.status + "', '" + req.body.body_type + "') RETURNING id;", (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = err.stack;
@@ -155,7 +156,7 @@ datae['status'] = 200;
 var arr = {};
 arr['id'] = resp.rows[0].id;
 arr['email'] = req.body.email;
-arr['created_on'] = Date.now();
+arr['created_on'] = timeStamp;
 arr['manufacturer'] = req.body.manufacturer;
 arr['model'] = req.body.model;
 arr['price'] = req.body.price;
@@ -175,6 +176,8 @@ res.send(datae);
 });
 
 });
+
+
 myapp.post('/order/', function (req, res) {
 var datae = {};
 jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
