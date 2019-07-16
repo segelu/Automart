@@ -576,7 +576,7 @@ function adregisterprocessor(){
   adsinfo['token'] = sessionStorage.getItem("token");
   adsinfo['secretKey'] = sessionStorage.getItem("secretKey");
   }
-  $(document).on('click','#signAds',function(){
+ $(document).on('click','#signAds',function(){
 adregisterprocessor();
 		$.ajax({
         	url: "/car/",   	
@@ -590,12 +590,15 @@ adregisterprocessor();
 			if(data.status == 404){
 			console.log(data);
 			$("#message").html(data.error);
+			if(data.error == "Error: Your Connection Token As Expired..."){
+			sessionStorage.clear();
+			}
 			}else{
 			console.log(data);
 			const {data: {id, created_on, manufacturer, email, model, price, state, status, body_type}} = data;
 
 			$("#message").html("Advert on " + manufacturer + " " + model + " model (" + body_type + ") Was Successfully Created");
-            }
+                       }
 		    }	        
 	   });
 	});
