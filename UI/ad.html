@@ -98,6 +98,20 @@ inputimage.className="mySlides slide-animate-fading";
 inputimage.style.display = "none";  
 document.getElementById("disp").appendChild(inputimage);
 }
+
+function sessionChecker(){
+if(sessionStorage.getItem("id") != ""){
+var activeUser = sessionStorage.getItem("id");
+document.getElementById("welcomeMessage").innerHTML = "Hi, " + sessionStorage.getItem("currentUser");
+document.getElementById("myrightsignin").style.display = "none";
+document.getElementById("login").style.display = "none";
+document.getElementById("welcomeMessage").style.display = "block";
+
+if(sessionStorage.getItem("admin") == true){
+document.getElementById("dAdmin").style.display = "block";
+}
+}
+}
  </script>
  <script src="jquery/dist/jquery.js" type="text/javascript"></script>
 
@@ -118,8 +132,10 @@ document.getElementById("disp").appendChild(inputimage);
             <li tabindex="-1"><a href="admin.html">Admin</a></li>
             </ul>
    <div class="rightNav"id="myrightnav">
-   <a href="javascript:;" onclick="toggleag();">Sign In</a>
+   <a href="javascript:;" id="myrightsignin" onclick="toggleag();">Sign In</a>
+   <b id="welcomeMessage"></b>
 </div>   
+ 
   </nav>
   
   <div id="login">
@@ -137,7 +153,7 @@ document.getElementById("disp").appendChild(inputimage);
              <br/>
             
                
-			  <input type="submit" class="btn" name="login" value="Sign In"/>
+			  <input type="submit" class="btn" id="loginn" name="login" value="Sign In"/>
 
         </form>
   </div>
@@ -193,7 +209,7 @@ document.getElementById("disp").appendChild(inputimage);
 <br/>
 <br/>
  <script>
-
+sessionChecker()
 var myIndex = 0;
 var myIndex2 = 0;
 var Intervals;
@@ -545,10 +561,11 @@ $(document).ready(function() {
 
 var adsinfo = {};
 function adregisterprocessor(){
- // Listen for form submit to collect data to sent to server in json
+ // Listen for form submit to collect data to sent to server in json adsinfo['image_name'] = curFiles[0].replace(/^.*[\\\/]/, '');
  
- var curFiles = document.getElementById("carpic").files;  
-  adsinfo['image_name'] = curFiles[0].replace(/^.*[\\\/]/, '');
+ var curFiles = document.getElementById("carpic").files;
+
+  
   adsinfo['email'] = document.getElementById('email').value;
   adsinfo['state'] = document.getElementById('state').value;
   adsinfo['price'] = document.getElementById('price').value;
