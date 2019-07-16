@@ -106,10 +106,13 @@ document.getElementById("welcomeMessage").innerHTML = "Hi, " + sessionStorage.ge
 document.getElementById("myrightsignin").style.display = "none";
 document.getElementById("login").style.display = "none";
 document.getElementById("welcomeMessage").style.display = "block";
+document.getElementById("uploadAdss").style.display = "block";
 
 if(sessionStorage.getItem("admin") == true){
 document.getElementById("dAdmin").style.display = "block";
 }
+}else{
+document.getElementById("uploadAdss").style.display = "none";
 }
 }
  </script>
@@ -189,7 +192,7 @@ document.getElementById("dAdmin").style.display = "block";
   
 </div>
   <div class="SecondtopHeadDiv" style="padding:2% 2% 2% 2%; margin-bottom:4%; ">
-<center >
+<center id="uploadAdss">
     <a href="javascript:;" onclick="on()" style="background-color:rgba(250,0,30,0.8); border-radius:7px; font-weight:bold;  box-shadow:0px 16px 16px 0px rgba(255,255,255,0.5) inset; width:20%; padding:1% 2% 1% 2%; text-decoration:none; color:white;">Post Advert</a>
 </center>
     </div>
@@ -576,7 +579,7 @@ function adregisterprocessor(){
   adsinfo['token'] = sessionStorage.getItem("token");
   adsinfo['secretKey'] = sessionStorage.getItem("secretKey");
   }
- $(document).on('click','#signAds',function(){
+  $(document).on('click','#signAds',function(){
 adregisterprocessor();
 		$.ajax({
         	url: "/car/",   	
@@ -598,7 +601,7 @@ adregisterprocessor();
 			const {data: {id, created_on, manufacturer, email, model, price, state, status, body_type}} = data;
 
 			$("#message").html("Advert on " + manufacturer + " " + model + " model (" + body_type + ") Was Successfully Created");
-                       }
+            }
 		    }	        
 	   });
 	});
