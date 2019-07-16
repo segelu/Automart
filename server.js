@@ -142,8 +142,13 @@ client.query("SELECT id FROM cars ORDER BY id DESC;", (errf, respf) => {
 if (errf){
 	
 }else{
+	
+if(respf.rows[0].id == "" || respf.rows[0].id == null){
+var newId = 1;		
+}else{
 var newId = respf.rows[0].id + 1;		
-
+}
+	
 client.query("INSERT INTO cars(id,owner,created_on,manufacturer,model,price,state,status,body_type) VALUES('"+ newId +"', '" + req.body.email + "', '" + Date.now() + "', '" + req.body.manufacturer + "', '" + req.body.model + "', '" + req.body.price + "', '" + req.body.state + "', '" + req.body.status + "', '" + req.body.body_type + "') RETURNING id;", (err, resp) => {
 if (err){
 datae['status'] = 404;
