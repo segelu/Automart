@@ -571,7 +571,7 @@ function adregisterprocessor(){
   
   adsinfo['email'] = sessionStorage.getItem("email");
   adsinfo['state'] = document.getElementById('state').value;
-  adsinfo['price'] = document.getElementById('price').value;
+  adsinfo['price'] = parseFloat(document.getElementById('price').value);
  adsinfo['manufacturer'] = document.getElementById('manufacturer').value;
   adsinfo['model'] = document.getElementById('model').value;
   adsinfo['body_type'] = document.getElementById('body_type').value;
