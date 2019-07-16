@@ -57,7 +57,7 @@ document.getElementById("login").style.display = "none";
 }
 
 function sessionChecker(){
-if(sessionStorage.getItem("id") != ""){
+if(sessionStorage.getItem("id") != null){
 var activeUser = sessionStorage.getItem("id");
 document.getElementById("welcomeMessage").innerHTML = "Hi, " + sessionStorage.getItem("currentUser");
 document.getElementById("myrightsignin").style.display = "none";
