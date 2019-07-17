@@ -146,7 +146,7 @@ if (errf){
 var newId = 1;		
 var timStamp = req.body.date_added;
 	
-client.query("INSERT INTO cars(id,owner,created_on,manufacturer,model,price,state,status,body_type) VALUES('"+ newId +"', '" + req.body.email + "', '" + Date.now() + "', '" + req.body.manufacturer + "', '" + req.body.model + "', '" + req.body.price + "', '" + req.body.state + "', '" + req.body.status + "', '" + req.body.body_type + "') RETURNING id;", (err, resp) => {
+client.query("INSERT INTO cars(id,owner,created_on,manufacturer,model,price,state,status,body_type) VALUES('"+ newId +"', '" + req.body.email + "', '" + (Date.now())::timestamp + "', '" + req.body.manufacturer + "', '" + req.body.model + "', '" + req.body.price + "', '" + req.body.state + "', '" + req.body.status + "', '" + req.body.body_type + "') RETURNING id;", (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = err.stack;
