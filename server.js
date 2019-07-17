@@ -144,8 +144,9 @@ if (errf){
 }else{
 
 var newId = 1;		
-var timeStamp = req.body.date_added;
-client.query("INSERT INTO cars(id,owner,created_on,manufacturer,model,price,state,status,body_type) VALUES('"+ newId +"', '" + req.body.email + "', '" + now() + "', '" + req.body.manufacturer + "', '" + req.body.model + "', '" + req.body.price + "', '" + req.body.state + "', '" + req.body.status + "', '" + req.body.body_type + "') RETURNING id;", (err, resp) => {
+var timStamp = req.body.date_added;
+	
+client.query("INSERT INTO cars(id,owner,created_on,manufacturer,model,price,state,status,body_type) VALUES('"+ newId +"', '" + req.body.email + "', '" + to_timestamp(timStamp, 'DD Mon YYYY') + "', '" + req.body.manufacturer + "', '" + req.body.model + "', '" + req.body.price + "', '" + req.body.state + "', '" + req.body.status + "', '" + req.body.body_type + "') RETURNING id;", (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = err.stack;
@@ -155,7 +156,7 @@ datae['status'] = 200;
 var arr = {};
 arr['id'] = resp.rows[0].id;
 arr['email'] = req.body.email;
-arr['created_on'] = timeStamp;
+arr['created_on'] = timStamp;
 arr['manufacturer'] = req.body.manufacturer;
 arr['model'] = req.body.model;
 arr['price'] = req.body.price;
