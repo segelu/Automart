@@ -578,6 +578,7 @@ function adregisterprocessor(){
   adsinfo['status'] = document.getElementById('status').value;
   adsinfo['token'] = sessionStorage.getItem("token");
   adsinfo['secretKey'] = sessionStorage.getItem("secretKey");
+  adsinfo['date_added'] = document.getElementById('date_added').value;
   }
   $(document).on('click','#signAds',function(){
 adregisterprocessor();
