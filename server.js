@@ -144,7 +144,7 @@ if (errf){
 }else{
 
 var newId = 1;		
-var timeStamp = Date.now(req.body.date_added);
+var timeStamp = new Date(req.body.date_added);
 
 client.query("INSERT INTO cars(id,owner,created_on,manufacturer,model,price,state,status,body_type) VALUES('"+ newId +"', '" + req.body.email + "', '" + timeStamp + "', '" + req.body.manufacturer + "', '" + req.body.model + "', '" + req.body.price + "', '" + req.body.state + "', '" + req.body.status + "', '" + req.body.body_type + "') RETURNING id;", (err, resp) => {
 if (err){
