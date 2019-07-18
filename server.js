@@ -178,33 +178,51 @@ res.send(datae);
 });
 
 myapp.post('/order/', function (req, res) {
+client.connect();	
+
 var datae = {};
-jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Your Connection Token As Expired...";			
+datae['error'] = "Error: Your Connection Token As Expired...";		
+res.send( datae);	
 }else{
-client.query('SELECT * FROM cars WHERE email = ' + req.email + ' AND id = ' + req.car_id + ';', (err, resp) => {
+	
+client.query("SELECT id FROM orders ORDER BY id DESC;", (errf, respf) => {
+if (errf){
+	
+}else{	
+
+if(respf.rows[0].id == 0 || respf.rows[0].id == null){
+var newId = 1;
+}else{
+var newId = respf.rows[0].id + 1;	
+}
+	
+client.query('SELECT * FROM cars WHERE email = ' + req.body.email + ' AND id = ' + req.body.car_id + ';', (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Can't Order For Car or Car does Not exist...";
+res.send( datae);
 }else{
 var pending = "pending";
-client.query('INSERT INTO orders(car_id,created_on,status,price,price_offered) VALUES(' + resp.rows.car_id + ', ' + Date.now() + ', ' + pending + ', ' + resp.rows.price + ', ' + req.price_offered + ') RETURNING id;', (err2, resp2) => {
+client.query("INSERT INTO orders(id,car_id,created_on,status,price,price_offered) VALUES('" + newId + "','" + resp.rows[0].car_id + "', current_timestamp, '" + pending + "', '" + resp.rows[0].price + "', '" + req.body.price_offered + "') RETURNING id;", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Problem Occur When Creating Order...";
+res.send( datae);
 }else{
 datae['status'] = 200;
-var arr = [];
-arr['id'] = resp2.rows.id;
-arr['car_id'] = resp.rows.id;
-arr['created_on'] = Date.now();
+var arr = {};
+arr['id'] = resp2.rows[0].id;
+arr['car_id'] = resp.rows[0].id;
+arr['created_on'] = resp2.rows[0].created_on;
 arr['status'] = pending;
-arr['price'] = resp.rows.price;
-arr['price_offered'] = req.price_offered;
-arr['body_type'] = resp.rows.body_type;
+arr['price'] = resp.rows[0].price;
+arr['price_offered'] = req.body.price_offered;
+arr['body_type'] = resp.rows[0].body_type;
 datae['data'] = arr;
+res.send( datae);
 } 
 
 });
@@ -212,8 +230,11 @@ datae['data'] = arr;
 });
 }
 });
-res.send( datae);
+}
 });
+
+});
+
 
 myapp.patch('/order/:order-id/price', function (req, res) {
 var orderid = req.params.order-id;
