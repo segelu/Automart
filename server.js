@@ -199,7 +199,7 @@ var newId = 1;
 var newId = respf.rows[0].id + 1;	
 }
 	
-client.query('SELECT * FROM cars WHERE email = ' + req.body.email + ' AND id = ' + req.body.car_id + ';', (err, resp) => {
+client.query("SELECT * FROM cars WHERE owner = '" + req.body.email + "' AND id = '" + req.body.car_id + "';", (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Can't Order For Car or Car does Not exist...";
@@ -235,36 +235,41 @@ res.send( datae);
 
 });
 
-
 myapp.patch('/order/:order-id/price', function (req, res) {
+client.connect();
+
 var orderid = req.params.order-id;
 var datae = {};
-jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Your Connection Token As Expired...";			
+datae['error'] = "Error: Your Connection Token As Expired...";		
+res.send(datae);	
 }else{
-client.query('SELECT * FROM orders WHERE id = ' + orderid + ';', (err, resp) => {
+client.query("SELECT * FROM orders WHERE id = '" + orderid + "';", (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Incorrect Order Identity, Can't Update Order Price...";
+res.send(datae);
 }else{
-if(resp.rows.status == "pending"){
-client.query('UPDATE orders SET price_offered = ' + req.price_offered + ' WHERE id = ' + orderid + ';', (err2, resp2) => {
+if(resp.rows[0].status == "pending"){
+client.query("UPDATE orders SET price_offered = '" + req.body.price_offered + "' WHERE id = '" + orderid + "';", (err2, resp2) => {
 if(err2){
 datae['status'] = 404;
-datae['error'] = "Error: Can't Update Order Price...";	
+datae['error'] = "Error: Can't Update Order Price...";
+res.send(datae);	
 }else{
 datae['status'] = 200;
-var arr = [];
+var arr = {};
 arr['id'] = orderid;
-arr['car_id'] = resp.rows.car_id;
-arr['created_on'] = Date.now();
-arr['status'] = resp.rows.status;
-arr['old_price_offered'] = resp.rows.price_offered;
-arr['new_price_offered'] = req.price_offered;
-arr['body_type'] = resp.rows.body_type;
+arr['car_id'] = resp.rows[0].car_id;
+arr['created_on'] = resp.rows[0].created_on;
+arr['status'] = resp.rows[0].status;
+arr['old_price_offered'] = resp.rows[0].price_offered;
+arr['new_price_offered'] = req.body.price_offered;
+arr['body_type'] = resp.rows[0].body_type;
 datae['data'] = arr;	
+res.send(datae);
 }
 });	
 }	
@@ -274,43 +279,48 @@ datae['data'] = arr;
 });	
 }
 });	
-res.send(datae);
+
 });
 
 myapp.patch('/car/:car-id/status', function (req, res) {
+client.connect();
+	
 var carid = req.params.car-id;
 var newstatus = "sold";
 var datae = {};
-jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
 datae['error'] = "Error: Your Connection Token As Expired...";			
+res.send(datae);
 }else{
-client.query('UPDATE cars SET status = ' + newstatus + ' WHERE id = ' + carid + ';', (err, resp) => {
+client.query("UPDATE cars SET status = '" + newstatus + "' WHERE id = '" + carid + "';", (err, resp) => {
 if(err){
 datae['status'] = 404;
 datae['error'] = "Error: Can't Update Car Status...";	
+res.send(datae);
 }else{
 	
-client.query('SELECT * FROM cars WHERE id = ' + carid + ';', (err2, resp2) => {
+client.query("SELECT * FROM cars WHERE id = '" + carid + "';", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
+res.send(datae);
 }else{
 
 datae['status'] = 200;
-var arr = [];
+var arr = {};
 arr['id'] = carid;
-arr['email'] = resp2.rows.email;
-arr['created_on'] = resp2.rows.created_on;
+arr['email'] = resp2.rows[0].owner;
+arr['created_on'] = resp2.rows[0].created_on;
 arr['status'] = newstatus;
-arr['manufacturer'] = resp2.rows.manufacturer;
-arr['model'] = resp2.rows.model;
-arr['price'] = resp2.rows.price;
-arr['state'] = resp2.rows.state;
+arr['manufacturer'] = resp2.rows[0].manufacturer;
+arr['model'] = resp2.rows[0].model;
+arr['price'] = resp2.rows[0].price;
+arr['state'] = resp2.rows[0].state;
 
 datae['data'] = arr;
-
+res.send(datae);
 }	
 });	
 	
@@ -318,43 +328,46 @@ datae['data'] = arr;
 });	
 }
 });		
-res.send(datae);
+
 });
 
 myapp.patch('/car/:car-id/price', function (req, res) {
 var carid = req.params.car-id;
 
 var datae = {};
-jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";			
+datae['error'] = "Error: Connection Not Secure...";	
+res.send(datae);		
 }else{
-client.query('UPDATE cars SET price = ' + req.price + ' WHERE id = ' + carid + ';', (err, resp) => {
+client.query("UPDATE cars SET price = '" + req.body.price + "' WHERE id = '" + carid + "';", (err, resp) => {
 if(err){
 datae['status'] = 404;
 datae['error'] = "Error: Can't Update Car's Price...";	
+res.send(datae);
 }else{
 	
-client.query('SELECT * FROM cars WHERE id = ' + carid + ';', (err2, resp2) => {
+client.query("SELECT * FROM cars WHERE id = '" + carid + "';", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
+res.send(datae);
 }else{
 
 datae['status'] = 200;
-var arr = [];
+var arr = {};
 arr['id'] = carid;
-arr['email'] = resp2.rows.email;
-arr['created_on'] = resp2.rows.created_on;
-arr['status'] = resp2.rows.status;
-arr['manufacturer'] = resp2.rows.manufacturer;
-arr['model'] = resp2.rows.model;
-arr['price'] = resp2.rows.price;
-arr['state'] = resp2.rows.state;
+arr['email'] = resp2.rows[0].owner;
+arr['created_on'] = resp2.rows[0].created_on;
+arr['status'] = resp2.rows[0].status;
+arr['manufacturer'] = resp2.rows[0].manufacturer;
+arr['model'] = resp2.rows[0].model;
+arr['price'] = resp2.rows[0].price;
+arr['state'] = resp2.rows[0].state;
 
 datae['data'] = arr;
-
+res.send(datae);
 }	
 });	
 	
@@ -362,43 +375,45 @@ datae['data'] = arr;
 });	
 }
 });		
-res.send(datae);
+
 });
 
 myapp.get('/car/:car-id/', function (req, res) {
 var carid = req.params.car-id;
 
 var datae = {};
-jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";			
+datae['error'] = "Error: Connection Not Secure...";	
+res.send(datae);		
 }else{
-client.query('SELECT * FROM cars WHERE id = ' + carid + ';', (err2, resp2) => {
+client.query("SELECT * FROM cars WHERE id = '" + carid + "';", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
+res.send(datae);
 }else{
 
 datae['status'] = 200;
-var arr = [];
+var arr = {};
 arr['id'] = carid;
-arr['owner'] = resp2.rows.email;
-arr['created_on'] = resp2.rows.created_on;
-arr['status'] = resp2.rows.status;
-arr['manufacturer'] = resp2.rows.manufacturer;
-arr['model'] = resp2.rows.model;
-arr['price'] = resp2.rows.price;
-arr['state'] = resp2.rows.state;
-arr['body_type'] = resp2.rows.body_type;
+arr['owner'] = resp2.rows[0].owner;
+arr['created_on'] = resp2.rows[0].created_on;
+arr['status'] = resp2.rows[0].status;
+arr['manufacturer'] = resp2.rows[0].manufacturer;
+arr['model'] = resp2.rows[0].model;
+arr['price'] = resp2.rows[0].price;
+arr['state'] = resp2.rows[0].state;
+arr['body_type'] = resp2.rows[0].body_type;
 
 datae['data'] = arr;
-
+res.send(datae);
 }	
 });	
 }
 });		
-res.send(datae);
+
 });
 
 
@@ -411,23 +426,25 @@ var manufacturer = req.query.manufacturer;
 var bodytype = req.query.body_type;
 
 var datae = {};
-jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
 datae['error'] = "Error: Connection Not Secure...";			
+res.send(datae);
 }else{
 if(min_price == "" && max_price == "" && state == "" && carStatus !=""){
-client.query('SELECT * FROM cars WHERE status = ' + carStatus + ';', (err2, resp2) => {
+client.query("SELECT * FROM cars WHERE status = '" + carStatus + "';", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
+res.send(datae);
 }else{
 var arr2 = [];
 datae['status'] = 200;
 for (var i=0; i < resp2.rows.length; i++){
 var arr = [];
 arr['id'] = resp2.rows[i].id;
-arr['owner'] = resp2.rows[i].email;
+arr['owner'] = resp2.rows[i].owner;
 arr['created_on'] = resp2.rows[i].created_on;
 arr['status'] = resp2.rows[i].status;
 arr['manufacturer'] = resp2[i].rows.manufacturer;
@@ -438,21 +455,23 @@ arr['body_type'] = resp2.rows[i].body_type;
 arr2.push(arr);
 }
 datae['data'] = arr2;
+res.send(datae);
 }	
 });	
 }else if(min_price != "" && max_price != ""){
 
-client.query('SELECT * FROM cars WHERE status = ' + carStatus + ' AND price > ' + min_price + ' OR status = ' + carStatus + ' AND price = ' + min_price +  ' OR status = ' + carStatus + ' AND price < ' + max_price + ' OR status = ' + carStatus + ' AND price = ' + max_price + ';', (err2, resp2) => {
+client.query("SELECT * FROM cars WHERE status = '" + carStatus + "' AND price > '" + min_price + "' OR status = '" + carStatus + "' AND price = '" + min_price +  "' OR status = '" + carStatus + "' AND price < '" + max_price + "' OR status = '" + carStatus + "' AND price = '" + max_price + "';", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
+res.send(datae);
 }else{
 var arr2 = [];
 datae['status'] = 200;
 for (var i=0; i < resp2.rows.length; i++){
 var arr = [];
 arr['id'] = resp2.rows[i].id;
-arr['owner'] = resp2.rows[i].email;
+arr['owner'] = resp2.rows[i].owner;
 arr['created_on'] = resp2.rows[i].created_on;
 arr['status'] = resp2.rows[i].status;
 arr['manufacturer'] = resp2[i].rows.manufacturer;
@@ -463,22 +482,24 @@ arr['body_type'] = resp2.rows[i].body_type;
 arr2.push(arr);
 }
 datae['data'] = arr2;
+res.send(datae);
 }	
 });	
 
 }else if(state != "" && carStatus !=""){
 
-client.query('SELECT * FROM cars WHERE status = ' + carStatus + ' AND state = ' + state + ';', (err2, resp2) => {
+client.query("SELECT * FROM cars WHERE status = '" + carStatus + "' AND state = '" + state + "';", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
+res.send(datae);
 }else{
 var arr2 = [];
 datae['status'] = 200;
 for (var i=0; i < resp2.rows.length; i++){
 var arr = [];
 arr['id'] = resp2.rows[i].id;
-arr['owner'] = resp2.rows[i].email;
+arr['owner'] = resp2.rows[i].owner;
 arr['created_on'] = resp2.rows[i].created_on;
 arr['status'] = resp2.rows[i].status;
 arr['manufacturer'] = resp2[i].rows.manufacturer;
@@ -489,22 +510,24 @@ arr['body_type'] = resp2.rows[i].body_type;
 arr2.push(arr);
 }
 datae['data'] = arr2;
+res.send(datae);
 }	
 });	
 
 }else if( manufacturer != "" && carStatus !=""){
 
-client.query('SELECT * FROM cars WHERE status = ' + carStatus + ' AND manufacturer = ' + manufacturer + ';', (err2, resp2) => {
+client.query("SELECT * FROM cars WHERE status = '" + carStatus + "' AND manufacturer = '" + manufacturer + "';", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
+res.send(datae);
 }else{
 var arr2 = [];
 datae['status'] = 200;
 for (var i=0; i < resp2.rows.length; i++){
 var arr = [];
 arr['id'] = resp2.rows[i].id;
-arr['owner'] = resp2.rows[i].email;
+arr['owner'] = resp2.rows[i].owner;
 arr['created_on'] = resp2.rows[i].created_on;
 arr['status'] = resp2.rows[i].status;
 arr['manufacturer'] = resp2[i].rows.manufacturer;
@@ -515,22 +538,24 @@ arr['body_type'] = resp2.rows[i].body_type;
 arr2.push(arr);
 }
 datae['data'] = arr2;
+res.send(datae);
 }	
 });	
 
 }else if( bodytype != "" ){
 
-client.query('SELECT * FROM cars WHERE body_type = ' + bodytype + ';', (err2, resp2) => {
+client.query("SELECT * FROM cars WHERE body_type = '" + bodytype + "';", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
+res.send(datae);
 }else{
 var arr2 = [];
 datae['status'] = 200;
 for (var i=0; i < resp2.rows.length; i++){
 var arr = [];
 arr['id'] = resp2.rows[i].id;
-arr['owner'] = resp2.rows[i].email;
+arr['owner'] = resp2.rows[i].owner;
 arr['created_on'] = resp2.rows[i].created_on;
 arr['status'] = resp2.rows[i].status;
 arr['manufacturer'] = resp2[i].rows.manufacturer;
@@ -541,59 +566,64 @@ arr['body_type'] = resp2.rows[i].body_type;
 arr2.push(arr);
 }
 datae['data'] = arr2;
+res.send(datae);
 }	
 });	
 
 }
 }
 });		
-res.send(datae);
+
 });
 
 myapp.delete('/car/:car-id/', function (req, res) {
 var carid = req.params.car-id;
 
 var datae = {};
-jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";			
+datae['error'] = "Error: Connection Not Secure...";		
+res.send(datae);	
 }else{
-client.query('DELETE FROM cars WHERE id = ' + carid + ';', (err2, resp2) => {
+client.query("DELETE FROM cars WHERE id = '" + carid + "';", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
+res.send(datae);
 }else{
 datae['status'] = 200;
 datae['data'] =  " Successfully Deleted";
-
+res.send(datae);
 }	
 });	
 }
 });		
-res.send(datae);
+
 });
 
 myapp.get('/car/', function (req, res) {
 var carid = req.params.car-id;
 
 var datae = {};
-jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
 datae['error'] = "Error: Connection Not Secure...";			
+res.send(datae);
 }else{
 client.query('SELECT * FROM cars ;', (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
+res.send(datae);
 }else{
 var arr2 = [];
 datae['status'] = 200;
 for (var i=0; i < resp2.rows.length; i++){
 var arr = [];
 arr['id'] = carid;
-arr['owner'] = resp2.rows[i].email;
+arr['owner'] = resp2.rows[i].owner;
 arr['created_on'] = resp2.rows[i].created_on;
 arr['status'] = resp2.rows[i].status;
 arr['manufacturer'] = resp2[i].rows.manufacturer;
@@ -604,39 +634,55 @@ arr['body_type'] = resp2.rows[i].body_type;
 arr2.push(arr);
 }
 datae['data'] = arr;
-
+res.send(datae);
 }	
 });	
 }
 });		
-res.send(datae);
+
 });
 
 myapp.post('/flag/', function (req, res) {
 var datae = {};
-jwt.verify(req.token, req.secretKey, (errt, authorizedData) => {
+jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
 if(errt){ 
 datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";			
+datae['error'] = "Error: Connection Not Secure...";	
+res.send( datae);		
 }else{
-client.query('SELECT * FROM cars WHERE email = ' + req.email + ' AND id = ' + req.car_id + ';', (err, resp) => {
+	
+client.query("SELECT id FROM flags ORDER BY id DESC;", (errf, respf) => {
+if (errf){
+	
+}else{	
+
+if(respf.rows[0].id == 0 || respf.rows[0].id == null){
+var newId = 1;
+}else{
+var newId = respf.rows[0].id + 1;	
+}
+			
+client.query("SELECT * FROM cars WHERE email = '" + req.body.email + "' AND id = '" + req.body.car_id + "';", (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Car does Not exist...";
+res.send( datae);
 }else{
 
-client.query('INSERT INTO flags(car_id,created_on,reason,description) VALUES(' + req.car_id + ', ' + Date.now() + ', ' + req.reason + ', ' + req.description + ') RETURNING id;', (err2, resp2) => {
+client.query("INSERT INTO flags(id,car_id,created_on,reason,description) VALUES( '"+ newId +"', '" + req.body.car_id + "', current_timestamp, '" + req.body.reason + "', '" + req.body.description + "') RETURNING id;", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Can Not Flag Advert...";
+res.send( datae);
 }else{
 datae['status'] = 200;
-var arr = [];
+var arr = {};
 arr['id'] = resp2.rows.id;
-arr['car_id'] = req.car_id;
-arr['reason'] = req.reason;
-arr['description'] = req.description;
+arr['car_id'] = req.body.car_id;
+arr['reason'] = req.body.reason;
+arr['description'] = req.body.description;
 datae['data'] = arr;
+res.send( datae);
 } 
 
 });
@@ -644,7 +690,9 @@ datae['data'] = arr;
 });
 }
 });	
-res.send( datae);
+}
+});
+
 });
 
 
