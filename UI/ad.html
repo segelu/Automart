@@ -270,6 +270,9 @@ function off() {
  b2[mySelectedIndex].style = "position:absolute; background-color:rgba(250,0,30,0.6); z-index:10; padding:4% 4% 4% 4%;";
  carousel();
   carousel2(); 
+if(sessionStorage.getItem("id") == null){
+ window.location.href = "index.html";
+ }	
 }
 
 function opennav() {
