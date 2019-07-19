@@ -427,16 +427,17 @@ casinfo['secretKey'] = sessionStorage.getItem("secretKey");
 }
  
 function loadnewads(){
- 
- const api = '/car/';
-        
-        // make API call here
-     var xmlhttp = new XMLHttpRequest();
-     xmlhttp.onreadystatechange = function() {
-     if (this.readyState == 4 && this.status == 200) {
-	 var data = this.responseText;
-    var myObj = JSON.parse(this.responseText);
-    if(data.status == 404){
+loadInfoo();
+	$.ajax({
+        	url: "/car/",   	
+			type: "GET",      				
+			data:  JSON.stringify(casinfo), 		
+			contentType: false,       		
+    	    cache: false,					
+			processData:false,  			
+			success: function(data)  		
+		    {
+			if(data.status == 404){
 			console.log(data);
 			
 			if(data.error == "Error: Your Connection Token As Expired..."){
@@ -455,14 +456,11 @@ function loadnewads(){
 			arrayOfCarsStatus[arrayOfCarsStatus.length] = status;
 			arrayOfCarsBodyType[arrayOfCarsBodyType.length] = body_type;
             }
-    
-    }
-    };
-    xmlhttp.open("GET", api, true);
-    xmlhttp.send();
+		    }	        
+	   });
+ 
  
  }
- 
  
  function analyse(){
  var da_selected = [];
