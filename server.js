@@ -438,7 +438,7 @@ arr['state'] = resp2.rows[i].state;
 arr['body_type'] = resp2.rows[i].body_type;
 arr2.push(arr);
 }
-datae['data'] = arr;
+datae['data'] = arr2;
 res.send(datae);
 }	
 });	
