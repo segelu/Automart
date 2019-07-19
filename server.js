@@ -605,7 +605,7 @@ datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
 res.send(datae);
 }else{
-var arr2 = [];
+var arr2 = {};
 datae['status'] = 200;
 for (var i=0; i < resp2.rows.length; i++){
 var arr = {};
@@ -626,6 +626,7 @@ res.send(datae);
 });	
 		
 });
+
 
 myapp.post('/flag/', function (req, res) {
 var datae = {};
