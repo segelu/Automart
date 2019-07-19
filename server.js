@@ -603,7 +603,6 @@ res.send(datae);
 });
 
 myapp.get('/car/', function (req, res) {
-var carid = req.params.car-id;
 
 var datae = {};
 jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
