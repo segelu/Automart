@@ -421,19 +421,31 @@ $(document).on('click','.soldad',function(){
  
  
 function loadnewads(){
-const api = '/car/';
-       // make API call here
-     var xmlhttp = new XMLHttpRequest();
-     xmlhttp.onreadystatechange = function() {
-     if (this.readyState == 4 && this.status == 200) {
-	 var data = this.responseText;
-    var myObj = JSON.parse(this.responseText);
-	if(data.status == 404){
-	console.log(data);
-	}else{
-     console.log(data);
-			const {data: {id, created_on, manufacturer, email, model, price, state, status, body_type}} = data;
 
+var casinfo = {};
+
+  casinfo['token'] = sessionStorage.getItem("token");
+  casinfo['secretKey'] = sessionStorage.getItem("secretKey");
+
+	$.ajax({
+        	url: "/car/",   	
+			type: "GET",      				
+			data:  JSON.stringify(casinfo), 		
+			contentType: false,       		
+    	    cache: false,					
+			processData:false,  			
+			success: function(data)  		
+		    {
+			if(data.status == 404){
+			console.log(data);
+			
+			if(data.error == "Error: Your Connection Token As Expired..."){
+			sessionStorage.clear();
+			window.location.href = "index.html";
+			}
+			}else{
+			console.log(data);
+			const {data: {id, created_on, manufacturer, email, model, price, state, status, body_type}} = data;
 			arrayOfCarsId[arrayOfCarsId.length]	= id;
             arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
 			arrayOfCarsPrice[arrayOfCarsPrice.length] = price;	
@@ -442,11 +454,9 @@ const api = '/car/';
 			arrayOfCarsState[arrayOfCarsState.length] = state;	
 			arrayOfCarsStatus[arrayOfCarsStatus.length] = status;
 			arrayOfCarsBodyType[arrayOfCarsBodyType.length] = body_type;
-	}
-    }
-    };
-    xmlhttp.open("GET", api, true);
-    xmlhttp.send();
+            }
+		    }	        
+	   });
  
  }
  
