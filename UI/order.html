@@ -32,7 +32,21 @@ function closelog(){
 document.getElementById("login").style.display = "none";
 }		 
 
+function sessionChecker(){
+if(sessionStorage.getItem("id") != null){
+var activeUser = sessionStorage.getItem("id");
+document.getElementById("welcomeMessage").innerHTML = "Hi, " + sessionStorage.getItem("currentUser");
+document.getElementById("myrightsignin").style.display = "none";
+document.getElementById("login").style.display = "none";
+document.getElementById("welcomeMessage").style.display = "block";
 
+if(sessionStorage.getItem("admin") == true){
+document.getElementById("dAdmin").style.display = "block";
+}
+}else{
+document.getElementById("uploadAdss").style.display = "none";
+}
+}
  </script>
  <script src="node_modules/jquery/dist/jquery.js" type="text/javascript"></script>
 <script src="node_modules/jquery.ui/ui/widget.js" type="text/javascript"></script>
@@ -54,11 +68,12 @@ document.getElementById("login").style.display = "none";
   <li><a href="javascript:void(0)" class="closebtn" onclick="closenav()">&times;</a></li>
             <li class="active" tabindex="-1"><a href="index.html">Home |</a></li>
             <li tabindex="-1"><a href="">About |</a></li>
-            <li tabindex="-1"><a href="admin.html">Admin</a></li>
+            <li tabindex="-1" style="display:none; float:left;" id="dAdmin"><a href="admin.html">Admin</a></li>
             </ul>
    <div class="rightNav"id="myrightnav">
-   <a href="javascript:;" onclick="toggleag();">Sign In</a>
-</div>   
+   <a href="javascript:;" id="myrightsignin" onclick="toggleag();">Sign In</a>
+   <b id="welcomeMessage"></b>
+</div>  
   </nav>
   
   <div id="login">
@@ -76,7 +91,7 @@ document.getElementById("login").style.display = "none";
              <br/>
             
                
-			  <input type="submit" class="btn" name="login" value="Sign In"/>
+			<input type="submit" class="btn" id="loginn" name="login" value="Sign In"/>
 
         </form>
   </div>
@@ -102,7 +117,7 @@ document.getElementById("login").style.display = "none";
  
 <br/>
  <script>
- 
+ sessionChecker();
  function getQueryVariable(variable)
 {
        var query = window.location.search.substring(1);
@@ -149,7 +164,7 @@ $(document).on('click','.order',function(){
 		$.ajax({
         	url: "/order/",   	
 			type: "POST",      				
-			data: jsonordercar, 		
+			data: JSON.stringify(jsonordercar), 		
 			contentType: false,       		
     	    cache: false,					
 			processData:false,  			
