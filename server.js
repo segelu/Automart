@@ -177,6 +177,38 @@ res.send(datae);
 
 });
 
+myapp.get('/car/', function (req, res) {
+client.connect();
+var datae = {};
+
+client.query("SELECT * FROM cars ORDER BY id DESC;", (err2, resp2) => {
+if (err2){
+datae['status'] = 404;
+datae['error'] = err2.stack;
+res.send(datae);
+}else{
+var arr2 = {};
+datae['status'] = 200;
+for (var i=0; i < resp2.rows.length; i++){
+var arr = {};
+arr['id'] = carid;
+arr['owner'] = resp2.rows[i].owner;
+arr['created_on'] = resp2.rows[i].created_on;
+arr['status'] = resp2.rows[i].status;
+arr['manufacturer'] = resp2[i].rows.manufacturer;
+arr['model'] = resp2.rows[i].model;
+arr['price'] = resp2.rows[i].price;
+arr['state'] = resp2.rows[i].state;
+arr['body_type'] = resp2.rows[i].body_type;
+arr2.push(arr);
+}
+datae['data'] = arr2;
+res.send(datae);
+}	
+});	
+		
+});
+
 myapp.post('/order/', function (req, res) {
 client.connect();	
 
@@ -411,38 +443,6 @@ res.send(datae);
 }	
 });	
 	
-});
-
-myapp.get('/car/', function (req, res) {
-client.connect();
-var datae = {};
-
-client.query("SELECT * FROM cars ORDER BY id DESC;", (err2, resp2) => {
-if (err2){
-datae['status'] = 404;
-datae['error'] = err2.stack;
-res.send(datae);
-}else{
-var arr2 = {};
-datae['status'] = 200;
-for (var i=0; i < resp2.rows.length; i++){
-var arr = {};
-arr['id'] = carid;
-arr['owner'] = resp2.rows[i].owner;
-arr['created_on'] = resp2.rows[i].created_on;
-arr['status'] = resp2.rows[i].status;
-arr['manufacturer'] = resp2[i].rows.manufacturer;
-arr['model'] = resp2.rows[i].model;
-arr['price'] = resp2.rows[i].price;
-arr['state'] = resp2.rows[i].state;
-arr['body_type'] = resp2.rows[i].body_type;
-arr2.push(arr);
-}
-datae['data'] = arr2;
-res.send(datae);
-}	
-});	
-		
 });
 
 
