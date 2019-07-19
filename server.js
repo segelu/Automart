@@ -332,6 +332,8 @@ res.send(datae);
 });
 
 myapp.patch('/car/:car-id/price', function (req, res) {
+client.connect();
+
 var carid = req.params.car-id;
 
 var datae = {};
@@ -379,6 +381,8 @@ res.send(datae);
 });
 
 myapp.get('/car/:car-id/', function (req, res) {
+client.connect();
+
 var carid = req.params.car-id;
 
 var datae = {};
@@ -418,6 +422,8 @@ res.send(datae);
 
 
 myapp.get('/car', function (req, res) {
+client.connect();
+
 var carStatus = req.query.status;
 var min_price = req.query.min_price;
 var max_price = req.query.max_price;
@@ -577,6 +583,7 @@ res.send(datae);
 });
 
 myapp.delete('/car/:car-id/', function (req, res) {
+client.connect();
 var carid = req.params.car-id;
 
 var datae = {};
@@ -620,7 +627,7 @@ res.send(datae);
 var arr2 = [];
 datae['status'] = 200;
 for (var i=0; i < resp2.rows.length; i++){
-var arr = [];
+var arr = {};
 arr['id'] = carid;
 arr['owner'] = resp2.rows[i].owner;
 arr['created_on'] = resp2.rows[i].created_on;
