@@ -183,7 +183,7 @@ client.connect();
 var datae = {};
 
 
-client.query("SELECT * FROM cars;", (err2, resp2) => {
+client.query('SELECT * FROM cars ;', (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
