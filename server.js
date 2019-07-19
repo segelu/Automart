@@ -386,12 +386,7 @@ client.connect();
 var carid = req.params.car-id;
 
 var datae = {};
-jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
-if(errt){ 
-datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";	
-res.send(datae);		
-}else{
+
 client.query("SELECT * FROM cars WHERE id = '" + carid + "';", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
@@ -415,9 +410,7 @@ datae['data'] = arr;
 res.send(datae);
 }	
 });	
-}
-});		
-
+	
 });
 
 
@@ -432,12 +425,7 @@ var manufacturer = req.query.manufacturer;
 var bodytype = req.query.body_type;
 
 var datae = {};
-jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
-if(errt){ 
-datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";			
-res.send(datae);
-}else{
+
 if(min_price == "" && max_price == "" && state == "" && carStatus !=""){
 client.query("SELECT * FROM cars WHERE status = '" + carStatus + "';", (err2, resp2) => {
 if (err2){
@@ -577,9 +565,7 @@ res.send(datae);
 });	
 
 }
-}
-});		
-
+	
 });
 
 myapp.delete('/car/:car-id/', function (req, res) {
@@ -612,12 +598,7 @@ res.send(datae);
 myapp.get('/car/', function (req, res) {
 client.connect();
 var datae = {};
-jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
-if(errt){ 
-datae['status'] = 404;
-datae['error'] = "Error: Connection Not Secure...";			
-res.send(datae);
-}else{
+
 client.query('SELECT * FROM cars ;', (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
@@ -643,9 +624,7 @@ datae['data'] = arr;
 res.send(datae);
 }	
 });	
-}
-});		
-
+		
 });
 
 myapp.post('/flag/', function (req, res) {
