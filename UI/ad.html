@@ -419,14 +419,15 @@ $(document).on('click','.soldad',function(){
 
 });
  
- 
-function loadnewads(){
-
 var casinfo = {};
 
-  casinfo['token'] = sessionStorage.getItem("token");
-  casinfo['secretKey'] = sessionStorage.getItem("secretKey");
-
+function loadInfoo(){
+casinfo['token'] = sessionStorage.getItem("token");
+casinfo['secretKey'] = sessionStorage.getItem("secretKey");
+}
+ 
+function loadnewads(){
+loadInfoo();
 	$.ajax({
         	url: "/car/",   	
 			type: "GET",      				
