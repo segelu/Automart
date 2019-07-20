@@ -232,7 +232,7 @@ var myIndexIndex = 0;
 var mySelectedIndex = 0;
 
 function carousel() {
-
+var xyx = document.getElementsByClassName("price");
   var i;
   var x = document.getElementsByClassName("mySlides");
   for (i = 0; i < x.length; i++) {
@@ -242,6 +242,9 @@ function carousel() {
   myIndex++;
   if (myIndex > x.length) {myIndex = 1}    
   x[myIndex-1].style.display = "block";  
+if(arrayOfCarsPrice.length != 0 && arrayOfCarsPrice[myIndex-1] != ""){
+	xyz[i].innerHTML = "NGN" + arrayOfCarsPrice[myIndex-1];
+ }
   myIndexIndex = myIndex-1;
   Interval = setTimeout(carousel, 9000);    
 }
