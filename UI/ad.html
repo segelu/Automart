@@ -446,11 +446,11 @@ function loadnewads(){
 			}else{
 			console.log(datam);
 			const {data} = datam;			
-			const [arrayCarGot] = data;
-			var no_items = arrayCarGot.length;
+			
+			var no_items = data.length;
 			var i = 0;
 			while(i < no_items){
-			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = {arrayCarGot}[i];
+			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = data[i];
 			arrayOfCarsId[arrayOfCarsId.length]	= id;
             arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
 			arrayOfCarsPrice[arrayOfCarsPrice.length] = price;	
