@@ -449,6 +449,7 @@ function loadnewads(){
 			var no_items = arrayCarGot.length;
 			var i = 0;
 			while(i < no_items){
+				alert(arrayCarGot[i]['price']);
 			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = arrayCarGot[i];
 			arrayOfCarsId[arrayOfCarsId.length]	= id;
                         arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
@@ -459,7 +460,6 @@ function loadnewads(){
 			arrayOfCarsStatus[arrayOfCarsStatus.length] = status;
 			arrayOfCarsBodyType[arrayOfCarsBodyType.length] = body_type;
 			
-			alert(price);
 			}
 			
             }
