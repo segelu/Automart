@@ -421,10 +421,7 @@ $(document).on('click','.soldad',function(){
  
 var casinfo = {};
 
-function loadInfoo(){
-casinfo['token'] = sessionStorage.getItem("token");
-casinfo['secretKey'] = sessionStorage.getItem("secretKey");
-}
+var xyx = document.getElementsByClassName("price");
  
 function loadnewads(){
  
@@ -461,7 +458,7 @@ function loadnewads(){
 			arrayOfCarsStatus[arrayOfCarsStatus.length] = status;
 			arrayOfCarsBodyType[arrayOfCarsBodyType.length] = body_type;
 			if(i == 0){
-			var xyx = document.getElementsByClassName("price");
+			
 			xyz[i].innerHTML = "NGN" + price;
 			}
 			}
