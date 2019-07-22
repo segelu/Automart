@@ -242,7 +242,12 @@ var xyx = document.getElementsByClassName("price");
   myIndex++;
   if (myIndex > x.length) {myIndex = 1}    
   x[myIndex-1].style.display = "block";  
-
+	
+if(arrayOfCarsPrice.length != 0 && arrayOfCarsPrice[myIndex-1] != ""){
+  alert(arrayOfCarsPrice[myIndex-1]);
+	xyz[i].innerHTML = "NGN" + arrayOfCarsPrice[myIndex-1];
+ }
+	
   myIndexIndex = myIndex-1;
   Interval = setTimeout(carousel, 9000);    
 }
