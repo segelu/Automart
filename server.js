@@ -451,22 +451,8 @@ datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
 res.send(datae);
 }else{
-var arr2 = [];
 datae['status'] = 200;
-for (var i=0; i < resp2.rows.length; i++){
-var arr = [];
-arr['id'] = resp2.rows[i].id;
-arr['owner'] = resp2.rows[i].owner;
-arr['created_on'] = resp2.rows[i].created_on;
-arr['status'] = resp2.rows[i].status;
-arr['manufacturer'] = resp2[i].rows.manufacturer;
-arr['model'] = resp2.rows[i].model;
-arr['price'] = resp2.rows[i].price;
-arr['state'] = resp2.rows[i].state;
-arr['body_type'] = resp2.rows[i].body_type;
-arr2.push(arr);
-}
-datae['data'] = arr2;
+datae['data'] = resp2.rows;
 res.send(datae);
 }	
 });	
@@ -478,22 +464,8 @@ datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
 res.send(datae);
 }else{
-var arr2 = [];
 datae['status'] = 200;
-for (var i=0; i < resp2.rows.length; i++){
-var arr = [];
-arr['id'] = resp2.rows[i].id;
-arr['owner'] = resp2.rows[i].owner;
-arr['created_on'] = resp2.rows[i].created_on;
-arr['status'] = resp2.rows[i].status;
-arr['manufacturer'] = resp2[i].rows.manufacturer;
-arr['model'] = resp2.rows[i].model;
-arr['price'] = resp2.rows[i].price;
-arr['state'] = resp2.rows[i].state;
-arr['body_type'] = resp2.rows[i].body_type;
-arr2.push(arr);
-}
-datae['data'] = arr2;
+datae['data'] = resp2.rows;
 res.send(datae);
 }	
 });	
@@ -506,22 +478,8 @@ datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
 res.send(datae);
 }else{
-var arr2 = [];
 datae['status'] = 200;
-for (var i=0; i < resp2.rows.length; i++){
-var arr = [];
-arr['id'] = resp2.rows[i].id;
-arr['owner'] = resp2.rows[i].owner;
-arr['created_on'] = resp2.rows[i].created_on;
-arr['status'] = resp2.rows[i].status;
-arr['manufacturer'] = resp2[i].rows.manufacturer;
-arr['model'] = resp2.rows[i].model;
-arr['price'] = resp2.rows[i].price;
-arr['state'] = resp2.rows[i].state;
-arr['body_type'] = resp2.rows[i].body_type;
-arr2.push(arr);
-}
-datae['data'] = arr2;
+datae['data'] = resp2.rows;
 res.send(datae);
 }	
 });	
@@ -534,22 +492,8 @@ datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
 res.send(datae);
 }else{
-var arr2 = [];
 datae['status'] = 200;
-for (var i=0; i < resp2.rows.length; i++){
-var arr = [];
-arr['id'] = resp2.rows[i].id;
-arr['owner'] = resp2.rows[i].owner;
-arr['created_on'] = resp2.rows[i].created_on;
-arr['status'] = resp2.rows[i].status;
-arr['manufacturer'] = resp2[i].rows.manufacturer;
-arr['model'] = resp2.rows[i].model;
-arr['price'] = resp2.rows[i].price;
-arr['state'] = resp2.rows[i].state;
-arr['body_type'] = resp2.rows[i].body_type;
-arr2.push(arr);
-}
-datae['data'] = arr2;
+datae['data'] = resp2.rows;
 res.send(datae);
 }	
 });	
@@ -562,22 +506,8 @@ datae['status'] = 404;
 datae['error'] = "Error: Try again, server unable to respond...";
 res.send(datae);
 }else{
-var arr2 = [];
 datae['status'] = 200;
-for (var i=0; i < resp2.rows.length; i++){
-var arr = [];
-arr['id'] = resp2.rows[i].id;
-arr['owner'] = resp2.rows[i].owner;
-arr['created_on'] = resp2.rows[i].created_on;
-arr['status'] = resp2.rows[i].status;
-arr['manufacturer'] = resp2[i].rows.manufacturer;
-arr['model'] = resp2.rows[i].model;
-arr['price'] = resp2.rows[i].price;
-arr['state'] = resp2.rows[i].state;
-arr['body_type'] = resp2.rows[i].body_type;
-arr2.push(arr);
-}
-datae['data'] = arr2;
+datae['data'] = resp2.rows;
 res.send(datae);
 }	
 });	
