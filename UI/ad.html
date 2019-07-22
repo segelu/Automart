@@ -445,23 +445,10 @@ function loadnewads(){
 			console.log(datam);
 			const {data} = datam;			
 			var arrayCarGot = [];
-			arrayCarGot = {data};
-			var no_items = arrayCarGot.length;
-			var i = 0;
-					alert(data);
-			while(i < no_items){
+			const [arrayCarGot] = {data};
 			
-			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = arrayCarGot[i];
-			arrayOfCarsId[arrayOfCarsId.length]	= id;
-                        arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
-			arrayOfCarsPrice[arrayOfCarsPrice.length] = price;	
-			arrayOfCarsManufacturer[arrayOfCarsManufacturer.length] = manufacturer;
-			arrayOfCarsModel[arrayOfCarsModel.length] = model;
-			arrayOfCarsState[arrayOfCarsState.length] = state;	
-			arrayOfCarsStatus[arrayOfCarsStatus.length] = status;
-			arrayOfCarsBodyType[arrayOfCarsBodyType.length] = body_type;
+					alert(arrayCarGot);
 			
-			}
 			
             }
     
