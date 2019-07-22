@@ -443,11 +443,24 @@ function loadnewads(){
 			}
 			}else{
 			console.log(datam);
-			const {data} = datam;			
+			const {data} = myObj;			
 			
-					alert(data);
+			var no_items = data.length;
+			var i = 0;
+			while(i < no_items){
+			alert(data[i]['price']);
+			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = data[i];
+			arrayOfCarsId[arrayOfCarsId.length]	= id;
+            arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
+			arrayOfCarsPrice[arrayOfCarsPrice.length] = price;	
+			arrayOfCarsManufacturer[arrayOfCarsManufacturer.length] = manufacturer;
+			arrayOfCarsModel[arrayOfCarsModel.length] = model;
+			arrayOfCarsState[arrayOfCarsState.length] = state;	
+			arrayOfCarsStatus[arrayOfCarsStatus.length] = status;
+			arrayOfCarsBodyType[arrayOfCarsBodyType.length] = body_type;
 			
-			
+			}
+						
             }
     
     }
@@ -456,6 +469,7 @@ function loadnewads(){
     xmlhttp.send();
  
  }
+ 
  
  
  function analyse(){
