@@ -223,6 +223,7 @@ document.getElementById("uploadAdss").style.display = "none";
 <br/>
 <br/>
  <script>
+ on();
 sessionChecker();
 var myIndex = 0;
 var myIndex2 = 0;
@@ -233,22 +234,23 @@ var mySelectedIndex = 0;
 
 function carousel() {
 var xyz = document.getElementsByClassName("price");
+ 
   var i;
   var x = document.getElementsByClassName("mySlides");
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";  
 	
   }
- 	
-if(arrayOfCarsPrice.length != 0 && myIndex < arrayOfCarsPrice.length){
+  
+ if(arrayOfCarsPrice.length != 0 && myIndex < arrayOfCarsPrice.length){
   xyz[0].innerHTML = "NGN" + arrayOfCarsPrice[0];
 	xyz[myIndex].innerHTML = "NGN" + arrayOfCarsPrice[myIndex];
  } 
-	
+  
   myIndex++;
   if (myIndex > x.length) {myIndex = 1}    
   x[myIndex-1].style.display = "block";  
-		
+  
   myIndexIndex = myIndex-1;
   Interval = setTimeout(carousel, 9000);    
 }
@@ -263,6 +265,7 @@ function carousel2() {
   myIndex2++;
   if (myIndex2 > y.length) {myIndex2 = 1}    
   y[myIndex2-1].style.display = "block";  
+  
   Intervals = setTimeout(carousel2, 9000);    
 }
 carousel2();
@@ -272,6 +275,7 @@ function on() {
 var b = document.getElementsByClassName("textSlide");
   document.getElementById("overlay").style.display = "block";
   document.getElementById("centerForm").style.display = "block";
+  document.getElementById("viewAdvert").style.display = "none";
   document.getElementById("login").style = "z-index:0;";
   b[myIndexIndex].style = "z-index:0;";
   b[myIndexIndex].style.display = "none";
@@ -428,8 +432,7 @@ $(document).on('click','.soldad',function(){
  
 var casinfo = {};
 
-var xyx = document.getElementsByClassName("price");
- 
+
 function loadnewads(){
  
  const api = '/car/';
@@ -454,7 +457,7 @@ function loadnewads(){
 			var no_items = data.length;
 			var i = 0;
 			while(i < no_items){
-			
+		
 			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = data[i];
 			arrayOfCarsId[arrayOfCarsId.length]	= id;
             arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
@@ -475,7 +478,6 @@ function loadnewads(){
     xmlhttp.send();
  
  }
- 
  
  
  function analyse(){
@@ -515,7 +517,7 @@ loadnewads();
 			  <br/>
            <select name="state" required="" class="control" id="state">	
 				<option value="">Select Car's State </option>
-
+                 
     <option value="New">New</option>
    <option value="Used">Used</option>
    
@@ -549,14 +551,17 @@ loadnewads();
           
               <br/>
 			  <br/>
+			 <form id="uploadimage" action="" method="post" enctype="multipart/form-data">
 			  <b style="color:rgba(255,255,255,0.99);">Upload Car's Photo:</b>
-			  <div class="preview"></div>
-              <div class="image_public_id"></div>
-
-         <input name="file" type="file" id="carpic" class="control cloudinary-fileupload" data-cloudinary-field="image_id" 
-          data-form-data="[upload-preset-and-other-upload-options-as-html-escaped-JSON-data]"></input>
-
-
+			  <div>
+			  <img id="preview" src="noimage.png" />
+			  </div>
+			  <div id="imgmessage"></div>
+			  <h4 id='loading' >loading..</h4>
+              <input type="text" value="ml_default" name="upload_preset" style="display:none;">
+              <input type="file" name="file" id="file" style="color: red;padding: 5px;border: 5px solid #8BF1B0;background-color: #8BF1B0;margin-top: 10px;border-radius: 5px;box-shadow: 0 0 15px #626F7E;margin-left: 10%;width: 42%;" required />
+              <input type="submit" value="Upload" class="submit" style="font-size: 16px;background: linear-gradient(#ffbc00 5%, #ffdd7f 100%);border: 1px solid #e5a900;color: #4E4D4B;font-weight: bold;cursor: pointer;width: 300px;border-radius: 5px;padding: 10px 0;outline: none;margin-top: 20px;margin-left: 10%;"/>
+             </form>
               <br/>
 			  <br/>
                
@@ -564,7 +569,7 @@ loadnewads();
 
   
 		</div>
-<p id="viewAdvert" style="display:none;">
+<div id="viewAdvert" style="display:none;">
 <div id="secondContainer" style=" padding-top:0.4%;">
 <a href="javascript:;" onclick="off()" style="text-align:right; float:right;font-weight:bold; background-color:rgba(250,0,30,0.8); border-radius:50%; padding:0.5% 1% 0.5% 1%; margin-right:3%; color:white; text-decoration:none; z-index;">X</a>
 
@@ -589,40 +594,36 @@ loadnewads();
   <img class="viewSlide  slide-animate-right" id = "viewdisplay" src="car1.jpg" />
  
 </div>
-  
- </div>
-</p>		
+</div>
+</div>		
 </center>
 </div> 
 <script>
 imagin();
-$.cloudinary.config({ cloud_name: 'akomolafe-segun', secure: true});
-$(document).ready(function() {
-    $("input.cloudinary-fileupload[type=file]").cloudinary_fileupload();
+$(document).ready(function (e) {
+$("#uploadimage").on('submit',(function(e) {
+e.preventDefault();
+$("#preview").empty();
+$('#loading').show();
+$.ajax({
+url: "https://api.cloudinary.com/v1_1/akomolafe-segun/image/upload", 
+type: "POST",             
+data: new FormData(this), 
+contentType: false,       
+processData:false,        
+success: function(data)   
+{
+$('#loading').hide();
+$("#imgmessage").html(data.secure_url);
+$("#preview").attr('src', data.secure_url);
+$("#preview").css("display", "block");
+}
 });
-
-$('.cloudinary-fileupload').bind('cloudinarydone', function(e, data) {  
-    $('.preview').html(
-       $.cloudinary.imageTag(data.result.public_id, 
-           { format: data.result.format, version: data.result.version, 
-             crop: 'scale', width: 200 }));    
-    $('.image_public_id').val(data.result.public_id);    
-    return true;});
-	
-$(document).ready(function() {
-  $('.cloudinary-fileupload').cloudinary_fileupload({
-    disableImageResize: false,
-    imageMaxWidth: 800,                   // 800 is an example value - no default
-    imageMaxHeight: 600,                  // 600 is an example value - no default
-    maxFileSize: 20000000,                // 20MB is an example value - no default
-    loadImageMaxFileSize: 20000000,       // default is 10MB
-    acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp|ico)$/i
-  });
-});	
+}));
 
 var adsinfo = {};
 function adregisterprocessor(){
- // Listen for form submit to collect data to sent to server in json adsinfo['image_name'] = curFiles[0].replace(/^.*[\\\/]/, '');
+ // Listen for form submit to collect data to sent to server in json 
  
  var curFiles = document.getElementById("carpic").files;
 
