@@ -245,6 +245,10 @@ var xyz = document.getElementsByClassName("price");
  if(arrayOfCarsPrice.length != 0 && myIndex < arrayOfCarsPrice.length){
   xyz[0].innerHTML = "NGN" + arrayOfCarsPrice[0];
 	xyz[myIndex].innerHTML = "NGN" + arrayOfCarsPrice[myIndex];
+	var getCarImagezero = arrayOfCarsManufacturer[0].split('@');
+	x[0].src = getCarImagezero[1];
+	var getCarImage = arrayOfCarsManufacturer[myIndex].split('@');
+	x[myIndex].src = getCarImage[1];
  } 
   
   myIndex++;
@@ -554,7 +558,7 @@ loadnewads();
 			 <form id="uploadimage" action="" method="post" enctype="multipart/form-data">
 			  <b style="color:rgba(255,255,255,0.99);">Upload Car's Photo:</b>
 			  <div>
-			  <img id="preview" src="noimage.png" />
+			  <img id="preview" />
 			  </div>
 			  <div id="imgmessage"></div>
 			  <h4 id='loading' >loading..</h4>
@@ -617,21 +621,20 @@ $('#loading').hide();
 $("#imgmessage").html(data.secure_url);
 $("#preview").attr('src', data.secure_url);
 $("#preview").css("display", "block");
+console.log(data.secure_url);
 }
 });
 }));
 
 var adsinfo = {};
 function adregisterprocessor(){
- // Listen for form submit to collect data to sent to server in json 
+ // Listen for form submit to collect data to sent to server in json string.split('@');
  
- var curFiles = document.getElementById("carpic").files;
-
   
   adsinfo['email'] = sessionStorage.getItem("email");
   adsinfo['state'] = document.getElementById('state').value;
   adsinfo['price'] = parseFloat(document.getElementById('price').value);
- adsinfo['manufacturer'] = document.getElementById('manufacturer').value;
+ adsinfo['manufacturer'] = document.getElementById('manufacturer').value + "@" + document.getElementById('imgmessage').innerHTML;
   adsinfo['model'] = document.getElementById('model').value;
   adsinfo['body_type'] = document.getElementById('body_type').value;
   adsinfo['status'] = document.getElementById('status').value;
