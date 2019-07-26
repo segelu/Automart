@@ -665,8 +665,10 @@ adregisterprocessor();
 			console.log(data);
 			const {data: {id, created_on, manufacturer, email, model, price, state, status, body_type}} = data;
 
-			$("#message").html("Advert on " + manufacturer + " " + model + " model (" + body_type + ") Was Successfully Created");
-			arrayOfCarsId[arrayOfCarsId.length]	= id;
+			var getCarManufact = manufacturer.split('@');
+
+			$("#message").html("Advert on " + getCarManufact[0] + " " + model + " model (" + body_type + ") Was Successfully Created");
+			arrayOfCarsId[arrayOfCarsId.length] = id;
             arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
 			arrayOfCarsPrice[arrayOfCarsPrice.length] = price;	
 			arrayOfCarsManufacturer[arrayOfCarsManufacturer.length] = manufacturer;
