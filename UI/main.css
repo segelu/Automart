@@ -166,7 +166,8 @@ margin-left:70%;
   position: fixed; 
   display: none; 
   width: 100%;
-  height: 900px;
+  height: 1000px;
+  min-height:500px;
   top: 0; 
   left: 0;
   right: 0;
@@ -175,6 +176,10 @@ margin-left:70%;
   z-index: 2;
   cursor: pointer; 
   color:red;
+  overflow:scroll;
+}
+.addForm{
+	height: 1000px;
 }
 #text_over{
   position: absolute;
@@ -189,7 +194,7 @@ margin-left:70%;
 width:50%;
 background-color:rgba(20,125,255,0.9);
 padding:1.3% 1% 3% 1%;
-margin-top:5%;
+margin-top:3%;
 }
 #secondContainer{
 background-color:rgba(20,125,205,0.9);
@@ -379,3 +384,17 @@ margin-left:5%;
 color:white;
 }
 .slide-section2{margin-top:50px!important;margin-bottom:1x!important; max-width:700px; float:center; margin-left:2%; padding-top:0%; border-radius:5px;}
+#loading
+{
+display:none;
+position:absolute;
+top:50px;
+left:850px;
+font-size:25px;
+}
+#preview{
+display:none;	
+}
+#imgmessage{
+display:none;	
+}
