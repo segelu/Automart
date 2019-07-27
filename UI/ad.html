@@ -219,17 +219,7 @@ var xyz = document.getElementsByClassName("price");
 	
   }
   
- if(arrayOfCarsPrice.length != 0 && myIndex < arrayOfCarsPrice.length){
-  xyz[0].innerHTML = "NGN" + arrayOfCarsPrice[0];
-	xyz[myIndex].innerHTML = "NGN" + arrayOfCarsPrice[myIndex];
-	var getCarImagezero = arrayOfCarsManufacturer[0].split('@');
-	x[0].src = getCarImagezero[1];
-	tradeMark[0].innerHTML = getCarImagezero[0];
-	var getCarImage = arrayOfCarsManufacturer[myIndex].split('@');
-	x[myIndex].src = getCarImage[1];
-	tradeMark[myIndex].innerHTML = getCarImage[0];
- }  
-  
+ 
   myIndex++;
   if (myIndex > x.length) {myIndex = 1}    
   x[myIndex-1].style.display = "block";  
