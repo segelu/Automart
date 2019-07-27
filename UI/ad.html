@@ -203,6 +203,7 @@ document.getElementById("uploadAdss").style.display = "none";
  <script>
 
 sessionChecker();
+ loadnewads();
 var myIndex = 0;
 var myIndex2 = 0;
 var Intervals;
@@ -485,7 +486,6 @@ i++;
 console.log(da_selected);
 } 
 
-loadnewads();
  //
 </script>
 <div id="overlay">
@@ -584,7 +584,7 @@ loadnewads();
 </center>
 </div> 
 <script>
-imagin();
+
 $(document).ready(function (e) {
 $("#uploadimage").on('submit',(function(e) {
 e.preventDefault();
