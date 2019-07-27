@@ -39,17 +39,15 @@ var arrayOfCarsStatus = [];
 function closelog(){
 document.getElementById("login").style.display = "none";
 }		 
-
-
 function imagin(){
-for (i = 1; i < arrayOfCarsManufacturer.length; i++) {
+var i = 5;
 var getFifthCarImage;
-var carprice = "Remember To Add Price";
-var carName = "Place Your Car Advert Here";
-if(arrayOfCarsPrice.length != 0 && i < arrayOfCarsPrice.length){  
-getFifthCarImage = arrayOfCarsManufacturer[i].split('@');
+var carprice = "N5m";
+var carName = "Audi Premerier";
+if(arrayOfCarsPrice.length != 0 && myIndex < arrayOfCarsPrice.length){  
+getFifthCarImage = arrayOfCarsManufacturer[4].split('@');
 carName = getFifthCarImage[0];
-carprice = "NGN" + arrayOfCarsPrice[i];
+carprice = "NGN" + arrayOfCarsPrice[4];
 }
 var inputtextslid = document.createElement("p");
 inputtextslid.className="textSlide slide-animate-top";
@@ -101,7 +99,7 @@ textsold.innerHTML = "Sold";
 inputtextslid.appendChild(textsold);
 document.getElementById("disp").appendChild(inputtextslid);
 var inputimage = document.createElement("IMG");
-if(arrayOfCarsPrice.length != 0 && i < arrayOfCarsPrice.length){
+if(arrayOfCarsPrice.length != 0 && myIndex < arrayOfCarsPrice.length){
 inputimage.src = getFifthCarImage[1];
 }else{
 inputimage.src = "car6.jpg";
@@ -110,9 +108,6 @@ inputimage.className="mySlides slide-animate-fading";
 inputimage.style.display = "none";  
 document.getElementById("disp").appendChild(inputimage);
 }
-}
-
-
 function sessionChecker(){
 if(sessionStorage.getItem("id") != null){
 var activeUser = sessionStorage.getItem("id");
@@ -176,7 +171,32 @@ document.getElementById("uploadAdss").style.display = "none";
 
   <div id="secondContainer">
   <div class="slide-content slide-section" id="disp">
+ <p class="textSlide slide-animate-top" id="txtSlid"><span class="carTradeMark">Ferrari</span><br/><span class="price">Price:N17.5m</span><br/>
+ <input type="button" value="Order Now" class="order" id="orderButton" />
+ <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" class="upflaview" id="view">View details</a></b>
+ <br/><br/> <a href="javascript:;" class="soldad">Sold</a>
+ </p>
+ <p class=" textSlide slide-animate-top" id="txtSlid"><span class="carTradeMark">Porche</span><br/><span class="price">Price:N20.5m</span><br/>
+ <input type="button" value="Order Now" class="order" id="orderButton" />
+ <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" class="upflaview" id="view">View details</a></b>
+<br/><br/> <a href="javascript:;" class="soldad">Sold</a>
+ </p>
+ <p class=" textSlide slide-animate-top" id="txtSlid"><span class="carTradeMark">Lambogini</span><br/><span class="price">Price:N16.5m</span><br/>
+ <input type="button" value="Order Now" class="order" id="orderButton" />
+ <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" class="upflaview" id="view">View details</a></b>
+ <br/><br/> <a href="javascript:;" class="soldad">Sold</a>
  
+ </p>
+  <p class=" textSlide slide-animate-top" id="txtSlid"><span class="carTradeMark">Buggati</span><br/><span class="price">Price:N14m</span><br/>
+ <input type="button" value="Order Now" class="order" id="orderButton" />
+ <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" class="upflaview" id="view">View details</a></b>
+ 
+ <br/><br/> <a href="javascript:;" class="soldad">Sold</a>
+ </p>
+  <img class="mySlides  slide-animate-right" src="car1.jpg" />
+  <img class="mySlides slide-animate-fading" src="car2.jpg"/>
+  <img class="mySlides slide-animate-fading" src="car3.jpg"/>
+  <img class="mySlides slide-animate-fading" src="car4.jpg"/>
   
 </div>
   <div class="SecondtopHeadDiv" style="padding:2% 2% 2% 2%; margin-bottom:4%; ">
@@ -200,55 +220,6 @@ document.getElementById("uploadAdss").style.display = "none";
 <br/>
 <br/>
  <script>
- function loadnewads(){
- 
- const api = '/car/';
-        
-        // make API call here
-     var xmlhttp = new XMLHttpRequest();
-     xmlhttp.onreadystatechange = function() {
-     if (this.readyState == 4 && this.status == 200) {
-	 var datam = this.responseText;
-    var myObj = JSON.parse(this.responseText);
-           if(datam.status == 404 || datam.status == "404"){
-			console.log(datam);
-			
-			if(datam.error == "Error: Your Connection Token As Expired..."){
-			sessionStorage.clear();
-			window.location.href = "index.html";
-			}
-			}else{
-			console.log(datam);
-			const {data} = myObj;			
-			
-			var no_items = data.length;
-			var i = 0;
-			while(i < no_items){
-		
-			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = data[i];
-			arrayOfCarsId[arrayOfCarsId.length]	= id;
-            arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
-			arrayOfCarsPrice[arrayOfCarsPrice.length] = price;	
-			arrayOfCarsManufacturer[arrayOfCarsManufacturer.length] = manufacturer;
-			arrayOfCarsModel[arrayOfCarsModel.length] = model;
-			arrayOfCarsState[arrayOfCarsState.length] = state;	
-			arrayOfCarsStatus[arrayOfCarsStatus.length] = status;
-			arrayOfCarsBodyType[arrayOfCarsBodyType.length] = body_type;
-			i++;
-			}
-						
-            }
-    
-    }
-    };
-    xmlhttp.open("GET", api, true);
-    xmlhttp.send();
- 
- }
- 
- loadnewads();
- //
- imagin();
 sessionChecker();
 var myIndex = 0;
 var myIndex2 = 0;
@@ -442,7 +413,51 @@ $(document).on('click','.soldad',function(){
 });
  
 var casinfo = {};
-
+function loadnewads(){
+ 
+ const api = '/car/';
+        
+        // make API call here
+     var xmlhttp = new XMLHttpRequest();
+     xmlhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+	 var datam = this.responseText;
+    var myObj = JSON.parse(this.responseText);
+           if(datam.status == 404 || datam.status == "404"){
+			console.log(datam);
+			
+			if(datam.error == "Error: Your Connection Token As Expired..."){
+			sessionStorage.clear();
+			window.location.href = "index.html";
+			}
+			}else{
+			console.log(datam);
+			const {data} = myObj;			
+			
+			var no_items = data.length;
+			var i = 0;
+			while(i < no_items){
+		
+			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = data[i];
+			arrayOfCarsId[arrayOfCarsId.length]	= id;
+            arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
+			arrayOfCarsPrice[arrayOfCarsPrice.length] = price;	
+			arrayOfCarsManufacturer[arrayOfCarsManufacturer.length] = manufacturer;
+			arrayOfCarsModel[arrayOfCarsModel.length] = model;
+			arrayOfCarsState[arrayOfCarsState.length] = state;	
+			arrayOfCarsStatus[arrayOfCarsStatus.length] = status;
+			arrayOfCarsBodyType[arrayOfCarsBodyType.length] = body_type;
+			i++;
+			}
+						
+            }
+    
+    }
+    };
+    xmlhttp.open("GET", api, true);
+    xmlhttp.send();
+ 
+ }
  
  
  function analyse(){
@@ -463,7 +478,8 @@ i++;
 }
 console.log(da_selected);
 } 
-
+loadnewads();
+ //
 </script>
 <div id="overlay">
 <center>
@@ -561,7 +577,7 @@ console.log(da_selected);
 </center>
 </div> 
 <script>
-
+imagin();
 $(document).ready(function (e) {
 $("#uploadimage").on('submit',(function(e) {
 e.preventDefault();
