@@ -21,10 +21,8 @@ var arrayOfCarsManufacturer = [];
 var arrayOfCarsState = [];
 var arrayOfCarsBodyType = [];
 var arrayOfCarsStatus = [];
-
  		function toggleag() {
            var ele3 = document.getElementById("login");
-
            if (ele3.style.display == "none") {
               ele3.style.display = "block";
 			  
@@ -38,10 +36,10 @@ var arrayOfCarsStatus = [];
 		   
          }
 		 
-
 function closelog(){
 document.getElementById("login").style.display = "none";
 }		 
+
 
 function imagin(){
 for (i = 1; i < arrayOfCarsManufacturer.length; i++) {
@@ -114,6 +112,7 @@ document.getElementById("disp").appendChild(inputimage);
 }
 }
 
+
 function sessionChecker(){
 if(sessionStorage.getItem("id") != null){
 var activeUser = sessionStorage.getItem("id");
@@ -122,7 +121,6 @@ document.getElementById("myrightsignin").style.display = "none";
 document.getElementById("login").style.display = "none";
 document.getElementById("welcomeMessage").style.display = "block";
 document.getElementById("uploadAdss").style.display = "block";
-
 if(sessionStorage.getItem("admin") == true){
 document.getElementById("dAdmin").style.display = "block";
 }
@@ -202,19 +200,16 @@ document.getElementById("uploadAdss").style.display = "none";
 <br/>
  <script>
 sessionChecker();
-loadnewads();
-imagin();
+
 var myIndex = 0;
 var myIndex2 = 0;
 var Intervals;
 var Interval;
 var myIndexIndex = 0;
 var mySelectedIndex = 0;
-
 function carousel() {
 var xyz = document.getElementsByClassName("price");
  var tradeMark = document.getElementsByClassName("carTradeMark");
-
   var i;
   var x = document.getElementsByClassName("mySlides");
   for (i = 0; i < x.length; i++) {
@@ -240,7 +235,6 @@ var xyz = document.getElementsByClassName("price");
   myIndexIndex = myIndex-1;
   Interval = setTimeout(carousel, 9000);    
 }
-carousel();
 
 function carousel2() {
   var i;
@@ -254,7 +248,7 @@ function carousel2() {
   
   Intervals = setTimeout(carousel2, 9000);    
 }
-carousel2();
+
 
 		
 function on() {
@@ -270,7 +264,6 @@ var b = document.getElementsByClassName("textSlide");
   mySelectedIndex = myIndexIndex;
  
 }
-
 function off() {
  var b2 = document.getElementsByClassName("textSlide");
   document.getElementById("overlay").style.display = "none";
@@ -282,23 +275,19 @@ function off() {
  window.location.href = "index.html";
  }
 }
-
 function opennav() {
 var b = document.getElementsByClassName("textSlide");
 var t = document.getElementsByClassName("mySlides");
   document.getElementById("mynavbar").style.width = "100%";
   document.getElementById("myrightnav").style.width = "100%";
-
   
 }
-
 function closenav() {
   document.getElementById("mynavbar").style.width = "0";
   document.getElementById("myrightnav").style.width = "0";
   document.getElementById("myrightnav").style = "@media (min-width: 992px){.rightNav{width:100%;}}";
   document.getElementById("mynavbar").style = "@media (min-width: 992px){.navbar-nav{width:100%;}}";
 }
-
 function loadlower(){
 var images = ["car1.jpg","car2.jpg","car3.jpg","car4.jpg","car5.jpg","car6.jpg","car7.png","car1.jpg"];
 var p = document.getElementsByClassName(" lower");
@@ -306,10 +295,8 @@ var p = document.getElementsByClassName(" lower");
     p[i].style = "background-image:url(" + images[i] + ");";  
 	
   }
-
 }
 loadlower();
-
 var jsonordercar = {};
 jsonordercar["email"] = sessionStorage.getItem("email");
 function ordering(carinfo){
@@ -318,8 +305,6 @@ var carid = [0,1,2,3,4,5,6,7];
 jsonordercar["car_id"] = carid[carinfo];
 jsonordercar["price_offered"] = priceoffered[carinfo];
 }
-
-
  function flag(id){
  var idflagged = document.getElementsByClassName("price");
 alert(idflagged[id].innerHTML);
@@ -332,7 +317,6 @@ alert(idflagged[id].innerHTML);
 window.location.href = "view.html?a=" + viewjson.url;
  }
  
-
  function sold(id){
 var idsold = [1,2,3,4,5,6,7,8];
 return idsold[id].toString();
@@ -346,20 +330,15 @@ var carididd = [1,2,3,4,5,6,7,8];
 var priceoffered = [2003460.00,4009915.00,2003460.00,1903460.50,8903460.05,88403460.05,7603460.05,7234555.789];
  window.location.href = "order.html?a=" + carimage[myIndexIndex] + "&b=" + priceoffered[myIndexIndex] + "&id=" + carididd[myIndexIndex];
 });
-
 $(document).on('click','#update',function(){
 var carimage = ["car1.jpg","car2.jpg","car3.jpg","car4.jpg","car5.jpg","car6.jpg","car7.png","car1.jpg"];
 var carididd = [1,2,3,4,5,6,7,8];
 var priceoffered = [2003460.00,4009915.00,2003460.00,1903460.50,8903460.05,88403460.05,7603460.05,7234555.789];
  window.location.href = "update.html?a=" + carimage[myIndexIndex] + "&b=" + priceoffered[myIndexIndex] + "&id=" + carididd[myIndexIndex];
 });
-
 $(document).on('click','#flag',function(){
-
   flag(myIndexIndex);
-
 });
-
 $(document).on('click','#view',function(){
 var b = document.getElementsByClassName("textSlide");
   document.getElementById("overlay").style.display = "block";
@@ -394,7 +373,6 @@ var b = document.getElementsByClassName("textSlide");
     xmlhttp.send();
   
 });
-
 $(document).on('click','.soldad',function(){
  var dcarId = sold(myIndexIndex);
  var jsonSold = {};
@@ -413,12 +391,9 @@ $(document).on('click','.soldad',function(){
             		
 		    }	        
 	   });
-
 });
  
 var casinfo = {};
-
-
 function loadnewads(){
  
  const api = '/car/';
@@ -482,10 +457,13 @@ da_selected[i]['id'] = total_item_value;
 da_selected[i]['status'] = total_item_value;
 i++;
 }
-
 console.log(da_selected);
 } 
 
+loadnewads();
+imagin();
+carousel();
+carousel2();
  //
 </script>
 <div id="overlay">
@@ -602,12 +580,10 @@ $('#loading').hide();
 $("#imgmessage").html(data.secure_url);
 $("#preview").attr('src', data.secure_url);
 $("#preview").css("display", "block");
-
 }
 });
 }));
 });
-
 var adsinfo = {};
 function adregisterprocessor(){
  // Listen for form submit to collect data to sent to server in json string.split('@');
@@ -645,9 +621,7 @@ adregisterprocessor();
 			}else{
 			console.log(data);
 			const {data: {id, created_on, manufacturer, email, model, price, state, status, body_type}} = data;
-
 			var getCarManufact = manufacturer.split('@');
-
 			$("#message").html("Advert on " + getCarManufact[0] + " " + model + " model (" + body_type + ") Was Successfully Created");
 			arrayOfCarsId[arrayOfCarsId.length] = id;
             arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
@@ -661,7 +635,6 @@ adregisterprocessor();
 		    }	        
 	   });
 	});
-
 </script>
 <footer style="background-color:black; height:50px; color:grey; text-align:center; padding-top:20px;">
 Copyright: &copy; Auto Mart <? echo date("Y"); ?>
