@@ -48,7 +48,7 @@ var carprice = "Remember To Add Price";
 var carName = "Place Your Car Advert Here";
 if(arrayOfCarsPrice.length != 0 && i < arrayOfCarsPrice.length){  
 getFifthCarImage = arrayOfCarsManufacturer[i].split('@');
-carName = getFifthCarImage[0];
+carName = getFifthCarImage[0] + " " + arrayOfCarsModel[i] + " model";
 carprice = "NGN" + arrayOfCarsPrice[i];
 }
 var inputtextslid = document.createElement("p");
