@@ -62,7 +62,10 @@ inputtextslid.style.display = "none";
 var textspan = document.createElement("span");
 textspan.className="price"; 
 textspan.innerHTML = "Price: " + carprice;
-inputtextslid.innerHTML += carName + "<br/>";
+var mycarTradeM = document.createElement("span");
+mycarTradeM.className="carTradeMark"; 
+mycarTradeM.innerHTML = carName + "<br/>";
+inputtextslid.appendChild(mycarTradeM);
 inputtextslid.appendChild(textspan);
 
 var textbutton = document.createElement("INPUT");
