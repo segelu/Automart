@@ -45,8 +45,16 @@ document.getElementById("login").style.display = "none";
 
 function imagin(){
 var i = 5;
+
+var getFifthCarImage = arrayOfCarsManufacturer[4].split('@');
+
 var carprice = "N5m";
 var carName = "Audi Premerier";
+if(arrayOfCarsPrice.length != 0 && myIndex < arrayOfCarsPrice.length){  
+carName = getFifthCarImage[0];
+carprice = "NGN" + arrayOfCarsPrice[4];
+}
+
 var inputtextslid = document.createElement("p");
 inputtextslid.className="textSlide slide-animate-top";
 inputtextslid.id="txtSlid";
@@ -104,7 +112,11 @@ inputtextslid.appendChild(textsold);
 document.getElementById("disp").appendChild(inputtextslid);
 
 var inputimage = document.createElement("IMG");
+if(arrayOfCarsPrice.length != 0 && myIndex < arrayOfCarsPrice.length){
+inputimage.src = getFifthCarImage[1];
+}else{
 inputimage.src = "car6.jpg";
+}
 inputimage.className="mySlides slide-animate-fading";
 inputimage.style.display = "none";  
 document.getElementById("disp").appendChild(inputimage);
@@ -174,23 +186,23 @@ document.getElementById("uploadAdss").style.display = "none";
 
   <div id="secondContainer">
   <div class="slide-content slide-section" id="disp">
- <p class="textSlide slide-animate-top" id="txtSlid">Ferrari<br/><span class="price">Price:N17.5m</span><br/>
+ <p class="textSlide slide-animate-top" id="txtSlid"><span class="carTradeMark">Ferrari</span><br/><span class="price">Price:N17.5m</span><br/>
  <input type="button" value="Order Now" class="order" id="orderButton" />
  <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" class="upflaview" id="view">View details</a></b>
  <br/><br/> <a href="javascript:;" class="soldad">Sold</a>
  </p>
- <p class=" textSlide slide-animate-top" id="txtSlid">Porche<br/><span class="price">Price:N20.5m</span><br/>
+ <p class=" textSlide slide-animate-top" id="txtSlid"><span class="carTradeMark">Porche</span><br/><span class="price">Price:N20.5m</span><br/>
  <input type="button" value="Order Now" class="order" id="orderButton" />
  <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" class="upflaview" id="view">View details</a></b>
 <br/><br/> <a href="javascript:;" class="soldad">Sold</a>
  </p>
- <p class=" textSlide slide-animate-top" id="txtSlid">Lambogini<br/><span class="price">Price:N16.5m</span><br/>
+ <p class=" textSlide slide-animate-top" id="txtSlid"><span class="carTradeMark">Lambogini</span><br/><span class="price">Price:N16.5m</span><br/>
  <input type="button" value="Order Now" class="order" id="orderButton" />
  <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" class="upflaview" id="view">View details</a></b>
  <br/><br/> <a href="javascript:;" class="soldad">Sold</a>
  
  </p>
-  <p class=" textSlide slide-animate-top" id="txtSlid">Buggati<br/><span class="price">Price:N14m</span><br/>
+  <p class=" textSlide slide-animate-top" id="txtSlid"><span class="carTradeMark">Buggati</span><br/><span class="price">Price:N14m</span><br/>
  <input type="button" value="Order Now" class="order" id="orderButton" />
  <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" class="upflaview" id="view">View details</a></b>
  
@@ -247,9 +259,11 @@ var xyz = document.getElementsByClassName("price");
 	xyz[myIndex].innerHTML = "NGN" + arrayOfCarsPrice[myIndex];
 	var getCarImagezero = arrayOfCarsManufacturer[0].split('@');
 	x[0].src = getCarImagezero[1];
+	tradeMark[0].innerHTML = getCarImagezero[0];
 	var getCarImage = arrayOfCarsManufacturer[myIndex].split('@');
 	x[myIndex].src = getCarImage[1];
- } 
+	tradeMark[myIndex].innerHTML = getCarImage[0];
+ }  
   
   myIndex++;
   if (myIndex > x.length) {myIndex = 1}    
