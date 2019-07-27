@@ -44,21 +44,19 @@ document.getElementById("login").style.display = "none";
 }		 
 
 function imagin(){
-var i = 5;
+for (i = 1; i < arrayOfCarsManufacturer.length; i++) {
 var getFifthCarImage;
-var carprice = "N5m";
-var carName = "Audi Premerier";
-if(arrayOfCarsPrice.length != 0 && myIndex < arrayOfCarsPrice.length){  
-getFifthCarImage = arrayOfCarsManufacturer[4].split('@');
+var carprice = "Remember To Add Price";
+var carName = "Place Your Car Advert Here";
+if(arrayOfCarsPrice.length != 0 && i < arrayOfCarsPrice.length){  
+getFifthCarImage = arrayOfCarsManufacturer[i].split('@');
 carName = getFifthCarImage[0];
-carprice = "NGN" + arrayOfCarsPrice[4];
+carprice = "NGN" + arrayOfCarsPrice[i];
 }
-
 var inputtextslid = document.createElement("p");
 inputtextslid.className="textSlide slide-animate-top";
 inputtextslid.id="txtSlid";
 inputtextslid.style.display = "none";  
-
 var textspan = document.createElement("span");
 textspan.className="price"; 
 textspan.innerHTML = "Price: " + carprice;
@@ -68,17 +66,14 @@ mycarTradeM.innerHTML = carName;
 inputtextslid.appendChild(mycarTradeM);
 inputtextslid.innerHTML += "<br/>";
 inputtextslid.appendChild(textspan);
-
 var textbutton = document.createElement("INPUT");
 textbutton.setAttribute("type","button");
 textbutton.id="orderButton"; 
 textbutton.className = "order";
 textbutton.value = "Order Now";
 inputtextslid.innerHTML += "<br/>";
-
 inputtextslid.appendChild(textbutton);
 inputtextslid.innerHTML += "<br/>";
-
 var textbold = document.createElement("b");
 var texta = document.createElement("a");
 texta.href = "javascript:;";
@@ -87,35 +82,28 @@ texta.id="update";
 texta.innerHTML = "Update";
 textbold.appendChild(texta);
 textbold.innerHTML += " | ";
-
 var texta2 = document.createElement("a");
 texta2.href = "javascript:;";
 texta2.className="upflaview"; 
 texta2.innerHTML = "Flag";
 textbold.appendChild(texta2);
 textbold.innerHTML += " | ";
-
 var texta3 = document.createElement("a");
 texta3.href = "javascript:;";
 texta3.className="upflaview"; 
 texta3.innerHTML = "View Details";
 texta3.id = "view";
 textbold.appendChild(texta3);
-
 inputtextslid.appendChild(textbold);
-
 inputtextslid.innerHTML += "<br/><br/>";
-
 var textsold = document.createElement("a");
 textsold.href = "javascript:;";
 textsold.className="soldad"; 
 textsold.innerHTML = "Sold";
 inputtextslid.appendChild(textsold);
-
 document.getElementById("disp").appendChild(inputtextslid);
-
 var inputimage = document.createElement("IMG");
-if(arrayOfCarsPrice.length != 0 && myIndex < arrayOfCarsPrice.length){
+if(arrayOfCarsPrice.length != 0 && i < arrayOfCarsPrice.length){
 inputimage.src = getFifthCarImage[1];
 }else{
 inputimage.src = "car6.jpg";
@@ -123,6 +111,7 @@ inputimage.src = "car6.jpg";
 inputimage.className="mySlides slide-animate-fading";
 inputimage.style.display = "none";  
 document.getElementById("disp").appendChild(inputimage);
+}
 }
 
 function sessionChecker(){
@@ -189,33 +178,7 @@ document.getElementById("uploadAdss").style.display = "none";
 
   <div id="secondContainer">
   <div class="slide-content slide-section" id="disp">
- <p class="textSlide slide-animate-top" id="txtSlid"><span class="carTradeMark">Ferrari</span><br/><span class="price">Price:N17.5m</span><br/>
- <input type="button" value="Order Now" class="order" id="orderButton" />
- <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" class="upflaview" id="view">View details</a></b>
- <br/><br/> <a href="javascript:;" class="soldad">Sold</a>
- </p>
- <p class=" textSlide slide-animate-top" id="txtSlid"><span class="carTradeMark">Porche</span><br/><span class="price">Price:N20.5m</span><br/>
- <input type="button" value="Order Now" class="order" id="orderButton" />
- <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" class="upflaview" id="view">View details</a></b>
-<br/><br/> <a href="javascript:;" class="soldad">Sold</a>
- </p>
- <p class=" textSlide slide-animate-top" id="txtSlid"><span class="carTradeMark">Lambogini</span><br/><span class="price">Price:N16.5m</span><br/>
- <input type="button" value="Order Now" class="order" id="orderButton" />
- <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" class="upflaview" id="view">View details</a></b>
- <br/><br/> <a href="javascript:;" class="soldad">Sold</a>
  
- </p>
-  <p class=" textSlide slide-animate-top" id="txtSlid"><span class="carTradeMark">Buggati</span><br/><span class="price">Price:N14m</span><br/>
- <input type="button" value="Order Now" class="order" id="orderButton" />
- <br/><b><a href="javascript:;" class="upflaview" id="update">Update</a> | <a href="javascript:;" onclick="flagAd()" class="upflaview" id="flag">Flag</a> | <a href="javascript:;" class="upflaview" id="view">View details</a></b>
- 
- <br/><br/> <a href="javascript:;" class="soldad">Sold</a>
- </p>
-  <img class="mySlides  slide-animate-right" src="car1.jpg" />
-  <img class="mySlides slide-animate-fading" src="car2.jpg"/>
-  <img class="mySlides slide-animate-fading" src="car3.jpg"/>
-  <img class="mySlides slide-animate-fading" src="car4.jpg"/>
-  
 </div>
   <div class="SecondtopHeadDiv" style="padding:2% 2% 2% 2%; margin-bottom:4%; ">
 <center id="uploadAdss">
