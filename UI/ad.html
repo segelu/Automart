@@ -45,12 +45,11 @@ document.getElementById("login").style.display = "none";
 
 function imagin(){
 var i = 5;
-
-var getFifthCarImage = arrayOfCarsManufacturer[4].split('@');
-
+var getFifthCarImage;
 var carprice = "N5m";
 var carName = "Audi Premerier";
 if(arrayOfCarsPrice.length != 0 && myIndex < arrayOfCarsPrice.length){  
+getFifthCarImage = arrayOfCarsManufacturer[4].split('@');
 carName = getFifthCarImage[0];
 carprice = "NGN" + arrayOfCarsPrice[4];
 }
