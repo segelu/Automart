@@ -177,6 +177,7 @@ document.getElementById("uploadAdss").style.display = "none";
   <div id="secondContainer">
   <div class="slide-content slide-section" id="disp">
  
+  
 </div>
   <div class="SecondtopHeadDiv" style="padding:2% 2% 2% 2%; margin-bottom:4%; ">
 <center id="uploadAdss">
@@ -199,8 +200,56 @@ document.getElementById("uploadAdss").style.display = "none";
 <br/>
 <br/>
  <script>
+ function loadnewads(){
+ 
+ const api = '/car/';
+        
+        // make API call here
+     var xmlhttp = new XMLHttpRequest();
+     xmlhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+	 var datam = this.responseText;
+    var myObj = JSON.parse(this.responseText);
+           if(datam.status == 404 || datam.status == "404"){
+			console.log(datam);
+			
+			if(datam.error == "Error: Your Connection Token As Expired..."){
+			sessionStorage.clear();
+			window.location.href = "index.html";
+			}
+			}else{
+			console.log(datam);
+			const {data} = myObj;			
+			
+			var no_items = data.length;
+			var i = 0;
+			while(i < no_items){
+		
+			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = data[i];
+			arrayOfCarsId[arrayOfCarsId.length]	= id;
+            arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
+			arrayOfCarsPrice[arrayOfCarsPrice.length] = price;	
+			arrayOfCarsManufacturer[arrayOfCarsManufacturer.length] = manufacturer;
+			arrayOfCarsModel[arrayOfCarsModel.length] = model;
+			arrayOfCarsState[arrayOfCarsState.length] = state;	
+			arrayOfCarsStatus[arrayOfCarsStatus.length] = status;
+			arrayOfCarsBodyType[arrayOfCarsBodyType.length] = body_type;
+			i++;
+			}
+						
+            }
+    
+    }
+    };
+    xmlhttp.open("GET", api, true);
+    xmlhttp.send();
+ 
+ }
+ 
+ loadnewads();
+ //
+ imagin();
 sessionChecker();
-
 var myIndex = 0;
 var myIndex2 = 0;
 var Intervals;
@@ -235,7 +284,7 @@ var xyz = document.getElementsByClassName("price");
   myIndexIndex = myIndex-1;
   Interval = setTimeout(carousel, 9000);    
 }
-
+carousel();
 function carousel2() {
   var i;
   var y = document.getElementsByClassName("textSlide");
@@ -248,8 +297,7 @@ function carousel2() {
   
   Intervals = setTimeout(carousel2, 9000);    
 }
-
-
+carousel2();
 		
 function on() {
 var b = document.getElementsByClassName("textSlide");
@@ -394,51 +442,7 @@ $(document).on('click','.soldad',function(){
 });
  
 var casinfo = {};
-function loadnewads(){
- 
- const api = '/car/';
-        
-        // make API call here
-     var xmlhttp = new XMLHttpRequest();
-     xmlhttp.onreadystatechange = function() {
-     if (this.readyState == 4 && this.status == 200) {
-	 var datam = this.responseText;
-    var myObj = JSON.parse(this.responseText);
-           if(datam.status == 404 || datam.status == "404"){
-			console.log(datam);
-			
-			if(datam.error == "Error: Your Connection Token As Expired..."){
-			sessionStorage.clear();
-			window.location.href = "index.html";
-			}
-			}else{
-			console.log(datam);
-			const {data} = myObj;			
-			
-			var no_items = data.length;
-			var i = 0;
-			while(i < no_items){
-		
-			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = data[i];
-			arrayOfCarsId[arrayOfCarsId.length]	= id;
-            arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
-			arrayOfCarsPrice[arrayOfCarsPrice.length] = price;	
-			arrayOfCarsManufacturer[arrayOfCarsManufacturer.length] = manufacturer;
-			arrayOfCarsModel[arrayOfCarsModel.length] = model;
-			arrayOfCarsState[arrayOfCarsState.length] = state;	
-			arrayOfCarsStatus[arrayOfCarsStatus.length] = status;
-			arrayOfCarsBodyType[arrayOfCarsBodyType.length] = body_type;
-			i++;
-			}
-						
-            }
-    
-    }
-    };
-    xmlhttp.open("GET", api, true);
-    xmlhttp.send();
- 
- }
+
  
  
  function analyse(){
@@ -460,11 +464,6 @@ i++;
 console.log(da_selected);
 } 
 
-loadnewads();
-imagin();
-carousel();
-carousel2();
- //
 </script>
 <div id="overlay">
 <center>
