@@ -401,7 +401,7 @@ res.send(datae);
 myapp.get('/car/:car-id/', function (req, res) {
 client.connect();
 
-var carid = req.params.car-id;
+var carid = req.body.params.car-id;
 
 var datae = {};
 
