@@ -43,8 +43,6 @@ document.getElementById("welcomeMessage").style.display = "block";
 if(sessionStorage.getItem("admin") == true){
 document.getElementById("dAdmin").style.display = "block";
 }
-}else{
-document.getElementById("uploadAdss").style.display = "none";
 }
 }
  </script>
@@ -73,7 +71,7 @@ document.getElementById("uploadAdss").style.display = "none";
    <div class="rightNav"id="myrightnav">
    <a href="javascript:;" id="myrightsignin" onclick="toggleag();">Sign In</a>
    <b id="welcomeMessage"></b>
-</div>  
+</div> 
   </nav>
   
   <div id="login">
@@ -100,7 +98,7 @@ document.getElementById("uploadAdss").style.display = "none";
   <div class="slide-content slide-section" id="disp">
  
  <p class="textSlide slide-animate-top" id="txtSlid">
- Ferrari<br/><span class="price" id="price">Price:N17.5m</span><br/>
+ <span id="manufacturer">Ferrari</span><br/><span class="price" id="price">Price:N17.5m</span><br/><b>State: </b><span class="thestate" id="thestate">New</span><br/>
  <b>Offer Price:</b><input type="text" id="offeredPrice" class="control"/>
  <input type="button" value="Order Now" class="order" id="orderButton" />
   <b id="message"></b>
@@ -128,13 +126,52 @@ document.getElementById("uploadAdss").style.display = "none";
        }
        return(false);
 }
-var getUrl = getQueryVariable("a");
-var priceOfcar = getQueryVariable("b");
+
 var idOfcar = getQueryVariable("id");
 
- document.getElementById("getdisplay").src = getUrl; 
- document.getElementById("price").innerHTML = "Price: NGN" + priceOfcar;
+function loadads(){
+ 
+ const api = '/car/' + idOfcar + '/';
+        
+        // make API call here
+     var xmlhttp = new XMLHttpRequest();
+     xmlhttp.onreadystatechange = function() {
+     if (this.readyState == 4 && this.status == 200) {
+	 var datam = this.responseText;
+    var myObj = JSON.parse(this.responseText);
+           if(datam.status == 404 || datam.status == "404"){
+			console.log(datam);
+			
+			if(datam.error == "Error: Your Connection Token As Expired..."){
+			sessionStorage.clear();
+			window.location.href = "index.html";
+			}
+			}else{
+			console.log(datam);
+			const {data} = myObj;			
+			
+			var no_items = data.length;
+			var i = 0;
+			
+			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = data;
+			
+			$("#price").html("NGN" + price);
+			var getCarImage = manufacturer.split('@');
+			$("#getdisplay").attr('src', getCarImage[1]);
+			$("#manufacturer").html(getCarImage[0] + " " + model + " model");
+			$("#thestate").html(state);
+            }
+    
+    }
+    };
+    xmlhttp.open("GET", api, true);
+    xmlhttp.send();
+ 
+ }
+ 
+ loadads();
 
+ 
 
 function opennav() {
 var b = document.getElementsByClassName("textSlide");
@@ -189,150 +226,8 @@ $(document).on('click','#update',function(){
 
  //
 </script>
-<div id="overlay">
-<center>
-<div id="centerForm" class="addForm">
-<a href="javascript:;" onclick="off()" style="text-align:right; float:right; background-color:rgba(250,0,30,0.8); border-radius:50%; padding:1% 2% 1% 2%; color:white; text-decoration:none; z-index;">X</a>
-  
 
-<h3 id="secondHead">Add a Car Advert</h3>
-            <div id="message"></div>
-   
-                <input type="text" required class="control" id="date_added" placeholder="Date Added(Format: DD-MM-YYYY)">
-				<br/>
-			  <br/>
-           <select name="state" required="" class="control" id="state">	
-				<option value="">Select State </option>
-
-    <option value="2019">Abia</option>
-   <option value="2019">Adamawa</option>
-    <option value="2019">Akwa Ibom</option>
-    <option value="2019">Anambra</option>
-    <option value="2019">Bauchi</option>
-    <option value="2019">Bayelsa</option>
-    <option value="2019">Benue</option>
-    <option value="2019">Borno</option>
-    <option value="2019">Cross River</option>
-    <option value="2019">Delta</option>
-    <option value="2019">Ebonyi</option>
-    <option value="2019">Enugu</option>
-    <option value="2019">Edo</option>
-    <option value="2019">Ekiti</option>
-    <option value="2019">Gombe</option>
-    <option value="2019">Imo</option>
-    <option value="2019">Jigawa</option>
-    <option value="2019">Kaduna</option>
-    <option value="2019">Kano</option>
-    <option value="2019">Katsina</option>
-    <option value="2019">Kebbi</option>
-    <option value="2019">Kogi</option>
-    <option value="2019">Kwara</option>
-    <option value="2019">Lagos</option>
-    <option value="2019">Nasarawa</option>
-    <option value="2019">Niger</option>
-    <option value="2019">Ogun</option>
-    <option value="2019">Ondo</option>
-    <option value="2019">Osun</option>
-    <option value="2019">Oyo</option>
-    <option value="2019">Plateau</option>
-    <option value="2019">Rivers</option>
-    <option value="2019">Sokoto</option>
-    <option value="2019">Taraba</option>
-    <option value="2019">Yobe</option>
-    <option value="2019">Zamfara</option>
-		</select>
-              <br/>
-             <br/>
-                
-                <input type="text" required class="control" name="price" id="price" placeholder="Car price">
-            
-              <br/>
-			 <br/>
-                
-                <input type="password" required class="control" name="manufacturer" id="manufacturer" placeholder="Car Manufacturer">
-           
-              <br/>
-              <br/>
-			  <input type="password" required class="control" name="model" id="model" placeholder="Car Model">
-           
-              <br/>
-              <br/>
-			   <input type="text" required class="control" id="body_type" placeholder="Car's Body type">
-          
-              <br/>
-			  <br/>
-			  <b style="color:rgba(255,255,255,0.99);">Upload Car's Photo:</b>
-              <div class="image_public_id"></div>
-
-         <input name="file" type="file" id="carpic" class="control cloudinary-fileupload" data-cloudinary-field="image_id" 
-          data-form-data="[upload-preset-and-other-upload-options-as-html-escaped-JSON-data]"></input>
-
-
-              <br/>
-			  <br/>
-               
-			  <input type="submit" class="btn" id="signAds" style="background-color:rgba(250,0,30,0.8);" value="Add Advert"/>
-
-        
-		</div>
-</center>
-</div> 
 <script>
-imagin();
-$.cloudinary.config({ cloud_name: 'akomolafe-segun', secure: true});
-$(document).ready(function() {
-    $("input.cloudinary-fileupload[type=file]").cloudinary_fileupload();
-});
-
-$('.cloudinary-fileupload').bind('cloudinarydone', function(e, data) {  
-    $('.preview').html(
-       $.cloudinary.imageTag(data.result.public_id, 
-           { format: data.result.format, version: data.result.version, 
-             crop: 'scale', width: 200 }));    
-    $('.image_public_id').val(data.result.public_id);    
-    return true;});
-	
-$(document).ready(function() {
-  $('.cloudinary-fileupload').cloudinary_fileupload({
-    disableImageResize: false,
-    imageMaxWidth: 800,                   // 800 is an example value - no default
-    imageMaxHeight: 600,                  // 600 is an example value - no default
-    maxFileSize: 20000000,                // 20MB is an example value - no default
-    loadImageMaxFileSize: 20000000,       // default is 10MB
-    acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp|ico)$/i
-  });
-});	
-
-var adsinfo = {};
-function adregisterprocessor(){
- // Listen for form submit to collect data to sent to server in json
- 
- var curFiles = document.getElementById("carpic").files;
-  adsinfo['image_name'] = curFiles[0].name;
-  adsinfo['date_added'] = document.getElementById('date_added').value;
-  adsinfo['state'] = document.getElementById('state').value;
-  adsinfo['price'] = document.getElementById('price').value;
- adsinfo['manufacturer'] = document.getElementById('manufacturer').value;
-  adsinfo['model'] = document.getElementById('model').value;
-  adsinfo['body_type'] = document.getElementById('body_type').value;
-  }
-  $(document).on('click','#signAds',function(){
-adregisterprocessor();
-		$.ajax({
-        	url: "/car/",   	
-			type: "POST",      				
-			data:  adsinfo, 		
-			contentType: false,       		
-    	    cache: false,					
-			processData:false,  			
-			success: function(data)  		
-		    {
-			
-			$("#message").html(data);
-            		
-		    }	        
-	   });
-	});
 
 </script>
 <footer style="background-color:black; height:50px; color:grey; text-align:center; padding-top:20px;">
