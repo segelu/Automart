@@ -65,7 +65,7 @@ document.getElementById("login").style.display = "none";
 document.getElementById("welcomeMessage").style.display = "block";
 document.getElementById("advertise").style.display = "block";
 document.getElementById("getStarted").style.display = "none";
-if(sessionStorage.getItem("admin") == true){
+if(sessionStorage.getItem("admin") == "true"){
 document.getElementById("dAdmin").style.display = "block";
 }
 }
@@ -301,7 +301,11 @@ login();
 			sessionStorage.setItem("token", token);	
             sessionStorage.setItem("email", email);	
             sessionStorage.setItem("id", id);	
-			sessionStorage.setItem("admin", is_admin);	
+			if(sessionStorage.getItem("admin") == true){
+			sessionStorage.setItem("admin", "true");	
+			}else{
+			sessionStorage.setItem("admin", "false");
+			}	
 			sessionStorage.setItem("currentUser", last_name + " " + first_name);
 			}
 			
@@ -371,7 +375,11 @@ signup();
 			sessionStorage.setItem("token", token);	
             sessionStorage.setItem("email", email);	
             sessionStorage.setItem("id", id);	
-			sessionStorage.setItem("admin", is_admin);	
+			if(sessionStorage.getItem("admin") == true){
+			sessionStorage.setItem("admin", "true");	
+			}else{
+			sessionStorage.setItem("admin", "false");
+			}
 			sessionStorage.setItem("currentUser", last_name + " " + first_name);
              }			
 		    }	        
