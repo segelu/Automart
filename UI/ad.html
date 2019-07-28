@@ -368,16 +368,10 @@ return idsold[id].toString();
  console.log(Date.now());
  
 $(document).on('click','.order',function(){
-var carimage = ["car1.jpg","car2.jpg","car3.jpg","car4.jpg","car5.jpg","car6.jpg","car7.png","car1.jpg"];
-var carididd = [1,2,3,4,5,6,7,8];
-var priceoffered = [2003460.00,4009915.00,2003460.00,1903460.50,8903460.05,88403460.05,7603460.05,7234555.789];
- window.location.href = "order.html?a=" + carimage[myIndexIndex] + "&b=" + priceoffered[myIndexIndex] + "&id=" + carididd[myIndexIndex];
+ window.location.href = "order.html?a=" + arrayOfCarsManufacturer[myIndexIndex] + "&b=" + arrayOfCarsPrice[myIndexIndex] + "&id=" + arrayOfCarsId[myIndexIndex];
 });
 $(document).on('click','#update',function(){
-var carimage = ["car1.jpg","car2.jpg","car3.jpg","car4.jpg","car5.jpg","car6.jpg","car7.png","car1.jpg"];
-var carididd = [1,2,3,4,5,6,7,8];
-var priceoffered = [2003460.00,4009915.00,2003460.00,1903460.50,8903460.05,88403460.05,7603460.05,7234555.789];
- window.location.href = "update.html?a=" + carimage[myIndexIndex] + "&b=" + priceoffered[myIndexIndex] + "&id=" + carididd[myIndexIndex];
+ window.location.href = "update.html?a=" + arrayOfCarsManufacturer[myIndexIndex] + "&b=" + arrayOfCarsPrice[myIndexIndex] + "&id=" + arrayOfCarsId[myIndexIndex];
 });
 $(document).on('click','#flag',function(){
   flag(myIndexIndex);
