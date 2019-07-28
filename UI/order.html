@@ -193,7 +193,7 @@ function closenav() {
 var jsonordercar = {};
 jsonordercar["email"] = sessionStorage.getItem("email");
 jsonordercar["car_id"] = idOfcar;
-jsonordercar["price"] = priceOfcar;
+jsonordercar["price"] = "";
 jsonordercar["price_offered"] = parseInt(document.getElementById("offeredPrice").value);
 
 $(document).on('click','.order',function(){
