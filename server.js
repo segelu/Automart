@@ -195,10 +195,10 @@ res.send(datae);
 		
 });
 
-myapp.get('/car/:car-id/', function (req, res) {
+myapp.get('/car/:carId/', function (req, res) {
 client.connect();
 
-var carid = req.params.car-id;
+var carid = req.params.carId;
 
 var datae = {};
 
