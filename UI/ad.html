@@ -99,12 +99,12 @@ var textsold = document.createElement("a");
 textsold.href = "javascript:;";
 textsold.className="soldad"; 
 textsold.innerHTML = "Sold";
+textsold.style.display = "none";
 if(sessionStorage.getItem("email") == arrayOfCarsOwner[i] && sessionStorage.getItem("email") != ""){
 textsold.style.display = "block";
-}else{
-textsold.style.display = "none";
 }
 inputtextslid.appendChild(textsold);
+
 document.getElementById("disp").appendChild(inputtextslid);
 var inputimage = document.createElement("IMG");
 if(arrayOfCarsPrice.length != 0 && i < arrayOfCarsPrice.length){
