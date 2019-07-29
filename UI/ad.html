@@ -238,11 +238,7 @@ function carousel2() {
   for (i = 0; i < y.length; i++) {
     y[i].style.display = "none";  
   }
-  var ysold = document.getElementsByClassName("soldad");
-  if(arrayOfCarsOwner[myIndex2] == sessionStorage.getItem("email")){
-ysold[myIndex2].style.display = "block";
-}
-  
+ 
   myIndex2++;
   if (myIndex2 > y.length) {myIndex2 = 1}    
   y[myIndex2-1].style.display = "block";  
