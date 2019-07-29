@@ -100,10 +100,6 @@ textsold.href = "javascript:;";
 textsold.className="soldad"; 
 textsold.innerHTML = "Sold";
 textsold.style.display = "none";
-if(sessionStorage.getItem("email") == arrayOfCarsOwner[i] && sessionStorage.getItem("email") != ""){
-textsold.style.display = "block";
-}
-
 inputtextslid.appendChild(textsold);
 
 document.getElementById("disp").appendChild(inputtextslid);
