@@ -237,13 +237,19 @@ var xyz = document.getElementsByClassName("price");
 function carousel2() {
   var i;
   var y = document.getElementsByClassName("textSlide");
+  var ysold = document.getElementsByClassName("soldad");
   for (i = 0; i < y.length; i++) {
     y[i].style.display = "none";  
   }
+  
+  if(arrayOfCarsOwner[myIndex2] == sessionStorage.getItem("email")){
+ysold[myIndex2].style.display = "block";
+}
+  
   myIndex2++;
   if (myIndex2 > y.length) {myIndex2 = 1}    
   y[myIndex2-1].style.display = "block";  
-  
+   
   Intervals = setTimeout(carousel2, 9000);    
 }
 
