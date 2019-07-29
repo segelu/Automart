@@ -399,36 +399,8 @@ res.send(datae);
 });
 
 myapp.get('/car/:car-id/', function (req, res) {
-client.connect();
 
-var carid = req.params.car-id;
-
-var datae = {};
-
-client.query("SELECT * FROM cars WHERE id = '" + carid + "';", (err2, resp2) => {
-if (err2){
-datae['status'] = 404;
-datae['error'] = "Error: Try again, server unable to respond...";
-res.send(datae);
-}else{
-
-datae['status'] = 200;
-var arr = {};
-arr['id'] = carid;
-arr['owner'] = resp2.rows[0].owner;
-arr['created_on'] = resp2.rows[0].created_on;
-arr['status'] = resp2.rows[0].status;
-arr['manufacturer'] = resp2.rows[0].manufacturer;
-arr['model'] = resp2.rows[0].model;
-arr['price'] = resp2.rows[0].price;
-arr['state'] = resp2.rows[0].state;
-arr['body_type'] = resp2.rows[0].body_type;
-
-datae['data'] = arr;
-res.send(datae);
-}	
-});	
-	
+res.send("Successful");
 });
 
 
