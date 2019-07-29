@@ -369,10 +369,10 @@ return idsold[id].toString();
  console.log(Date.now());
  
 $(document).on('click','.order',function(){
- window.location.href = "order.html?id=" + arrayOfCarsId[myIndexIndex];
+ window.location.href = "order.html?id=" + arrayOfCarsId[arrayOfCarsId.length - myIndexIndex];
 });
 $(document).on('click','#update',function(){
- window.location.href = "update.html?id=" + arrayOfCarsId[myIndexIndex];
+ window.location.href = "update.html?id=" + arrayOfCarsId[arrayOfCarsId.length - myIndexIndex];
 });
 $(document).on('click','#flag',function(){
   flag(myIndexIndex);
