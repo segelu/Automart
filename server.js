@@ -286,10 +286,10 @@ res.send( datae);
 
 });
 
-myapp.patch('/order/:order-id/price', function (req, res) {
+myapp.patch('/order/:orderId/price', function (req, res) {
 client.connect();
 
-var orderid = req.params.order-id;
+var orderid = req.params.orderId;
 var datae = {};
 jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
 if(errt){ 
@@ -333,10 +333,10 @@ res.send(datae);
 
 });
 
-myapp.patch('/car/:car-id/status', function (req, res) {
+myapp.patch('/car/:carId/status', function (req, res) {
 client.connect();
 	
-var carid = req.params.car-id;
+var carid = req.params.carId;
 var newstatus = "sold";
 var datae = {};
 jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
@@ -382,10 +382,10 @@ res.send(datae);
 
 });
 
-myapp.patch('/car/:car-id/price', function (req, res) {
+myapp.patch('/car/:carId/price', function (req, res) {
 client.connect();
 
-var carid = req.params.car-id;
+var carid = req.params.carId;
 
 var datae = {};
 jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
@@ -515,9 +515,9 @@ res.send(datae);
 	
 });
 
-myapp.delete('/car/:car-id/', function (req, res) {
+myapp.delete('/car/:carId/', function (req, res) {
 client.connect();
-var carid = req.params.car-id;
+var carid = req.params.carId;
 
 var datae = {};
 jwt.verify(req.body.token, req.body.secretKey, (errt, authorizedData) => {
