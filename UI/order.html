@@ -119,6 +119,7 @@ document.getElementById("dAdmin").style.display = "block";
 }
 
 var idOfcar = getQueryVariable("id");
+var daCarPrice;
 
 function loadads(){
  
@@ -151,6 +152,7 @@ function loadads(){
 			$("#getdisplay").attr('src', getCarImage[1]);
 			$("#manufacturer").html(getCarImage[0] + " " + model + " model");
 			$("#thestate").html(state);
+			daCarPrice = price;
             }
     
     }
@@ -184,7 +186,7 @@ function closenav() {
 var jsonordercar = {};
 jsonordercar["email"] = sessionStorage.getItem("email");
 jsonordercar["car_id"] = idOfcar;
-jsonordercar["price"] = "";
+jsonordercar["price"] = daCarPrice;
 jsonordercar["price_offered"] = parseInt(document.getElementById("offeredPrice").value);
 
 $(document).on('click','.order',function(){
