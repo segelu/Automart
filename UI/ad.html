@@ -95,11 +95,13 @@ texta3.id = "view";
 textbold.appendChild(texta3);
 inputtextslid.appendChild(textbold);
 inputtextslid.innerHTML += "<br/><br/>";
+if(sessionStorage.getItem("email") == arrayOfCarsOwner[i]){
 var textsold = document.createElement("a");
 textsold.href = "javascript:;";
 textsold.className="soldad"; 
 textsold.innerHTML = "Sold";
 inputtextslid.appendChild(textsold);
+}
 document.getElementById("disp").appendChild(inputtextslid);
 var inputimage = document.createElement("IMG");
 if(arrayOfCarsPrice.length != 0 && i < arrayOfCarsPrice.length){
