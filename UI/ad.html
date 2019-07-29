@@ -42,7 +42,8 @@ document.getElementById("login").style.display = "none";
 
 
 function imagin(){
-for (i = 1; i < arrayOfCarsManufacturer.length; i++) {
+var topLength = arrayOfCarsManufacturer.length - 1;
+for (i = topLength; i >= 0; i--) {
 var getFifthCarImage;
 var carprice = "Remember To Add Price";
 var carName = "Place Your Car Advert Here";
