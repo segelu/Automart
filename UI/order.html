@@ -89,10 +89,11 @@ document.getElementById("dAdmin").style.display = "block";
   <div class="slide-content slide-section" id="disp">
  
  <p class="textSlide slide-animate-top" id="txtSlid">
+ <b id="message"></b>
  <span id="manufacturer">Ferrari</span><br/><span class="price" id="price">Price:N17.5m</span><br/><b>State: </b><span class="thestate" id="thestate">New</span><br/>
  <b>Offer Price:</b><input type="text" id="offeredPrice" class="control"/>
  <input type="button" value="Order Now" class="order" id="orderButton" />
-  <b id="message"></b>
+  
  </p>
  
   <img class="mySlides  slide-animate-right" id = "getdisplay" src="car1.jpg" />
@@ -120,6 +121,7 @@ document.getElementById("dAdmin").style.display = "block";
 
 var idOfcar = getQueryVariable("id");
 var daCarPrice;
+var carReference;
 
 function loadads(){
  
@@ -153,6 +155,7 @@ function loadads(){
 			$("#manufacturer").html(getCarImage[0] + " " + model + " model");
 			$("#thestate").html(state);
 			daCarPrice = price;
+			carReference = getCarImage[0] + " " + model + " model";
             }
     
     }
@@ -188,6 +191,8 @@ jsonordercar["email"] = sessionStorage.getItem("email");
 jsonordercar["car_id"] = idOfcar;
 jsonordercar["price"] = daCarPrice;
 jsonordercar["price_offered"] = parseInt(document.getElementById("offeredPrice").value);
+jsonordercar['token'] = sessionStorage.getItem("token");
+jsonordercar['secretKey'] = sessionStorage.getItem("secretKey");
 
 $(document).on('click','.order',function(){
 
@@ -200,9 +205,15 @@ $(document).on('click','.order',function(){
 			processData:false,  			
 			success: function(data)  		
 		    {
-			
-			$("#message").html(data);
-            		
+			if(data.status == 404){
+			console.log(data);
+			$("#message").html(data.error);
+			}else{
+			console.log(data);
+			const {data: {id, car_id, created_on, status, price, price_offered,body_type}} = data;
+
+			$("#message").html(carReference + ", was successfully ordered for on " + created_on + " at NGN" + price_offered);
+            }
 		    }	        
 	   });
 
