@@ -253,7 +253,7 @@ datae['error'] = "Error: Can't Order For Car or Car does Not exist...";
 res.send( datae);
 }else{
 var pending = "pending";
-client.query("INSERT INTO orders(id,car_id,buyer,created_on,status,price,price_offered,amount) VALUES('" + newId + "','" + req.body.car_id + "', '" + req.body.buyer + "', current_timestamp, '" + pending + "', '" + req.body.price + "', '" + req.body.price_offered + "', 'no value') RETURNING id;", (err2, resp2) => {
+client.query("INSERT INTO orders(id,car_id,buyer,created_on,status,price,price_offered,amount) VALUES('" + newId + "','" + req.body.car_id + "', '" + req.body.buyer + "', current_timestamp, '" + pending + "', '" + req.body.price + "', '" + req.body.price_offered + "', 'none') RETURNING id;", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Problem Occur When Creating Order...";
@@ -263,11 +263,10 @@ datae['status'] = 200;
 var arr = {};
 arr['id'] = resp2.rows[0].id;
 arr['car_id'] = req.body.car_id;
-arr['created_on'] = "30-07-2019";
+arr['created_on'] = new Date();
 arr['status'] = pending;
 arr['price'] = req.body.price;
 arr['price_offered'] = req.body.price_offered;
-arr['body_type'] = resp.rows[0].body_type;
 datae['data'] = arr;
 res.send( datae);
 } 
