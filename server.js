@@ -244,9 +244,9 @@ if (errf){
 	
 }else{	
 var newId = 1;
-
 var pending = "pending";
-client.query("INSERT INTO orders(id,buyer,car_id,amount,status,created_on,price,price_offered) VALUES('" + newId + "', '" + req.body.buyer + "', '" + req.body.car_id + "', 'no value', '" + pending + "', current_timestamp, '" + req.body.price + "', '" + req.body.price_offered + "') RETURNING id;", (err2, resp2) => {
+var amount = "no value";
+client.query("INSERT INTO orders(id,buyer,car_id,amount,status,created_on,price,price_offered) VALUES('" + newId + "', '" + req.body.buyer + "', '" + req.body.car_id + "', '" + amount + "', '" + pending + "', current_timestamp, '" + req.body.price + "', '" + req.body.price_offered + "') RETURNING id;", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Problem Occur When Creating Order...";
