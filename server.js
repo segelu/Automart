@@ -246,6 +246,14 @@ if (errf){
 var newId = respf.rows[0].id + 1;	
 var pending = "pending";
 var amount = "no value";
+var today = new Date();
+var dd = today.getDate();
+
+var mm = today.getMonth(); 
+var yyyy = today.getFullYear();
+
+var createdDate = dd + "-" + mm + "-" + yyyy;	
+	
 client.query("INSERT INTO orders(id,buyer,car_id,amount,status,created_on,price,price_offered) VALUES('" + newId + "', '" + req.body.buyer + "', '" + req.body.car_id + "', '" + amount + "', '" + pending + "', current_timestamp, '" + req.body.price + "', '" + req.body.price_offered + "') RETURNING id;", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
@@ -256,7 +264,7 @@ datae['status'] = 200;
 var arr = {};
 arr['id'] = resp2.rows[0].id;
 arr['car_id'] = req.body.car_id;
-arr['created_on'] = new Date();
+arr['created_on'] = createdDate;
 arr['status'] = pending;
 arr['price'] = req.body.price;
 arr['price_offered'] = req.body.price_offered;
