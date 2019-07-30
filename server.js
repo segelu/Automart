@@ -249,7 +249,7 @@ var amount = "no value";
 var today = new Date();
 var dd = today.getDate();
 
-var mm = today.getMonth(); 
+var mm = today.getMonth() + 1; 
 var yyyy = today.getFullYear();
 
 var createdDate = dd + "-" + mm + "-" + yyyy;	
