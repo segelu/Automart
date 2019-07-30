@@ -118,11 +118,9 @@ document.getElementById("dAdmin").style.display = "block";
        }
        return(false);
 }
-
+var jsonordercar = {};
 var idOfcar = getQueryVariable("id");
-var daCarPrice;
 var carReference;
-var carBody;
 
 function loadads(){
  
@@ -155,8 +153,8 @@ function loadads(){
 			$("#getdisplay").attr('src', getCarImage[1]);
 			$("#manufacturer").html(getCarImage[0] + " " + model + " model");
 			$("#thestate").html(state);
-			daCarPrice = price;
-			carBody = body_type;
+			jsonordercar['price'] = parseFloat(price);
+			jsonordercar['body_type'] = body_type;
 			carReference = getCarImage[0] + " " + model + " model";
             }
     
@@ -188,17 +186,14 @@ function closenav() {
 }
 
 
-var jsonordercar = {};
-jsonordercar['buyer'] = sessionStorage.getItem("email");
+
+jsonordercar['buyer'] = sessionStorage.getItem("id");
 jsonordercar['car_id'] = parseInt(idOfcar);
-jsonordercar['price'] = parseFloat(daCarPrice);
-jsonordercar['price_offered'] = parseFloat(document.getElementById("offeredPrice").value);
 jsonordercar['token'] = sessionStorage.getItem("token");
 jsonordercar['secretKey'] = sessionStorage.getItem("secretKey");
-jsonordercar['body_type'] = carBody;
 
 $(document).on('click','.order',function(){
-
+jsonordercar['price_offered'] = parseFloat(document.getElementById("offeredPrice").value);
 		$.ajax({
         	url: "/order/",   	
 			type: "POST",      				
@@ -224,7 +219,7 @@ $(document).on('click','.order',function(){
 		    }	        
 	   });
 
-  console.log(jsonordercar);
+  
   
 });
 
