@@ -122,6 +122,7 @@ document.getElementById("dAdmin").style.display = "block";
 var idOfcar = getQueryVariable("id");
 var daCarPrice;
 var carReference;
+var carBody;
 
 function loadads(){
  
@@ -147,7 +148,7 @@ function loadads(){
 			var no_items = data.length;
 			var i = 0;
 			
-			const {id, created_on, manufacturer, email, model, price, state, status} = data;
+			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = data;
 			
 			$("#price").html("NGN" + price);
 			var getCarImage = manufacturer.split('@');
@@ -155,6 +156,7 @@ function loadads(){
 			$("#manufacturer").html(getCarImage[0] + " " + model + " model");
 			$("#thestate").html(state);
 			daCarPrice = price;
+			carBody = body_type;
 			carReference = getCarImage[0] + " " + model + " model";
             }
     
