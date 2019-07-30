@@ -243,7 +243,7 @@ client.query("SELECT id FROM orders ORDER BY id DESC;", (errf, respf) => {
 if (errf){
 	
 }else{	
-var newId = 1;
+var newId = respf.rows[0].id + 1;	
 var pending = "pending";
 var amount = "no value";
 client.query("INSERT INTO orders(id,buyer,car_id,amount,status,created_on,price,price_offered) VALUES('" + newId + "', '" + req.body.buyer + "', '" + req.body.car_id + "', '" + amount + "', '" + pending + "', current_timestamp, '" + req.body.price + "', '" + req.body.price_offered + "') RETURNING id;", (err2, resp2) => {
