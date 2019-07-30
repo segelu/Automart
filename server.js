@@ -243,15 +243,8 @@ client.query("SELECT id FROM orders ORDER BY id DESC;", (errf, respf) => {
 if (errf){
 	
 }else{	
-
 var newId = 1;
 
-client.query("SELECT * FROM cars WHERE id = '" + req.body.car_id + "';", (err, resp) => {
-if (err){
-datae['status'] = 404;
-datae['error'] = "Error: Can't Order For Car or Car does Not exist...";
-res.send( datae);
-}else{
 var pending = "pending";
 client.query("INSERT INTO orders(id,buyer,car_id,amount,status,created_on,price,price_offered) VALUES('" + newId + "', '" + req.body.buyer + "', '" + req.body.car_id + "', 'no value', '" + pending + "', current_timestamp, '" + req.body.price + "', '" + req.body.price_offered + "') RETURNING id;", (err2, resp2) => {
 if (err2){
@@ -267,13 +260,13 @@ arr['created_on'] = new Date();
 arr['status'] = pending;
 arr['price'] = req.body.price;
 arr['price_offered'] = req.body.price_offered;
+arr['body_type'] = req.body.body_type;
 datae['data'] = arr;
 res.send( datae);
 } 
 
 });
-}
-});
+
 }
 });
 }
