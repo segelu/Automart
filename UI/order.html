@@ -147,7 +147,7 @@ function loadads(){
 			var no_items = data.length;
 			var i = 0;
 			
-			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = data;
+			const {id, created_on, manufacturer, email, model, price, state, status} = data;
 			
 			$("#price").html("NGN" + price);
 			var getCarImage = manufacturer.split('@');
