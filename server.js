@@ -253,7 +253,7 @@ datae['error'] = "Error: Can't Order For Car or Car does Not exist...";
 res.send( datae);
 }else{
 var pending = "pending";
-client.query("INSERT INTO orders(id,car_id,buyer,created_on,status,price,price_offered,amount) VALUES('" + newId + "','" + req.body.car_id + "', '" + req.body.buyer + "', current_timestamp, '" + pending + "', '" + req.body.price + "', '" + req.body.price_offered + "', '') RETURNING id;", (err2, resp2) => {
+client.query("INSERT INTO orders(id,car_id,buyer,created_on,status,price,price_offered,amount) VALUES('" + newId + "','" + req.body.car_id + "', '" + req.body.buyer + "', current_timestamp, '" + pending + "', '" + req.body.price + "', '" + req.body.price_offered + "', 'no value') RETURNING id;", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Problem Occur When Creating Order...";
