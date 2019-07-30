@@ -261,7 +261,12 @@ res.send( datae);
 }else{
 datae['status'] = 200;
 var arr = {};
-
+arr['id'] = resp2.rows[0].id;
+arr['car_id'] = req.body.car_id;
+arr['created_on'] = new Date();
+arr['status'] = pending;
+arr['price'] = req.body.price;
+arr['price_offered'] = req.body.price_offered;
 datae['data'] = arr;
 res.send( datae);
 } 
