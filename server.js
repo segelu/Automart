@@ -246,15 +246,14 @@ if (errf){
 
 var newId = 1;
 
-	
-client.query("SELECT * FROM cars WHERE owner = '" + req.body.email + "' AND id = '" + req.body.car_id + "';", (err, resp) => {
+client.query("SELECT * FROM cars WHERE id = '" + req.body.car_id + "';", (err, resp) => {
 if (err){
 datae['status'] = 404;
 datae['error'] = "Error: Can't Order For Car or Car does Not exist...";
 res.send( datae);
 }else{
 var pending = "pending";
-client.query("INSERT INTO orders(id,car_id,created_on,status,price,price_offered,amount) VALUES('" + newId + "','" + resp.rows[0].car_id + "', current_timestamp, '" + pending + "', '" + resp.rows[0].price + "', '" + req.body.price_offered + "', '') RETURNING id;", (err2, resp2) => {
+client.query("INSERT INTO orders(id,car_id,buyer,created_on,status,price,price_offered,amount) VALUES('" + newId + "','" + resp.rows[0].car_id + "', '" + req.body.buyer + "', current_timestamp, '" + pending + "', '" + resp.rows[0].price + "', '" + req.body.price_offered + "', '') RETURNING id;", (err2, resp2) => {
 if (err2){
 datae['status'] = 404;
 datae['error'] = "Error: Problem Occur When Creating Order...";
