@@ -239,8 +239,17 @@ datae['error'] = "Error: Your Connection Token As Expired...";
 res.send( datae);	
 }else{
 	
-var newId = 1;
+client.query("SELECT id FROM orders ORDER BY id DESC;", (errf, respf) => {
+if (errf){
+	
+}else{	
 
+if(respf.rows[0].id == 0 || respf.rows[0].id == null){
+var newId = 1;
+}else{
+var newId = respf.rows[0].id + 1;	
+}
+	
 client.query("SELECT * FROM cars WHERE owner = '" + req.body.email + "' AND id = '" + req.body.car_id + "';", (err, resp) => {
 if (err){
 datae['status'] = 404;
@@ -270,7 +279,8 @@ res.send( datae);
 });
 }
 });
-
+}
+});
 }
 });
 
