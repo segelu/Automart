@@ -189,8 +189,8 @@ function closenav() {
 var jsonordercar = {};
 jsonordercar["email"] = sessionStorage.getItem("email");
 jsonordercar["car_id"] = idOfcar;
-jsonordercar["price"] = daCarPrice;
-jsonordercar["price_offered"] = parseInt(document.getElementById("offeredPrice").value);
+jsonordercar["price"] = parseFloat(daCarPrice);
+jsonordercar["price_offered"] = parseFloat(document.getElementById("offeredPrice").value);
 jsonordercar['token'] = sessionStorage.getItem("token");
 jsonordercar['secretKey'] = sessionStorage.getItem("secretKey");
 
