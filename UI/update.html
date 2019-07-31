@@ -187,6 +187,8 @@ var jsoncar = {};
 
 $(document).on('click','.update',function(){
 jsoncar["price"] = parseFloat(document.getElementById("newPrice").value);
+jsoncar['token'] = sessionStorage.getItem("token");
+jsoncar['secretKey'] = sessionStorage.getItem("secretKey");
 
    $.ajax({
         	url: "/car/" + idOfcar + "/price",   	
