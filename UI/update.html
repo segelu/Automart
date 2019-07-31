@@ -93,7 +93,7 @@ document.getElementById("dAdmin").style.display = "block";
  <b id="message" style="color:gold;"></b><br/>
  <span id="manufacturer">Ferrari</span><br/><span class="price" id="price">Price:N17.5m</span><br/><b>State: </b><span class="thestate" id="thestate">New</span><br/>
  <b>New Price:</b><input type="text" id="newPrice" class="control"/>
- <input type="button" value="Update Price" id="update" id="orderButton" />
+ <input type="button" value="Update Price" class="update" id="orderButton" />
   <b id="message"></b>
  </p>
  
@@ -185,7 +185,7 @@ function closenav() {
 
 var jsoncar = {};
 
-$(document).on('click','#update',function(){
+$(document).on('click','.update',function(){
 jsoncar["price"] = parseFloat(document.getElementById("newPrice").value);
 
    $.ajax({
