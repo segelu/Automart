@@ -275,9 +275,9 @@ function carousel2() {
 			var i = 0;
 			while(i < no_items){
 		
-			const {id, created_on, manufacturer, email, model, price, state, status, body_type} = data[i];
+			const {id, created_on, manufacturer, owner, model, price, state, status, body_type} = data[i];
 			arrayOfCarsId[arrayOfCarsId.length]	= id;
-            arrayOfCarsOwner[arrayOfCarsOwner.length] = email;	
+                        arrayOfCarsOwner[arrayOfCarsOwner.length] = owner;	
 			arrayOfCarsPrice[arrayOfCarsPrice.length] = price;	
 			arrayOfCarsManufacturer[arrayOfCarsManufacturer.length] = manufacturer;
 			arrayOfCarsModel[arrayOfCarsModel.length] = model;
