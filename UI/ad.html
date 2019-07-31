@@ -248,7 +248,7 @@ function carousel2() {
  
   var getNextAdInt = arrayOfCarsOwner.length - (myIndex2-1);
   if(arrayOfCarsOwner[getNextAdInt] == sessionStorage.getItem("email")){
-      ysold[getNextAdInt].style.display = "block";
+      ysold[myIndex2-1].style.display = "block";
      }
    
   Intervals = setTimeout(carousel2, 9000);    
