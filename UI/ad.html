@@ -99,7 +99,9 @@ var textsold = document.createElement("a");
 textsold.href = "javascript:;";
 textsold.className="soldad"; 
 textsold.innerHTML = "Sold";
-textsold.style.display = "none";
+if(arrayOfCarsOwner[i] == sessionStorage.getItem("email") && sessionStorage.getItem("email") != null){
+textsold.style.display = "block";
+}
 inputtextslid.appendChild(textsold);
 
 document.getElementById("disp").appendChild(inputtextslid);
