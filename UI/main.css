@@ -347,7 +347,7 @@ padding:5% 5% 5% 5%;margin-top:5%; border-radius:7px; border-color:gold; box-sha
 color:white; text-decoration:none; font-size:12px;
 }
 .soldad{
-color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:5% 8% 5% 8%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;
+color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:5% 8% 5% 8%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px;  display:none;
 }
 
 #viewtxtSlid{
