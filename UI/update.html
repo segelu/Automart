@@ -191,7 +191,7 @@ jsoncar["price"] = parseFloat(document.getElementById("newPrice").value);
    $.ajax({
         	url: "/car/" + idOfcar + "/price",   	
 			type: "POST",      				
-			data: JSON.stringify(jsonordercar), 		
+			data: JSON.stringify(jsoncar), 		
 			contentType: false,       		
     	    cache: false,					
 			processData:false,  			
