@@ -238,14 +238,18 @@ function carousel2() {
   
   for (i = 0; i < y.length; i++) {
     y[i].style.display = "none";  
-    
+    ysold[i].style.display = "none";
   }
  
 	
   myIndex2++;
   if (myIndex2 > y.length) {myIndex2 = 1}    
   y[myIndex2-1].style.display = "block"; 
-
+ 
+  if(arrayOfCarsOwner[myIndex2-1] == sessionStorage.getItem("email")){
+      ysold[myIndex2-1].style.display = "block";
+     }
+   
   Intervals = setTimeout(carousel2, 9000);    
 }
 
