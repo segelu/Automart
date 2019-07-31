@@ -99,9 +99,7 @@ var textsold = document.createElement("a");
 textsold.href = "javascript:;";
 textsold.className="soldad"; 
 textsold.innerHTML = "Sold";
-if(arrayOfCarsOwner[i] == sessionStorage.getItem("email") && sessionStorage.getItem("email") != null){
-textsold.style.display = "block";
-}
+
 inputtextslid.appendChild(textsold);
 
 document.getElementById("disp").appendChild(inputtextslid);
@@ -236,6 +234,7 @@ var xyz = document.getElementsByClassName("price");
 function carousel2() {
   var i;
   var y = document.getElementsByClassName("textSlide");
+  var ysold = document.getElementsByClassName("soldad");
   
   for (i = 0; i < y.length; i++) {
     y[i].style.display = "none";  
@@ -243,7 +242,11 @@ function carousel2() {
  
   myIndex2++;
   if (myIndex2 > y.length) {myIndex2 = 1}    
-  y[myIndex2-1].style.display = "block";  
+  y[myIndex2-1].style.display = "block"; 
+
+if(arrayOfCarsOwner[myIndex2-1] == sessionStorage.getItem("email")){
+ysold[myIndex2-1].style.display = "block";
+}	
    
   Intervals = setTimeout(carousel2, 9000);    
 }
