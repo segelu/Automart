@@ -238,13 +238,15 @@ function carousel2() {
   
   for (i = 0; i < y.length; i++) {
     y[i].style.display = "none";  
-     if(arrayOfCarsOwner[i] == sessionStorage.getItem("email")){
-      ysold[i].style.display = "block";
-     }else{
-	 ysold[i].style.display = "none"; 
-     }
+    
   }
  
+if(arrayOfCarsOwner[myIndex2] == sessionStorage.getItem("email")){
+      ysold[myIndex2].style.display = "block";
+     }else{
+	 ysold[myIndex2].style.display = "none"; 
+  }	
+	
   myIndex2++;
   if (myIndex2 > y.length) {myIndex2 = 1}    
   y[myIndex2-1].style.display = "block"; 
