@@ -247,6 +247,7 @@ function carousel2() {
   y[myIndex2-1].style.display = "block"; 
  
   var getNextAdInt = arrayOfCarsOwner.length - (myIndex2-1);
+	alert(getNextAdInt);
   if(arrayOfCarsOwner[getNextAdInt] == sessionStorage.getItem("email")){
       ysold[myIndex2-1].style.display = "block";
      }
