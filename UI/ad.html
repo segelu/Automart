@@ -235,21 +235,22 @@ function carousel2() {
   var i;
   var y = document.getElementsByClassName("textSlide");
   var ysold = document.getElementsByClassName("soldad");
+  var updatin = document.getElementsByClassName("upflaview");
   
   for (i = 0; i < y.length; i++) {
     y[i].style.display = "none";  
-    ysold[i].style.display = "none";
+	ysold[i].style.display = "none";
+	updatin[i].style.display = "none";
   }
- 
-	
+       
   myIndex2++;
   if (myIndex2 > y.length) {myIndex2 = 1}    
-  y[myIndex2-1].style.display = "block"; 
- 
+  y[myIndex2-1].style.display = "block";  
   var getNextAdInt = arrayOfCarsId.length - myIndex2;
-	
+ 
   if(arrayOfCarsOwner[getNextAdInt] == sessionStorage.getItem("email")){
-      ysold[myIndex2-1].style.display = "block";
+      ysold[myIndex2-1].style = "color:white; box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.5) inset; padding:5% 8% 5% 8%; background-color: blue; border-radius:50%; text-decoration:none; font-size:12px; display:block;";
+	  updatin[myIndex2-1].style.display = "block";
      }
    
   Intervals = setTimeout(carousel2, 9000);    
